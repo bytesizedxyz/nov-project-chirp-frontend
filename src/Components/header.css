@@ -1,21 +1,23 @@
 .headerDiv {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  text-align: initial;
+  justify-content: space-between;
+  align-items: center;
   background: #71706e;
-  height: 5em;
+  height: 90px;
 }
 
-.loginButton {
+.chirpButton {
   background-color: #990303;
+  height: 40px;
+  width: 120px;
+  border: 0px;
 }
 
 .search {
-  flex-direction: row-reverse;
-}
-
-.profileHolder {
+  background-color: #9c9999;
+  height: 30px;
+  border: 0px;
+  width: 200px;
 }
 
 .profileImage {

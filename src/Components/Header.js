@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Gravatar from "gravatar-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./header.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Gravatar from 'gravatar-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './header.css';
 
 class Header extends Component {
   state = {
-    search: "",
+    search: '',
     isOpen: false,
-    email: ""
+    email: ''
   };
 
   handleChange = e => {
@@ -27,32 +27,25 @@ class Header extends Component {
   render() {
     return (
       <div className="headerDiv">
-        <Link to="addPost">
-          <button>
-            <FontAwesomeIcon icon="plus" />
-          </button>
-        </Link>
-        <form onSubmit={this.handleSubmit} className={"search"}>
-          <input type="text" name="search" onChange={this.handleChange} />
+        <button className="loginButton">
+          <FontAwesomeIcon className="loginButton" icon="plus" />
+        </button>
+        <form onSubmit={this.handleSubmit}>
           <input
-            type="submit"
-            style={{
-              height: "0px",
-              width: "0px",
-              border: "none",
-              padding: "0px",
-              hidefocus: "true"
-            }}
+            placeholder="Search for chirps"
+            type="text"
+            className="search"
+            onChange={this.handleChange}
           />
         </form>
         <div className="profileHolder">
           <Gravatar
+            className="profileImage"
             email={this.state.email}
-            size={100}
             rating="PG"
-            alt="Alvin Dickson profile"
-            secure
+            alt="Profile image or gravatar"
             default="monsterid"
+            secure
           />
         </div>
       </div>
