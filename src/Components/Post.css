@@ -1,6 +1,35 @@
 .post{
-    width:80%;
-    height:300px;
+    width:60%;
+    height:25vh;
+    font-size: 1.5em;
     background-color:#9c9999;
     margin-bottom:20px;
+    display:grid;
+    grid-template-columns: 5% 5% 5% auto 10%;
+    grid-template-rows: 20% auto 20%;
+}
+
+.likes{
+    grid-column: 1/2;
+    grid-row: 3/4
+}
+
+.dislikes{
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.favorites{
+    grid-column: 3/4;
+    grid-row: 3/4;
+}
+
+.content{
+    grid-column: 2/5;
+    grid-row: 2/3;
+}
+
+.createdAt{
+    grid-column: 5/6;
+    grid-row: 3/4;
 }

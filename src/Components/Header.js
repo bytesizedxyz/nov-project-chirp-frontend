@@ -51,8 +51,10 @@ class Header extends Component {
     return (
       <div className="headerDiv">
         <Modal open={this.state.show} handleClose={this.hideModal}>
-          <p>Modal</p>
-          <p>Data</p>
+          <h1>Add New Post</h1>
+          <form>
+            <input type="text" name="message" />
+          </form>
         </Modal>
         <Link to="addPost">
           <button onClick={this.showModal}>

@@ -11,4 +11,5 @@ const Modal = ({ handleClose, open, children }) => {
     </div>
   );
 };
+
 export default Modal;
