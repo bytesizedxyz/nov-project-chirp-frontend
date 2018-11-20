@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Gravatar from 'gravatar-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Modal from './Modal';
 import './header.css';
 
 class Header extends Component {
   state = {
     search: '',
-    isOpen: false,
-    email: ''
+    open: false
+  };
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
   };
 
   handleChange = e => {
@@ -25,12 +32,33 @@ class Header extends Component {
   };
 
   render() {
+    const { user } = this.props;
+    let GravatarBlock;
+    if (user && user.email) {
+      GravatarBlock = (
+        <Gravatar
+          email={this.props.user.email}
+          size={60}
+          rating="PG"
+          alt="Alvin Dickson profile"
+          secure
+          default="monsterid"
+        />
+      );
+    }
     return (
       <div className="headerDiv">
-        <button className="loginButton">
-          <FontAwesomeIcon className="loginButton" icon="plus" />
+        <Modal open={this.state.show} handleClose={this.hideModal}>
+          <h1>Add New Post</h1>
+          <form>
+            <input type="text" name="message" />
+          </form>
+        </Modal>
+        <button onClick={this.showModal}>
+          <FontAwesomeIcon icon="plus" />
         </button>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className={'search'}>
+          <input type="text" name="search" onChange={this.handleChange} />
           <input
             placeholder="Search for chirps"
             type="text"
@@ -38,16 +66,7 @@ class Header extends Component {
             onChange={this.handleChange}
           />
         </form>
-        <div className="profileHolder">
-          <Gravatar
-            className="profileImage"
-            email={this.state.email}
-            rating="PG"
-            alt="Profile image or gravatar"
-            default="monsterid"
-            secure
-          />
-        </div>
+        {GravatarBlock}
       </div>
     );
   }

@@ -7,11 +7,11 @@ export default function Post(props) {
   const chirp = props.chirp
   return (
     <div className="post">
-      <p>{chirp.message}</p>
-      <p>{chirp.likes}</p>
-      <p>{chirp.dislikes}</p>
-      <p>{chirp.favorites}</p>
-      <p>{chirp.created_at}</p>
+      <span className="content">{chirp.message}</span>
+      <span className="likes">{chirp.likes} Likes</span>
+      <span className="dislikes">{chirp.dislikes} Dislikes</span>
+      <span className="favorites">{chirp.favorites} Favorites</span>
+      <span className="createdAt">{chirp.created_at}</span>
     </div>
   )
 }

@@ -11,7 +11,7 @@ export default class Feed extends Component {
 
     return (
       <div>
-          <div style={{display:"flex", flexWrap: "wrap", alignItems:"center", justifyContent:"center"}}>
+          <div style={{display:"flex", flexWrap: "wrap", alignItems:"center", justifyContent:"center", overflowY: "scroll", height:"95vh"}}>
             {chirps? chirps.map((chirp, index) => <Post key={index} chirp={chirp}/>) : null}
           </div>
       </div>
