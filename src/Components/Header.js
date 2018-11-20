@@ -64,7 +64,7 @@ class Header extends Component {
           <textarea
             onChange={this.handleChange}
             rows="4"
-            cols="50"
+            cols="75"
             type="text"
             name="message"
           />
