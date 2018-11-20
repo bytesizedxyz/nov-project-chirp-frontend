@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import Gravatar from 'gravatar-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Modal from './Modal';
-import './header.css';
+import React, { Component } from "react";
+import Gravatar from "gravatar-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "./Modal";
+import "./header.css";
 
 class Header extends Component {
   state = {
-    search: '',
+    search: "",
+    message: "",
     open: false
   };
 
@@ -25,10 +26,16 @@ class Header extends Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSearch = e => {
     e.preventDefault();
     const { search } = this.state;
     console.log(search);
+  };
+
+  addPost = e => {
+    e.preventDefault();
+    const { message } = this.state;
+    console.log(message);
   };
 
   render() {
@@ -48,17 +55,24 @@ class Header extends Component {
     }
     return (
       <div className="headerDiv">
-        <Modal open={this.state.show} handleClose={this.hideModal}>
+        <Modal
+          open={this.state.show}
+          handleClose={this.hideModal}
+          addPost={this.addPost}
+        >
           <h1>Add New Post</h1>
-          <form>
-            <input type="text" name="message" />
-          </form>
+          <textarea
+            onChange={this.handleChange}
+            rows="4"
+            cols="50"
+            type="text"
+            name="message"
+          />
         </Modal>
         <button onClick={this.showModal}>
           <FontAwesomeIcon icon="plus" />
         </button>
-        <form onSubmit={this.handleSubmit} className={'search'}>
-          <input type="text" name="search" onChange={this.handleChange} />
+        <form onSubmit={this.handleSearch} className={"search"}>
           <input
             placeholder="Search for chirps"
             type="text"
