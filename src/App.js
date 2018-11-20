@@ -30,6 +30,7 @@ class App extends Component {
     let searchedChirps = this.state.chirps;
     searchedChirps = searchedChirps.filter(chirp => {
       console.log("chirp", chirp);
+      return searchedChirps.indexOf(filter()) !== -1;
     });
   };
 
