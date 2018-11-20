@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
+.shadow {
+  z-index: 5;
+  box-shadow: 10px 10px 8px #888888;
+}
 .headerBottom {
   margin-top: -15px;
   margin-bottom: 15px;

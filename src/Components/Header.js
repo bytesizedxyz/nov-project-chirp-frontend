@@ -58,7 +58,7 @@ class Header extends Component {
       );
     }
     return (
-      <div className="flexColumnAround">
+      <div className="flexColumnAround shadow">
         <div className="flexRowBetween">
           <EmpireLogo />
           <h1>Darth Twitter</h1>
