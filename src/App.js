@@ -40,18 +40,18 @@ class App extends Component {
     });
   };
 
-  filteredPosts = (filter, filterBy) => {
-    let filteredChrips = this.state.chirps;
-    this.setState({ searchedChirps: filteredChrips });
-    filteredChrips = filteredChrips.filter(chirp =>
-      chirp.message.toLowerCase().includes(filter.toLowerCase()) ? chirp : []
+  // {"userId":8,"message":"Monitored 24 hour time-frame","deleted":true,"likes":59,"dislikes":67,"favorites":77,"created_at":"7/3/2003"},
+
+  filteredPosts = (filter = "") => {
+    console.log("FP filter",filter)
+    return this.state.chirps.filter(chirp =>
+      chirp.message.toLowerCase().includes(filter.toLowerCase())
     );
-    this.setState({ searchedChirps: filteredChrips });
   };
 
   render() {
     const { chirps, user, searchedChirps } = this.state;
-    const passedChirps = searchedChirps.length !== 0 ? searchedChirps : chirps;
+    // const passedChirps = search"edChirps.length !== 0 ? searchedChirps : chirps;
     return (
       <Router>
         <div className="App">
@@ -60,7 +60,7 @@ class App extends Component {
             addPost={this.addPost}
             user={user.attributes}
           />
-          <Feed chirps={passedChirps} />
+          { chirps? <Feed chirps={this.filteredPosts()} /> : null}
         </div>
       </Router>
     );
