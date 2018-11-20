@@ -46,7 +46,7 @@ class Header extends Component {
         <Gravatar
           className="profileImage"
           email={this.props.user.email}
-          size={60}
+          size={120}
           rating="PG"
           alt="Alvin Dickson profile"
           default="monsterid"

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC|Bungee');
+
 .flexColumnAround {
   display: flex;
   flex-direction: column;
@@ -11,19 +13,21 @@
   justify-content: space-between;
   align-items: center;
   background: #71706e;
-<<<<<<< HEAD
-  height: 90px;
-  width:100%;
-=======
   width: 100%;
 }
 h1 {
-  font-size: 50px;
+  font-size: 80px;
+  margin: 0px;
+  font-family: 'Bowlby One SC', cursive;
+  letter-spacing: 2px;
+  color: black;
+  /* font-family: 'Bungee', cursive; */
 }
 .logo {
-  height: 100px;
-  width: 100px;
->>>>>>> 10b6a35b2a21d7d0d3c7124d5da775f1ade63056
+  height: 120px;
+  width: 120px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .chirpButton {
@@ -42,6 +46,9 @@ h1 {
 
 .profileImage {
   border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 10px;
+  opacity: 0.75;
 }
 
 .modal {
