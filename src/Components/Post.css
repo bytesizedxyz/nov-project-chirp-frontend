@@ -43,7 +43,7 @@
         height:25vh;
         min-height:325px;
         font-size: 1.3em;
-        /* background-color:#9c9999; */
+        /* background-color:#292323 */
         background-color: #292323;
         margin-bottom:20px;
         display:grid;
@@ -83,7 +83,7 @@
         height:25vh;
         min-height:325px;
         font-size: 1.5em;
-        background-color:#9c9999;
+        background-color:#292323;
         margin-bottom:20px;
         display:grid;
         grid-template-columns: 15% 15% 15% auto 15% 15%;
@@ -122,7 +122,7 @@
         height:25vh;
         min-height:325px;
         font-size: 1.5em;
-        background-color:#9c9999;
+        background-color:#292323;
         margin-bottom:20px;
         display:grid;
         grid-template-columns: 15% 15% 15% auto 15% 15%;
@@ -162,7 +162,7 @@
         height:25vh;
         min-height:325px;
         font-size: 1.5em;
-        background-color:#9c9999;
+        background-color:#292323;
         margin-bottom:20px;
         display:grid;
         grid-template-columns: 15% 15% 15% auto 15% 15%;
