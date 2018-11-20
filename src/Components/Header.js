@@ -2,13 +2,22 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Gravatar from "gravatar-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NewPost from "./NewPost";
+import Modal from "./Modal";
 import "./header.css";
 
 class Header extends Component {
   state = {
     search: "",
-    isOpen: false,
-    email: ""
+    open: false
+  };
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
   };
 
   handleChange = e => {
@@ -25,10 +34,30 @@ class Header extends Component {
   };
 
   render() {
+    const { user } = this.props;
+    let GravatarBlock;
+    if (user && user.email) {
+      GravatarBlock = (
+        <Gravatar
+          email={this.props.user.email}
+          size={60}
+          rating="PG"
+          alt="Alvin Dickson profile"
+          secure
+          default="monsterid"
+        />
+      );
+    }
     return (
       <div className="headerDiv">
+        <Modal open={this.state.show} handleClose={this.hideModal}>
+          <h1>Add New Post</h1>
+          <form>
+            <input type="text" name="message" />
+          </form>
+        </Modal>
         <Link to="addPost">
-          <button>
+          <button onClick={this.showModal}>
             <FontAwesomeIcon icon="plus" />
           </button>
         </Link>
@@ -45,16 +74,7 @@ class Header extends Component {
             }}
           />
         </form>
-        <div className="profileHolder">
-          <Gravatar
-            email={this.state.email}
-            size={100}
-            rating="PG"
-            alt="Alvin Dickson profile"
-            secure
-            default="monsterid"
-          />
-        </div>
+        {GravatarBlock}
       </div>
     );
   }
