@@ -28,17 +28,11 @@ class App extends Component {
 
   filteredPosts = (filter, filterBy) => {
     let filteredChrips = this.state.chirps;
-    console.log("filter", filter);
-    if (filter === "" || filter === null) {
-      this.setState({ searchedChirps: filteredChrips });
-    } else {
-      console.log("else");
-      filteredChrips = filteredChrips.filter(chirp =>
-        chirp.message.toLowerCase().includes(filter.toLowerCase())
-      );
-      this.setState({ searchedChirps: filteredChrips });
-      console.log("after sa");
-    }
+    this.setState({ searchedChirps: filteredChrips });
+    filteredChrips = filteredChrips.filter(chirp =>
+      chirp.message.toLowerCase().includes(filter.toLowerCase()) ? null : chirp
+    );
+    this.setState({ searchedChirps: filteredChrips });
   };
 
   render() {

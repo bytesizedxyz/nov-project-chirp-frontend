@@ -31,9 +31,7 @@ class Header extends Component {
   handleSearch = e => {
     e.preventDefault();
     const { filter, filterBy } = this.state;
-    if (filter === "") {
-      return;
-    }
+    console.log("filter", filter);
     this.props.filteredPosts(filter, filterBy);
   };
 
