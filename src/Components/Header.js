@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Gravatar from "gravatar-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import NewPost from "./NewPost";
 import Modal from "./Modal";
 import "./header.css";
 
@@ -56,11 +54,9 @@ class Header extends Component {
             <input type="text" name="message" />
           </form>
         </Modal>
-        <Link to="addPost">
-          <button onClick={this.showModal}>
-            <FontAwesomeIcon icon="plus" />
-          </button>
-        </Link>
+        <button onClick={this.showModal}>
+          <FontAwesomeIcon icon="plus" />
+        </button>
         <form onSubmit={this.handleSubmit} className={"search"}>
           <input type="text" name="search" onChange={this.handleChange} />
           <input
