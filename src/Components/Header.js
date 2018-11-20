@@ -8,9 +8,10 @@ import './header.css';
 
 class Header extends Component {
   state = {
-    search: '',
-    message: '',
-    open: false
+    message: "",
+    open: false,
+    filter: "",
+    filterBy: ""
   };
 
   showModal = () => {
@@ -30,8 +31,9 @@ class Header extends Component {
 
   handleSearch = e => {
     e.preventDefault();
-    const { search } = this.state;
-    console.log(search);
+    const { filter, filterBy } = this.state;
+    console.log(filter);
+    this.props.filteredPosts(filter, filterBy);
   };
 
   addPost = e => {
@@ -48,7 +50,7 @@ class Header extends Component {
         <Gravatar
           className="profileImage"
           email={this.props.user.email}
-          size={60}
+          size={120}
           rating="PG"
           alt="Alvin Dickson profile"
           default="monsterid"
@@ -93,7 +95,11 @@ class Header extends Component {
             placeholder="Search for chirps"
             className="search"
             type="text"
+            name="filter"
           />
+          <button className="chirpButton" onClick={this.handleSearch}>
+            Search
+          </button>
         </div>
       </div>
     );

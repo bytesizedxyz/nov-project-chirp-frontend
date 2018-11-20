@@ -25,12 +25,25 @@ class App extends Component {
     console.log(user);
     this.setState({ user: user });
   };
+
+  filteredPosts = (filter, filterBy) => {
+    let searchedChirps = this.state.chirps;
+    searchedChirps = searchedChirps.filter(chirp => {
+      console.log("chirp", chirp);
+    });
+  };
+
+  // updatedList.filter(function(item){
+  //   return item.toLowerCase().search(
+  //     event.target.value.toLowerCase()) !== -1;
+  // });
+
   render() {
     const { chirps, user } = this.state;
     return (
       <Router>
         <div className="App">
-          <Header user={user.attributes} />
+          <Header filteredPosts={this.filteredPosts} user={user.attributes} />
           <Feed chirps={chirps} />
         </div>
       </Router>
