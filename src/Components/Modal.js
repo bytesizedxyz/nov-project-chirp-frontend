@@ -6,8 +6,12 @@ const Modal = ({ addPost, handleClose, open, children }) => {
     <div className={showHideClassName}>
       <section className="modal-main">
         <div>{children}</div>
-        <button onClick={handleClose}>close</button>
-        <button onClick={addPost}>Submit Post</button>
+        <button className={"chirpButton"} onClick={handleClose}>
+          close
+        </button>
+        <button className={"chirpButton"} onClick={addPost}>
+          Submit Post
+        </button>
       </section>
     </div>
   );

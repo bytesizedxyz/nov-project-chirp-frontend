@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import Gravatar from "gravatar-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from "./Modal";
-import "./header.css";
+import React, { Component } from 'react';
+import Gravatar from 'gravatar-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Modal from './Modal';
+import './header.css';
 
 class Header extends Component {
   state = {
-    search: "",
-    message: "",
+    search: '',
+    message: '',
     open: false
   };
 
@@ -44,43 +44,54 @@ class Header extends Component {
     if (user && user.email) {
       GravatarBlock = (
         <Gravatar
+          className="profileImage"
           email={this.props.user.email}
           size={60}
           rating="PG"
           alt="Alvin Dickson profile"
-          secure
           default="monsterid"
+          secure
         />
       );
     }
     return (
-      <div className="headerDiv">
-        <Modal
-          open={this.state.show}
-          handleClose={this.hideModal}
-          addPost={this.addPost}
-        >
-          <h1>Add New Post</h1>
-          <textarea
-            onChange={this.handleChange}
-            rows="4"
-            cols="75"
-            type="text"
-            name="message"
+      <div className="flexColumnAround">
+        <div className="flexRowBetween">
+          <img
+            className="logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/7/75/Emblem_of_the_First_Galactic_Empire.svg"
+            alt="The Empire is with you."
           />
-        </Modal>
-        <button onClick={this.showModal}>
-          <FontAwesomeIcon icon="plus" />
-        </button>
-        <form onSubmit={this.handleSearch} className={"search"}>
+          <h1>Darth Twitter</h1>
+          {GravatarBlock}
+        </div>
+
+        <div>
+          <button className="chirpButton" onClick={this.showModal}>
+            <FontAwesomeIcon icon="plus" />
+          </button>
+
+          <Modal
+            open={this.state.show}
+            handleClose={this.hideModal}
+            addPost={this.addPost}
+          >
+            <h1>Add New Post</h1>
+            <textarea
+              onChange={this.handleChange}
+              rows="4"
+              cols="50"
+              type="text"
+              name="message"
+            />
+          </Modal>
+
           <input
             placeholder="Search for chirps"
-            type="text"
             className="search"
-            onChange={this.handleChange}
+            type="text"
           />
-        </form>
-        {GravatarBlock}
+        </div>
       </div>
     );
   }
