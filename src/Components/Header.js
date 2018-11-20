@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Gravatar from 'gravatar-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import EmpireLogo from './empire-brands'
 import Modal from './Modal';
 import './header.css';
+
 
 class Header extends Component {
   state = {
@@ -57,11 +59,12 @@ class Header extends Component {
     return (
       <div className="flexColumnAround">
         <div className="flexRowBetween">
-          <img
+          {/* <img
             className="logo"
             src="https://upload.wikimedia.org/wikipedia/commons/7/75/Emblem_of_the_First_Galactic_Empire.svg"
             alt="The Empire is with you."
-          />
+          /> */}
+          <EmpireLogo/>
           <h1>Darth Twitter</h1>
           {GravatarBlock}
         </div>

@@ -11,10 +11,6 @@
   justify-content: space-between;
   align-items: center;
   background: #71706e;
-<<<<<<< HEAD
-  height: 90px;
-  width:100%;
-=======
   width: 100%;
 }
 h1 {
@@ -23,7 +19,6 @@ h1 {
 .logo {
   height: 100px;
   width: 100px;
->>>>>>> 10b6a35b2a21d7d0d3c7124d5da775f1ade63056
 }
 
 .chirpButton {
