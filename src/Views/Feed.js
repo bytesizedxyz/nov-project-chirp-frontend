@@ -15,11 +15,15 @@ export default class Feed extends Component {
     }
 
   render() {
-      const {users, chirps} = this.state;
+    
+      let {users, chirps} = this.state;
+          users = users.default;
+          chirps = chirps.default;
+
     return (
       <div>
           <div style={{display:"flex"}}>
-            {chirps && chirps.map((chirp, index) => <Post key={index} chirps={chirp}/>)}
+            {chirps? chirps.map((chirp, index) => <Post key={index} chirps={chirp}/>) : null}
           </div>
       </div>
     )
