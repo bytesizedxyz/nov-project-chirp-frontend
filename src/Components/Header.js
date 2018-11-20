@@ -42,10 +42,10 @@ class Header extends Component {
   // };
 
   closeAndSend = () => {
-    console.log("running close and send")
-    this.setState({open: false, message: ""})
-    this.props.addPost(this.state.message)
-  }
+    console.log('running close and send');
+    this.setState({ open: false, message: '' });
+    this.props.addPost(this.state.message);
+  };
 
   render() {
     const { user } = this.props;
@@ -64,7 +64,7 @@ class Header extends Component {
       );
     }
     return (
-      <div className="flexColumnAround shadow">
+      <div className="flexColumnAround">
         <div className="flexRowBetween">
           <EmpireLogo />
           <h1>Darth Twitter</h1>
