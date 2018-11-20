@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
 import Post from '../Components/Post';
+import "./Feed.css"
 
 export default class Feed extends Component {
 
   render() {
       
       const {chirps} = this.props;
-      console.log(chirps)
 
     return (
       <div>
-          <div style={{display:"flex", flexWrap: "wrap", alignItems:"center", justifyContent:"center", overflowY: "scroll", height:"95vh"}}>
+          <div className="feed">
             {chirps? chirps.map((chirp, index) => <Post key={index} chirp={chirp}/>) : null}
           </div>
       </div>

@@ -10,10 +10,10 @@ export default function Post(props) {
   return (
     <div className="post">
       <span className="content">{chirp.message}</span>
-      <span className="likes">{chirp.likes} <FontAwesomeIcon icon={faThumbsUp}/></span>
-      <span className="dislikes">{chirp.dislikes} <FontAwesomeIcon icon={faThumbsDown}/></span>
-      <span className="favorites">{chirp.favorites} <FontAwesomeIcon icon={faStar}/></span>
-      <span className="createdAt">{chirp.created_at} <FontAwesomeIcon icon={faClock}/></span>
+      <span className="likes">{chirp.likes} <FontAwesomeIcon color="#990303" icon={faThumbsUp}/></span>
+      <span className="dislikes">{chirp.dislikes} <FontAwesomeIcon color="#990303" icon={faThumbsDown}/></span>
+      <span className="favorites">{chirp.favorites} <FontAwesomeIcon  color="#990303" icon={faStar}/></span>
+      <span className="createdAt">{chirp.created_at} <FontAwesomeIcon color="#990303" icon={faClock}/></span>
       
     </div>
   )
