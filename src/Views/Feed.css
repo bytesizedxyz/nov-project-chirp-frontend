@@ -1,8 +1,8 @@
-.feed{
-    height:calc(100vh - 170px);
-    display:flex;
+.feed {
+    height: calc(100vh - 170px);
+    display: flex;
     flex-wrap: wrap;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     overflow-y: scroll;
 
