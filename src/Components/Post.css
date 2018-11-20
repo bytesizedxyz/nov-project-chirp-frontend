@@ -28,6 +28,7 @@
 .content{
     grid-column: 2/5;
     grid-row: 2/3;
+    word-break: break-all;
 }
 
 .createdAt{
@@ -69,6 +70,7 @@
     .content{
         grid-column: 2/6;
         grid-row: 2/3;
+        word-break: break-all;
     }
     
     .createdAt{
@@ -108,6 +110,7 @@
     .content{
         grid-column: 2/6;
         grid-row: 2/3;
+        word-break: break-all;
     }
     
     .createdAt{
@@ -147,6 +150,7 @@
     .content{
         grid-column: 2/6;
         grid-row: 2/3;
+        word-break: break-all;
     }
     
     .createdAt{
@@ -187,6 +191,7 @@
     .content{
         grid-column: 2/6;
         grid-row: 2/3;
+        word-break: break-all;
     }
     
     .createdAt{

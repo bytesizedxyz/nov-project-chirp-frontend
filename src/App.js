@@ -26,6 +26,20 @@ class App extends Component {
     this.setState({ user: user });
   };
 
+  addPost = (post) => {
+    let newPost = {
+      message:post,
+      likes:0,
+      dislikes:0,
+      favorites:0,
+      created_at: (new Date()).toLocaleDateString()
+    }
+    this.setState(prevState => {
+      prevState.chirps.unshift(newPost)
+      return prevState
+    })
+  }
+
   filteredPosts = (filter, filterBy) => {
     let searchedChirps = this.state.chirps;
     searchedChirps = searchedChirps.filter(chirp => {
@@ -43,7 +57,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Header filteredPosts={this.filteredPosts} user={user.attributes} />
+          <Header filteredPosts={this.filteredPosts} addPost={this.addPost} user={user.attributes} />
           <Feed chirps={chirps} />
         </div>
       </Router>
