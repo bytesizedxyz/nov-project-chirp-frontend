@@ -17,35 +17,38 @@ library.add(faPlus);
 class App extends Component {
   state = {
     chirps: chirps.default,
-    user: []
+    user: [],
+    searchedChirps: []
   };
 
   componentDidMount = async () => {
     const user = await Auth.currentAuthenticatedUser();
-    console.log(user);
     this.setState({ user: user });
   };
 
   filteredPosts = (filter, filterBy) => {
-    let searchedChirps = this.state.chirps;
-    searchedChirps = searchedChirps.filter(chirp => {
-      console.log("chirp", chirp);
-      return searchedChirps.indexOf(filter()) !== -1;
-    });
+    let filteredChrips = this.state.chirps;
+    console.log("filter", filter);
+    if (filter === "" || filter === null) {
+      this.setState({ searchedChirps: filteredChrips });
+    } else {
+      console.log("else");
+      filteredChrips = filteredChrips.filter(chirp =>
+        chirp.message.toLowerCase().includes(filter.toLowerCase())
+      );
+      this.setState({ searchedChirps: filteredChrips });
+      console.log("after sa");
+    }
   };
 
-  // updatedList.filter(function(item){
-  //   return item.toLowerCase().search(
-  //     event.target.value.toLowerCase()) !== -1;
-  // });
-
   render() {
-    const { chirps, user } = this.state;
+    const { chirps, user, searchedChirps } = this.state;
+    const passedChirps = searchedChirps.length !== 0 ? searchedChirps : chirps;
     return (
       <Router>
         <div className="App">
           <Header filteredPosts={this.filteredPosts} user={user.attributes} />
-          <Feed chirps={chirps} />
+          <Feed chirps={passedChirps} />
         </div>
       </Router>
     );

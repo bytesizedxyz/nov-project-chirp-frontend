@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import Gravatar from 'gravatar-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EmpireLogo from './empire-brands'
-import Modal from './Modal';
-import './header.css';
-
+import React, { Component } from "react";
+import Gravatar from "gravatar-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EmpireLogo from "./empire-brands";
+import Modal from "./Modal";
+import "./header.css";
 
 class Header extends Component {
   state = {
@@ -32,7 +31,9 @@ class Header extends Component {
   handleSearch = e => {
     e.preventDefault();
     const { filter, filterBy } = this.state;
-    console.log(filter);
+    if (filter === "") {
+      return;
+    }
     this.props.filteredPosts(filter, filterBy);
   };
 
@@ -66,7 +67,7 @@ class Header extends Component {
             src="https://upload.wikimedia.org/wikipedia/commons/7/75/Emblem_of_the_First_Galactic_Empire.svg"
             alt="The Empire is with you."
           /> */}
-          <EmpireLogo/>
+          <EmpireLogo />
           <h1>Darth Twitter</h1>
           {GravatarBlock}
         </div>
@@ -92,6 +93,7 @@ class Header extends Component {
           </Modal>
 
           <input
+            onChange={this.handleChange}
             placeholder="Search for chirps"
             className="search"
             type="text"
