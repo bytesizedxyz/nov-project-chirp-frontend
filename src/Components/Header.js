@@ -35,11 +35,17 @@ class Header extends Component {
     this.props.filteredPosts(filter, filterBy);
   };
 
-  addPost = e => {
-    e.preventDefault();
-    const { message } = this.state;
-    console.log(message);
-  };
+  // addPost = e => {
+  //   e.preventDefault();
+  //   const { message } = this.state;
+  //   console.log(message);
+  // };
+
+  closeAndSend = () => {
+    console.log("running close and send")
+    this.setState({open: false, message: ""})
+    this.props.addPost(this.state.message)
+  }
 
   render() {
     const { user } = this.props;
@@ -69,15 +75,17 @@ class Header extends Component {
           <Modal
             open={this.state.show}
             handleClose={this.hideModal}
-            addPost={this.addPost}
+            addPost={this.closeAndSend}
           >
             <h1>Add New Post</h1>
             <textarea
+              value={this.state.message}
               onChange={this.handleChange}
-              rows="4"
+              rows="5"
               cols="50"
               type="text"
               name="message"
+              maxLength="280"
             />
           </Modal>
 
