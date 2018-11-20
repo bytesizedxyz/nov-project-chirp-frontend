@@ -8,6 +8,7 @@ import aws_exports from "./aws-exports";
 import * as chirps from "./dummy_data/chirps";
 import Header from "./Components/Header";
 import Login from "./Components/Login";
+import Feed from "./Views/Feed";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
