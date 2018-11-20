@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import Feed from './Views/Feed';
-
-/*
- * DUMMY DATA; REPLACE
- */
-import * as chirps from './dummy_data/chirps';
-import * as users from "./dummy_data/users";
+import Amplify, { Auth } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react';
+import aws_exports from './aws-exports';
+import * as chirps from "./dummy_data/chirps";
+Amplify.configure(aws_exports);
 
 class App extends Component {
+
   state={
-    chirps: chirps.default,
-    users: users.default
+    chirps: chirps.default
   }
+
+  componentDidMount = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    console.log(user);
+  };
   render() {
     const {chirps} = this.state;
     return (
@@ -24,4 +27,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAuthenticator(App);
