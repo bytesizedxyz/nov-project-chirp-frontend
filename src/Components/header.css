@@ -1,9 +1,24 @@
-.headerDiv {
+.flexColumnAround {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: #71706e;
+  width: 100%;
+}
+.flexRowBetween {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #71706e;
-  height: 90px;
+  width: 100%;
+}
+h1 {
+  font-size: 50px;
+}
+.logo {
+  height: 100px;
+  width: 100px;
 }
 
 .chirpButton {
@@ -22,7 +37,6 @@
 
 .profileImage {
   border-radius: 50%;
-  width: 100%;
 }
 
 .modal {
