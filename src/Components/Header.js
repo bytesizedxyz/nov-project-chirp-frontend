@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import Gravatar from "gravatar-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EmpireLogo from "./empire-brands";
-import Modal from "./Modal";
-import "./header.css";
+import React, { Component } from 'react';
+import Gravatar from 'gravatar-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import EmpireLogo from './empire-brands';
+import Modal from './Modal';
+import './header.css';
 
 class Header extends Component {
   state = {
-    message: "",
+    message: '',
     open: false,
-    filter: "",
-    filterBy: ""
+    filter: '',
+    filterBy: ''
   };
 
   showModal = () => {
@@ -35,11 +35,17 @@ class Header extends Component {
     this.props.filteredPosts(filter, filterBy);
   };
 
-  addPost = e => {
-    e.preventDefault();
-    const { message } = this.state;
-    console.log(message);
-  };
+  // addPost = e => {
+  //   e.preventDefault();
+  //   const { message } = this.state;
+  //   console.log(message);
+  // };
+
+  closeAndSend = () => {
+    console.log("running close and send")
+    this.setState({open: false, message: ""})
+    this.props.addPost(this.state.message)
+  }
 
   render() {
     const { user } = this.props;
@@ -60,35 +66,32 @@ class Header extends Component {
     return (
       <div className="flexColumnAround">
         <div className="flexRowBetween">
-          {/* <img
-            className="logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/7/75/Emblem_of_the_First_Galactic_Empire.svg"
-            alt="The Empire is with you."
-          /> */}
           <EmpireLogo />
           <h1>Darth Twitter</h1>
           {GravatarBlock}
         </div>
 
-        <div>
-          <button className="chirpButton" onClick={this.showModal}>
-            <FontAwesomeIcon icon="plus" />
-          </button>
-
+        <div className="headerBottom headerBottomStyle">
           <Modal
             open={this.state.show}
             handleClose={this.hideModal}
-            addPost={this.addPost}
+            addPost={this.closeAndSend}
           >
             <h1>Add New Post</h1>
             <textarea
+              value={this.state.message}
               onChange={this.handleChange}
-              rows="4"
+              rows="5"
               cols="50"
               type="text"
               name="message"
+              maxLength="280"
             />
           </Modal>
+
+          <button className="chirpButton" onClick={this.showModal}>
+            <FontAwesomeIcon icon="plus" />
+          </button>
 
           <input
             onChange={this.handleChange}
@@ -98,7 +101,7 @@ class Header extends Component {
             name="filter"
           />
           <button className="chirpButton" onClick={this.handleSearch}>
-            Search
+            SEARCH
           </button>
         </div>
       </div>
