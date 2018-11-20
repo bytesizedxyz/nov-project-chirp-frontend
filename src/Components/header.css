@@ -1,0 +1,24 @@
+.headerDiv {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  text-align: initial;
+  background: #71706e;
+  height: 3em;
+}
+
+.loginButton {
+  background-color: #990303;
+}
+
+.search {
+  flex-direction: row-reverse;
+}
+
+.profileHolder {
+}
+
+.profileImage {
+  border-radius: 50%;
+  width: 100%;
+}
