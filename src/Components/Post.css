@@ -4,6 +4,7 @@
     min-height:325px;
     font-size: 1.5em;
     background-color:#292323;
+    opacity: 0.95;
     margin-bottom:20px;
     display:grid;
     grid-template-columns: 7% 7% 7% auto 15%;
@@ -46,6 +47,7 @@
         font-size: 1.3em;
         /* background-color:#292323 */
         background-color: #292323;
+        opacity: 0.95;
         margin-bottom:20px;
         display:grid;
         grid-template-columns: 20% 20% 20% auto 20% 20%;
@@ -86,6 +88,7 @@
         min-height:325px;
         font-size: 1.5em;
         background-color:#292323;
+        opacity: 0.95;
         margin-bottom:20px;
         display:grid;
         grid-template-columns: 15% 15% 15% auto 15% 15%;
@@ -126,6 +129,7 @@
         min-height:325px;
         font-size: 1.5em;
         background-color:#292323;
+        opacity: 0.95;
         margin-bottom:20px;
         display:grid;
         grid-template-columns: 15% 15% 15% auto 15% 15%;
@@ -167,6 +171,7 @@
         min-height:325px;
         font-size: 1.5em;
         background-color:#292323;
+        opacity: 0.95;
         margin-bottom:20px;
         display:grid;
         grid-template-columns: 15% 15% 15% auto 15% 15%;
