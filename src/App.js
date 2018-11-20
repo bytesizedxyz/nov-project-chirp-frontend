@@ -18,19 +18,21 @@ library.add(faPlus);
 
 class App extends Component {
   state = {
-    chirps: chirps.default
+    chirps: chirps.default,
+    user: []
   };
 
   componentDidMount = async () => {
     const user = await Auth.currentAuthenticatedUser();
     console.log(user);
+    this.setState({ user: user });
   };
   render() {
-    const { chirps } = this.state;
+    const { chirps, user } = this.state;
     return (
       <Router>
         <div className="App">
-          <Header />
+          <Header user={user.attributes} />
           <Switch>
             <Route exact path="/login" component={Login} />
           </Switch>

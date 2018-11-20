@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Gravatar from "gravatar-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
 
 class Header extends Component {
   state = {
     search: "",
-    isOpen: false
+    isOpen: false,
+    email: ""
   };
 
   handleChange = e => {
@@ -44,9 +46,13 @@ class Header extends Component {
           />
         </form>
         <div className="profileHolder">
-          <img
-            className="profileImage"
-            src={"https://i.ytimg.com/vi/AfdR003knes/hqdefault.jpg"}
+          <Gravatar
+            email={this.state.email}
+            size={100}
+            rating="PG"
+            alt="Alvin Dickson profile"
+            secure
+            default="monsterid"
           />
         </div>
       </div>
@@ -55,22 +61,3 @@ class Header extends Component {
 }
 
 export default Header;
-
-// handleSubmit(event) {
-//   event.preventDefault();
-//   axios.post("/auth/signup", {
-//       username: this.state.username,
-//       password: this.state.password
-//     })
-//     .then(response => {
-//       console.log(response.data);
-//       if (!response.data.errmsg) {
-//         console.log("You have signed up!");
-//         this.setState({
-//           redirectTo: "/login"
-//         });
-//       } else {
-//         console.log("An account already exists with these details");
-//       }
-//     });
-// }
