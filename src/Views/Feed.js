@@ -12,7 +12,7 @@ export default class Feed extends Component {
     return (
       <div>
           <div style={{display:"flex", flexWrap: "wrap", alignItems:"center", justifyContent:"center"}}>
-            {chirps? chirps.map((chirp, index) => <Post key={index} chirps={chirp}/>) : null}
+            {chirps? chirps.map((chirp, index) => <Post key={index} chirp={chirp}/>) : null}
           </div>
       </div>
     )

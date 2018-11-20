@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Feed from "./Views/Feed";
 import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import aws_exports from './aws-exports';
