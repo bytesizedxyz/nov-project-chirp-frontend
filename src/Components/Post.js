@@ -3,7 +3,7 @@
 import React from 'react';
 import "./Post.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown, faStar, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faThumbsDown, faStar, faClock, fabEmpire } from '@fortawesome/free-solid-svg-icons';
 
 export default function Post(props) {
   const chirp = props.chirp
@@ -14,6 +14,7 @@ export default function Post(props) {
       <span className="dislikes">{chirp.dislikes} <FontAwesomeIcon icon={faThumbsDown}/></span>
       <span className="favorites">{chirp.favorites} <FontAwesomeIcon icon={faStar}/></span>
       <span className="createdAt">{chirp.created_at} <FontAwesomeIcon icon={faClock}/></span>
+      
     </div>
   )
 }
