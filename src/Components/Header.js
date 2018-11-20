@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import Gravatar from 'gravatar-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EmpireLogo from './empire-brands'
+import EmpireLogo from './empire-brands';
 import Modal from './Modal';
 import './header.css';
 
-
 class Header extends Component {
   state = {
-    message: "",
+    message: '',
     open: false,
-    filter: "",
-    filterBy: ""
+    filter: '',
+    filterBy: ''
   };
 
   showModal = () => {
@@ -61,21 +60,12 @@ class Header extends Component {
     return (
       <div className="flexColumnAround">
         <div className="flexRowBetween">
-          {/* <img
-            className="logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/7/75/Emblem_of_the_First_Galactic_Empire.svg"
-            alt="The Empire is with you."
-          /> */}
-          <EmpireLogo/>
+          <EmpireLogo />
           <h1>Darth Twitter</h1>
           {GravatarBlock}
         </div>
 
-        <div>
-          <button className="chirpButton" onClick={this.showModal}>
-            <FontAwesomeIcon icon="plus" />
-          </button>
-
+        <div className="headerBottom headerBottomStyle">
           <Modal
             open={this.state.show}
             handleClose={this.hideModal}
@@ -91,14 +81,18 @@ class Header extends Component {
             />
           </Modal>
 
+          <button className="chirpButton" onClick={this.showModal}>
+            <FontAwesomeIcon icon="plus" />
+          </button>
+
           <input
-            placeholder="Search for chirps"
+            placeHolder="SEARCH FOR CHIRPS"
             className="search"
             type="text"
             name="filter"
           />
           <button className="chirpButton" onClick={this.handleSearch}>
-            Search
+            SEARCH
           </button>
         </div>
       </div>
