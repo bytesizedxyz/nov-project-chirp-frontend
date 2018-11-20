@@ -44,9 +44,7 @@
   transform: translate(-50%, -50%);
 }
 
-.modal-main input {
-  height: 100px;
-  width: 80%;
+.modal-main textarea {
   margin-bottom: 3%;
 }
 
