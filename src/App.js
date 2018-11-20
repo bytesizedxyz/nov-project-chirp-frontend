@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import Amplify, { Auth } from "aws-amplify";
 import { withAuthenticator } from "aws-amplify-react";
@@ -7,7 +7,7 @@ import aws_exports from "./aws-exports";
 
 import * as chirps from "./dummy_data/chirps";
 import Header from "./Components/Header";
-import Login from "./Components/Login";
+import NewPost from "./Components/NewPost";
 import Feed from "./Views/Feed";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -32,9 +32,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header user={user.attributes} />
-          <Switch>
-            <Route exact path="/login" component={Login} />
-          </Switch>
           <Feed chirps={chirps} />
         </div>
       </Router>
