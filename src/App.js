@@ -23,7 +23,13 @@ class App extends Component {
 
   componentDidMount = async () => {
     const user = await Auth.currentAuthenticatedUser();
+    let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
+    console.log("chirps", chirps)
+    chirps = await chirps.body.json();
+    console.log(chirps)
+    console.log(user.attributes)
     this.setState({ user: user });
+
   };
 
   addPost = post => {
@@ -39,8 +45,6 @@ class App extends Component {
       return prevState;
     });
   };
-
-  // {"userId":8,"message":"Monitored 24 hour time-frame","deleted":true,"likes":59,"dislikes":67,"favorites":77,"created_at":"7/3/2003"},
 
   filteredPosts = (filter = "") => {
     console.log("FP filter",filter)
