@@ -31,7 +31,7 @@ class Header extends Component {
   handleSearch = e => {
     e.preventDefault();
     const { filter, filterBy } = this.state;
-    console.log("filter", filter);
+    console.log('filter', filter);
     this.props.filteredPosts(filter, filterBy);
   };
 
@@ -71,7 +71,7 @@ class Header extends Component {
           {GravatarBlock}
         </div>
 
-        <div className="headerBottom headerBottomStyle">
+        <div className="headerBottom flexRowAround">
           <Modal
             open={this.state.show}
             handleClose={this.hideModal}
@@ -93,13 +93,17 @@ class Header extends Component {
             <FontAwesomeIcon icon="plus" />
           </button>
 
-          <input
-            onChange={this.handleChange}
-            placeholder="Search for chirps"
-            className="search"
-            type="text"
-            name="filter"
-          />
+          <span className="flexRowCenter">
+            <FontAwesomeIcon icon="search" className="searchIcon" />
+            <input
+              onChange={this.handleChange}
+              placeholder="Search for chirps"
+              className="search"
+              type="text"
+              name="filter"
+            />
+          </span>
+
           <button className="chirpButton" onClick={this.handleSearch}>
             SEARCH
           </button>
