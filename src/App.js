@@ -24,11 +24,9 @@ class App extends Component {
   componentDidMount = async () => {
     const user = await Auth.currentAuthenticatedUser();
     let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
-    console.log("chirps", chirps)
-    chirps = await chirps.body.json();
-    console.log(chirps)
-    console.log(user.attributes)
-    this.setState({ user: user });
+    chirps = await chirps.json();
+    console.log("chirps", chirps, "user", user)
+    this.setState({ user, chirps });
 
   };
 
@@ -39,29 +37,21 @@ class App extends Component {
     });
   };
 
-  addPost = post => {
-    let newPost = {
-      message: post,
-      likes: 0,
-      dislikes: 0,
-      favorites: 0,
-      created_at: new Date().toLocaleDateString()
-    };
-    this.setState(prevState => {
-      prevState.chirps.unshift(newPost);
-      return prevState;
-    });
+  addPost = async post => {
+    // const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {method:"POST", body:{
+    //   message:post,
+    //   username:this.state.user.email
+    // }})
+    // const reply = newPost.json();
+    console.log("reply", {
+      message:post,
+      username:this.state.user.username
+    })
   };
 
-<<<<<<< HEAD
-  filteredPosts = (filter = "") => {
-    console.log("FP filter",filter)
-    return this.state.chirps.filter(chirp =>
-=======
   render() {
     const { chirps, user, filter } = this.state;
     const searchedChirps = chirps.filter(chirp =>
->>>>>>> 6afe2ba8a2471e89bb5339682c623771bd0967fd
       chirp.message.toLowerCase().includes(filter.toLowerCase())
     );
     return (

@@ -23,7 +23,7 @@ export default function Post(props) {
         {chirp.likes} <FontAwesomeIcon color="#990303" icon={faThumbsUp} />
       </span>
       <span className="dislikes">
-        {chirp.dislikes} <FontAwesomeIcon color="#990303" icon={faThumbsDown} />
+        {chirp.hates} <FontAwesomeIcon color="#990303" icon={faThumbsDown} />
       </span>
       <span className="favorites">
         {chirp.favorites} <FontAwesomeIcon color="#990303" icon={faStar} />
