@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import './App.css';
-import Amplify, { Auth } from 'aws-amplify';
-import { withAuthenticator } from 'aws-amplify-react';
-import aws_exports from './aws-exports';
+import React, { Component } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import Amplify, { Auth } from "aws-amplify";
+import { withAuthenticator } from "aws-amplify-react";
+import aws_exports from "./aws-exports";
 
-import * as chirps from './dummy_data/chirps';
-import Header from './Components/Header';
-import Feed from './Views/Feed';
+import * as chirps from "./dummy_data/chirps";
+import Header from "./Components/Header";
+import Feed from "./Views/Feed";
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 Amplify.configure(aws_exports);
 library.add(faPlus, faSearch);
 
@@ -18,12 +18,19 @@ class App extends Component {
   state = {
     chirps: chirps.default,
     user: [],
-    searchedChirps: []
+    filter: ""
   };
 
   componentDidMount = async () => {
     const user = await Auth.currentAuthenticatedUser();
     this.setState({ user: user });
+  };
+
+  handleFilter = e => {
+    const { value } = e.target;
+    this.setState({
+      filter: value
+    });
   };
 
   addPost = post => {
@@ -40,27 +47,21 @@ class App extends Component {
     });
   };
 
-  // {"userId":8,"message":"Monitored 24 hour time-frame","deleted":true,"likes":59,"dislikes":67,"favorites":77,"created_at":"7/3/2003"},
-
-  filteredPosts = (filter = '') => {
-    console.log('FP filter', filter);
-    return this.state.chirps.filter(chirp =>
+  render() {
+    const { chirps, user, filter } = this.state;
+    const searchedChirps = chirps.filter(chirp =>
       chirp.message.toLowerCase().includes(filter.toLowerCase())
     );
-  };
-
-  render() {
-    const { chirps, user, searchedChirps } = this.state;
-    // const passedChirps = search"edChirps.length !== 0 ? searchedChirps : chirps;
     return (
       <Router>
         <div className="App">
           <Header
-            filteredPosts={this.filteredPosts}
+            handleFilter={this.handleFilter}
             addPost={this.addPost}
             user={user.attributes}
+            filter={filter}
           />
-          {chirps ? <Feed chirps={this.filteredPosts()} /> : null}
+          {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
         </div>
       </Router>
     );

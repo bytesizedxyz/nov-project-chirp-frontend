@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
+@import url("https://fonts.googleapis.com/css?family=Bowlby+One+SC");
 .headerBottom {
   margin-top: -15px;
   margin-bottom: 15px;
@@ -9,6 +9,12 @@
   justify-content: space-around;
   align-items: center;
   background-color: #292323;
+}
+.lightHeaderBottomStyle {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
 }
 .flexColumnAround {
   display: flex;
@@ -33,7 +39,7 @@
 h1 {
   font-size: 80px;
   margin: 0px;
-  font-family: 'Bowlby One SC', cursive;
+  font-family: "Bowlby One SC", cursive;
   letter-spacing: 2px;
   color: black;
 }
