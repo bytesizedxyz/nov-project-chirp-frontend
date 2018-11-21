@@ -8,6 +8,7 @@ import aws_exports from "./aws-exports";
 import * as chirps from "./dummy_data/chirps";
 import Header from "./Components/Header";
 import Feed from "./Views/Feed";
+import { ThemeContext, themes } from "./ThemeProvider";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +19,8 @@ class App extends Component {
   state = {
     chirps: chirps.default,
     user: [],
-    filter: ""
+    filter: "",
+    theme: themes.dark
   };
 
   componentDidMount = async () => {
@@ -28,6 +30,13 @@ class App extends Component {
     console.log("chirps", chirps, "user", user)
     this.setState({ user, chirps });
 
+  };
+
+  toggleTheme = () => {
+    this.setState(state => ({
+      theme: state.theme === themes.dark ? themes.light : themes.dark
+    }));
+    console.log(this.state.theme);
   };
 
   handleFilter = e => {
@@ -50,22 +59,28 @@ class App extends Component {
   };
 
   render() {
-    const { chirps, user, filter } = this.state;
+    const { chirps, user, filter, theme } = this.state;
+    const themeChange = {
+      theme,
+      toggleTheme: this.toggleTheme
+    };
     const searchedChirps = chirps.filter(chirp =>
       chirp.message.toLowerCase().includes(filter.toLowerCase())
     );
     return (
-      <Router>
-        <div className="App">
-          <Header
-            handleFilter={this.handleFilter}
-            addPost={this.addPost}
-            user={user.attributes}
-            filter={filter}
-          />
-          {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
-        </div>
-      </Router>
+      <ThemeContext.Provider value={themeChange}>
+        <Router>
+          <div className="App">
+            <Header
+              handleFilter={this.handleFilter}
+              addPost={this.addPost}
+              user={user.attributes}
+              filter={filter}
+            />
+            {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
+          </div>
+        </Router>
+      </ThemeContext.Provider>
     );
   }
 }

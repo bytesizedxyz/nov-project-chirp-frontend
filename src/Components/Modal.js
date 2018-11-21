@@ -1,16 +1,22 @@
-import React from "react";
+import React from 'react';
 
 const Modal = ({ addPost, handleClose, open, children }) => {
-  const showHideClassName = open ? "modal display-block" : "modal display-none";
+  const showHideClassName = open ? 'modalOpen' : 'modal display-none';
   return (
     <div className={showHideClassName}>
-      <section className="modal-main">
+      <section className="modal-main whiteFont brownBackground">
         <div>{children}</div>
-        <button className={"chirpButton"} onClick={handleClose}>
+        <button
+          className={'chirpButton whiteFont brownBackground'}
+          onClick={handleClose}
+        >
           close
         </button>
-        <button className={"chirpButton"} onClick={addPost}>
-          Submit Post
+        <button
+          className={'chirpButton whiteFont brownBackground'}
+          onClick={addPost}
+        >
+          submit
         </button>
       </section>
     </div>
