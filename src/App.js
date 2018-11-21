@@ -27,6 +27,7 @@ class App extends Component {
     const user = await Auth.currentAuthenticatedUser();
     let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
     chirps = await chirps.json();
+    chirps = chirps.reverse();
     console.log("chirps", chirps, "user", user)
     this.setState({ user, chirps });
 
@@ -47,14 +48,14 @@ class App extends Component {
   };
 
   addPost = async post => {
-    // const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {method:"POST", body:{
-    //   message:post,
-    //   username:this.state.user.email
-    // }})
-    // const reply = newPost.json();
-    console.log("reply", {
-      message:post,
-      username:this.state.user.username
+    const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({
+      message:`${post}`,
+      username:`${this.state.user.username}`
+    })})
+    const reply = await newPost.json();
+    this.setState(prevState => {
+      prevState.chirps.unshift(reply);
+      return prevState
     })
   };
 
@@ -65,7 +66,7 @@ class App extends Component {
       toggleTheme: this.toggleTheme
     };
     const searchedChirps = chirps.filter(chirp =>
-      chirp.message.toLowerCase().includes(filter.toLowerCase())
+      chirp.message? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false
     );
     return (
       <ThemeContext.Provider value={themeChange}>

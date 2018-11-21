@@ -29,7 +29,7 @@ export default function Post(props) {
         {chirp.favorites} <FontAwesomeIcon color="#990303" icon={faStar} />
       </span>
       <span className="createdAt">
-        {chirp.created_at} <FontAwesomeIcon color="#990303" icon={faClock} />
+        {new Date(chirp.created_at).toLocaleDateString()} <FontAwesomeIcon color="#990303" icon={faClock} />
       </span>
     </div>
   );
