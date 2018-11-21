@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
-import Gravatar from 'gravatar-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EmpireLogo from './empire-brands';
-import Modal from './Modal';
-import './header.css';
+import React, { Component } from "react";
+import Gravatar from "gravatar-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EmpireLogo from "./empire-brands";
+import Modal from "./Modal";
+import "./header.css";
 
 class Header extends Component {
   state = {
-    message: '',
-    open: false,
-    filter: '',
-    filterBy: ''
+    message: "",
+    open: false
   };
 
   showModal = () => {
@@ -28,27 +26,14 @@ class Header extends Component {
     });
   };
 
-  handleSearch = e => {
-    e.preventDefault();
-    const { filter, filterBy } = this.state;
-    console.log("filter", filter);
-    this.props.filteredPosts(filter, filterBy);
-  };
-
-  // addPost = e => {
-  //   e.preventDefault();
-  //   const { message } = this.state;
-  //   console.log(message);
-  // };
-
   closeAndSend = () => {
-    console.log('running close and send');
-    this.setState({ open: false, message: '' });
+    console.log("running close and send");
+    this.setState({ open: false, message: "" });
     this.props.addPost(this.state.message);
   };
 
   render() {
-    const { user } = this.props;
+    const { user, handleFilter, filter } = this.props;
     let GravatarBlock;
     if (user && user.email) {
       GravatarBlock = (
@@ -57,7 +42,7 @@ class Header extends Component {
           email={this.props.user.email}
           size={120}
           rating="PG"
-          alt="Alvin Dickson profile"
+          alt="Profile Image"
           default="monsterid"
           secure
         />
@@ -71,7 +56,7 @@ class Header extends Component {
           {GravatarBlock}
         </div>
 
-        <div className="headerBottom headerBottomStyle">
+        <div className="headerBottom flexRowAround">
           <Modal
             open={this.state.show}
             handleClose={this.hideModal}
@@ -93,13 +78,17 @@ class Header extends Component {
             <FontAwesomeIcon icon="plus" />
           </button>
 
-          <input
-            onChange={this.handleChange}
-            placeholder="Search for chirps"
-            className="search"
-            type="text"
-            name="filter"
-          />
+          <span className="flexRowCenter">
+            <FontAwesomeIcon icon="search" className="searchIcon" />
+            <input
+              onChange={handleFilter}
+              placeholder="Search for chirps"
+              className="search"
+              type="text"
+              name={filter}
+            />
+          </span>
+
           <button className="chirpButton" onClick={this.handleSearch}>
             SEARCH
           </button>

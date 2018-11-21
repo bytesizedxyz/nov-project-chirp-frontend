@@ -10,15 +10,15 @@ import Header from "./Components/Header";
 import Feed from "./Views/Feed";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 Amplify.configure(aws_exports);
-library.add(faPlus);
+library.add(faPlus, faSearch);
 
 class App extends Component {
   state = {
     chirps: chirps.default,
     user: [],
-    searchedChirps: []
+    filter: ""
   };
 
   componentDidMount = async () => {
@@ -30,6 +30,13 @@ class App extends Component {
     console.log(user.attributes)
     this.setState({ user: user });
 
+  };
+
+  handleFilter = e => {
+    const { value } = e.target;
+    this.setState({
+      filter: value
+    });
   };
 
   addPost = post => {
@@ -46,25 +53,27 @@ class App extends Component {
     });
   };
 
+<<<<<<< HEAD
   filteredPosts = (filter = "") => {
     console.log("FP filter",filter)
     return this.state.chirps.filter(chirp =>
+=======
+  render() {
+    const { chirps, user, filter } = this.state;
+    const searchedChirps = chirps.filter(chirp =>
+>>>>>>> 6afe2ba8a2471e89bb5339682c623771bd0967fd
       chirp.message.toLowerCase().includes(filter.toLowerCase())
     );
-  };
-
-  render() {
-    const { chirps, user, searchedChirps } = this.state;
-    // const passedChirps = search"edChirps.length !== 0 ? searchedChirps : chirps;
     return (
       <Router>
         <div className="App">
           <Header
-            filteredPosts={this.filteredPosts}
+            handleFilter={this.handleFilter}
             addPost={this.addPost}
             user={user.attributes}
+            filter={filter}
           />
-          { chirps? <Feed chirps={this.filteredPosts()} /> : null}
+          {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
         </div>
       </Router>
     );
