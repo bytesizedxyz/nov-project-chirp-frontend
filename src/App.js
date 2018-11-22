@@ -26,7 +26,12 @@ class App extends Component {
 
   componentDidMount = async () => {
     const user = await Auth.currentAuthenticatedUser();
-    this.setState({ user: user });
+    let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
+    chirps = await chirps.json();
+    chirps = chirps.reverse();
+    console.log("chirps", chirps, "user", user)
+    this.setState({ user, chirps });
+
   };
 
   toggleTheme = () => {
@@ -43,18 +48,16 @@ class App extends Component {
     });
   };
 
-  addPost = post => {
-    let newPost = {
-      message: post,
-      likes: 0,
-      dislikes: 0,
-      favorites: 0,
-      created_at: new Date().toLocaleDateString()
-    };
+  addPost = async post => {
+    const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({
+      message:`${post}`,
+      username:`${this.state.user.username}`
+    })})
+    const reply = await newPost.json();
     this.setState(prevState => {
-      prevState.chirps.unshift(newPost);
-      return prevState;
-    });
+      prevState.chirps.unshift(reply);
+      return prevState
+    })
   };
 
   render() {
@@ -64,7 +67,7 @@ class App extends Component {
       toggleTheme: this.toggleTheme
     };
     const searchedChirps = chirps.filter(chirp =>
-      chirp.message.toLowerCase().includes(filter.toLowerCase())
+      chirp.message? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false
     );
     return (
       <ThemeContext.Provider value={themeChange}>
