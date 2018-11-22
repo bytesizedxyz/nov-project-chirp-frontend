@@ -9,7 +9,7 @@ describe("Header rendering", () => {
     const { queryByText } = render(<Header />);
     const header = queryByText("Darth Twitter" || "Jedi Twitter");
 
-    const search = getByPlaceholderText("Search for chirps");
+    const search = getBy("Search for chirps");
     expect(header.innerHTML).toBe("Darth Twitter");
     expect(search.innerHTML)
     console.log(header.innerHTML);

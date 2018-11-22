@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Post from '../Components/Post';
-import "./Feed.css"
+import Post from "../Components/Post";
+import "./Feed.css";
+import { ThemeContext } from "../ThemeProvider";
 
 export default class Feed extends Component {
-
   render() {
-      
-      const {chirps} = this.props;
+    const { chirps } = this.props;
 
     return (
-      <div>
+      <ThemeContext.Consumer>
+        {({ theme, toggleTheme }) => (
           <div className="feed">
-            {chirps? chirps.map((chirp, index) => <Post key={index} chirp={chirp}/>) : null}
+            {chirps
+              ? chirps.map((chirp, index) => <Post key={index} chirp={chirp} />)
+              : null}
           </div>
-      </div>
-    )
+        )}
+      </ThemeContext.Consumer>
+    );
   }
 }
