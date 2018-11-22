@@ -28,7 +28,7 @@ class App extends Component {
     let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
     chirps = await chirps.json();
     chirps = chirps.reverse();
-    console.log("chirps", chirps, "user", user)
+    console.log("chirps", chirps, "user", user);
     this.setState({ user, chirps });
 
   };
