@@ -1,22 +1,112 @@
+/* App styling */
+.App {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  color: #fff;
+}
+
+/* theme button */
+.theme-button {
+  border: 0px;
+}
+
+.theme-button :focus {
+  outline-style: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+/* Light Theme */
+.lightBlueBackground {
+  background-color: #dff6ff;
+}
+
+.eggshellBackground {
+  background-color: #f0ead6;
+}
+
+.greyBackground {
+  background-color: #9c9999;
+}
+
+.blueBackground {
+  background-color: #2f67f8;
+  /* background-color: #2049d9; */
+}
+
+.brownFont {
+  color: #581f11;
+}
+
+.eggshellFont {
+  color: #f0ead6;
+}
+
+.eggshellBorder {
+  border: 2px solid #f0ead6;
+}
+
+.searchIconBorderEggshell {
+  border-left: solid 2px #f0ead6;
+  border-bottom: solid 2px #f0ead6;
+  border-top: solid 2px #f0ead6;
+}
+
+/* Dark Theme */
+.brownBackground {
+  background-color: #292323;
+}
+
+.greyBackground {
+  background-color: #9c9999;
+}
+
+.blackBackground {
+  background-color: black;
+}
+
+.whiteFont {
+  color: #fff;
+}
+
+.redFont {
+  color: #990303;
+}
+
+.blackFont {
+  color: black;
+}
+
+.redBorder {
+  border: 2px solid #990303;
+}
+
+.searchIconBorderRed {
+  border-left: solid 2px #990303;
+  border-bottom: solid 2px #990303;
+  border-top: solid 2px #990303;
+}
+
 /* placeholder font */
 ::placeholder {
   font-size: 14px;
   font-weight: 700;
-  color: #71706e;
+  color: #f0ead6;
   opacity: 1;
 }
 
 :-ms-input-placeholder {
   font-size: 14px;
   font-weight: 700;
-  color: #71706e;
+  color: #f0ead6;
   opacity: 1;
 }
 
 ::-ms-input-placeholder {
   font-size: 14px;
   font-weight: 700;
-  color: #71706e;
+  color: #f0ead6;
   opacity: 1;
 }
 
@@ -111,37 +201,6 @@ h1 {
   margin-top: -15px;
   margin-bottom: 15px;
   width: 50%;
-}
-
-/* coloring */
-.brownBackground {
-  background-color: #292323;
-}
-
-.greyBackground {
-  background-color: #9c9999;
-}
-
-.whiteFont {
-  color: #fff;
-}
-
-.redFont {
-  color: #990303;
-}
-
-.blackFont {
-  color: black;
-}
-
-.redBorder2px {
-  border: 2px solid #990303;
-}
-
-.searchIconBorder {
-  border-left: solid 2px #990303;
-  border-bottom: solid 2px #990303;
-  border-top: solid 2px #990303;
 }
 
 /* font */

@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import "./App.css";
-import Amplify, { Auth } from "aws-amplify";
-import { withAuthenticator } from "aws-amplify-react";
-import aws_exports from "./aws-exports";
+import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Amplify, { Auth } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react';
+import aws_exports from './aws-exports';
 
-import * as chirps from "./dummy_data/chirps";
-import Header from "./Components/Header";
-import Feed from "./Views/Feed";
-import { ThemeContext, themes } from "./ThemeProvider";
+import * as chirps from './dummy_data/chirps';
+import Header from './Components/Header';
+import Feed from './Views/Feed';
+import { ThemeContext, themes } from './ThemeProvider';
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
+import './Components/header.css';
+
 Amplify.configure(aws_exports);
 library.add(faPlus, faSearch);
 
@@ -19,7 +20,7 @@ class App extends Component {
   state = {
     chirps: chirps.default,
     user: [],
-    filter: "",
+    filter: '',
     theme: themes.dark
   };
 
@@ -68,15 +69,23 @@ class App extends Component {
     return (
       <ThemeContext.Provider value={themeChange}>
         <Router>
-          <div className="App">
-            <Header
-              handleFilter={this.handleFilter}
-              addPost={this.addPost}
-              user={user.attributes}
-              filter={filter}
-            />
-            {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
-          </div>
+          <ThemeContext.Consumer>
+            {({ theme }) => (
+              <div
+                className={`App
+                ${theme.lightBlueBackground}
+                ${theme.blackBackground}`}
+              >
+                <Header
+                  handleFilter={this.handleFilter}
+                  addPost={this.addPost}
+                  user={user.attributes}
+                  filter={filter}
+                />
+                {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
+              </div>
+            )}
+          </ThemeContext.Consumer>
         </Router>
       </ThemeContext.Provider>
     );

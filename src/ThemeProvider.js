@@ -1,19 +1,28 @@
-import React from "react";
+import React from 'react';
 
 export const themes = {
   light: {
-    Header: {
-      color: "yellow"
-    },
-    foreground: "#000000",
-    background: "#eeeeee"
+    lightBlueBackground: 'lightBlueBackground',
+    eggshellBackground: 'eggshellBackground',
+    greyBackground: 'greyBackground',
+    blueBackground: 'blueBackground',
+    whiteFont: 'whiteFont',
+    eggshellFont: 'eggshellFont',
+    brownFont: 'brownFont',
+    eggshellBorder: 'eggshellBorder',
+    searchIconBorder: 'searchIconBorderEggshell',
+    obiTwitter: 'Obi Wan Kenobi Twitter'
   },
   dark: {
-    Header: {
-      color: "brown"
-    },
-    foreground: "#ffffff",
-    background: "#222222"
+    brownBackground: 'brownBackground',
+    greyBackground: 'greyBackground',
+    whiteFont: 'whiteFont',
+    blackFont: 'blackFont',
+    redFont: 'redFont',
+    redBorder: 'redBorder',
+    searchIconBorder: 'searchIconBorderRed',
+    blackBackground: 'blackBackground',
+    darthTwitter: 'Darth Twitter'
   }
 };
 
