@@ -35,7 +35,6 @@ class Header extends Component {
 
   render() {
     const { user, handleFilter, filter } = this.props;
-    console.log(user);
     let GravatarBlock;
     if (user && user.email) {
       GravatarBlock = (
@@ -60,7 +59,6 @@ class Header extends Component {
               <h1 className={theme.Header.color}>Darth Twitter</h1>
               {GravatarBlock}
             </div>
-
             <div className="headerBottom flexRowAround brownBackground">
               <Modal
                 open={this.state.show}
@@ -79,14 +77,12 @@ class Header extends Component {
                   className="greyBackground whiteFont textAreaFont"
                 />
               </Modal>
-
               <button
                 className="chirpButton redFont redBorder2px brownBackground"
                 onClick={this.showModal}
               >
                 <FontAwesomeIcon icon="plus" />
               </button>
-
               <button
                 className="chirpButton"
                 onClick={toggleTheme}
@@ -94,7 +90,6 @@ class Header extends Component {
               >
                 Change Theme
               </button>
-
               <span className="flexRowCenter">
                 <FontAwesomeIcon
                   icon="search"
@@ -108,7 +103,6 @@ class Header extends Component {
                   name={filter}
                 />
               </span>
-
               <button
                 className="chirpButton redFont redBorder2px brownBackground"
                 onClick={this.handleSearch}

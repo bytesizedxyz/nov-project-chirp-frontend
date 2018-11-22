@@ -28,16 +28,14 @@ class App extends Component {
     let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
     chirps = await chirps.json();
     chirps = chirps.reverse();
-    console.log("chirps", chirps, "user", user)
+    console.log("chirps", chirps, "user", user);
     this.setState({ user, chirps });
-
   };
 
   toggleTheme = () => {
     this.setState(state => ({
       theme: state.theme === themes.dark ? themes.light : themes.dark
     }));
-    console.log(this.state.theme);
   };
 
   handleFilter = e => {
@@ -48,15 +46,22 @@ class App extends Component {
   };
 
   addPost = async post => {
-    const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({
-      message:`${post}`,
-      username:`${this.state.user.username}`
-    })})
+    const newPost = await fetch(
+      "https://nov-chirp-backend.herokuapp.com/chirp",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: `${post}`,
+          username: `${this.state.user.username}`
+        })
+      }
+    );
     const reply = await newPost.json();
     this.setState(prevState => {
       prevState.chirps.unshift(reply);
-      return prevState
-    })
+      return prevState;
+    });
   };
 
   render() {
@@ -66,7 +71,9 @@ class App extends Component {
       toggleTheme: this.toggleTheme
     };
     const searchedChirps = chirps.filter(chirp =>
-      chirp.message? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false
+      chirp.message
+        ? chirp.message.toLowerCase().includes(filter.toLowerCase())
+        : false
     );
     return (
       <ThemeContext.Provider value={themeChange}>
