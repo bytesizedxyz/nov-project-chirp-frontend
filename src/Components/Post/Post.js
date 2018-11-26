@@ -2,23 +2,15 @@
 import React from "react";
 import "./Post.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbsUp,
-  faThumbsDown,
-  faStar,
-  faClock
-} from "@fortawesome/free-solid-svg-icons";
-import { ThemeContext } from "../ThemeProvider";
-
+import { faThumbsUp, faThumbsDown, faStar, faClock } from "@fortawesome/free-solid-svg-icons";
+import { ThemeContext } from "../../ThemeProvider";
 
 export default function Post(props) {
   const chirp = props.chirp;
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
-        <div
-          className={`post ${theme.brownBackground} ${theme.blueBackground}`}
-        >
+        <div className={`post ${theme.brownBackground} ${theme.blueBackground}`}>
           <svg
             className="logo"
             src="https://upload.wikimedia.org/wikipedia/commons/7/75/Emblem_of_the_First_Galactic_Empire.svg"
@@ -29,8 +21,7 @@ export default function Post(props) {
             {chirp.likes} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
           </span>
           <span className="dislikes">
-            {chirp.hates}{" "}
-            <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
+            {chirp.hates} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
           </span>
           <span className="favorites">
             {chirp.favorites} <FontAwesomeIcon color={theme.iconColor} icon={faStar} />

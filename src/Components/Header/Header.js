@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import Gravatar from "gravatar-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EmpireLogo from "./empire-brands";
-import Modal from "./Modal";
-import { ThemeContext } from "../ThemeProvider";
+import EmpireLogo from "../empire-brands";
+import Modal from "../Modal";
+import { ThemeContext } from "../../ThemeProvider";
 import "./header.css";
 
 class Header extends Component {
   state = {
     message: "",
-    open: false
+    show: false
   };
 
   showModal = () => {
+    console.log("showing modal");
     this.setState({ show: true });
   };
 
   hideModal = () => {
+    console.log("hiding modal");
     this.setState({ show: false });
   };
 
@@ -29,12 +31,8 @@ class Header extends Component {
 
   closeAndSend = () => {
     console.log("running close and send");
-    this.setState({ open: false, message: "" });
+    this.setState({ show: false, message: "" });
     this.props.addPost(this.state.message);
-  };
-
-  handleSearch = () => {
-    console.log("Searching for new chirps");
   };
 
   render() {
@@ -76,6 +74,7 @@ class Header extends Component {
               <div
                 className={`theme-button ${theme.brownBackground} ${theme.blueBackground}`}
                 onClick={toggleTheme}
+                data-testid="SVGIcon"
               >
                 <EmpireLogo />
               </div>
@@ -106,6 +105,7 @@ class Header extends Component {
                   name="message"
                   maxLength="280"
                   className={`greyBackground whiteFont textAreaFont`}
+                  data-testid="addPostText"
                 />
               </Modal>
               <button
@@ -118,6 +118,7 @@ class Header extends Component {
                 ${theme.blueBackground}
                 ${theme.eggshellBorder}`}
                 onClick={this.showModal}
+                data-testid="addPostButton"
               >
                 <FontAwesomeIcon icon="plus" />
               </button>

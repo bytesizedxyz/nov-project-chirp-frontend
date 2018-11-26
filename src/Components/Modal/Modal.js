@@ -1,12 +1,12 @@
 import React from "react";
-import { ThemeContext } from "../ThemeProvider";
+import { ThemeContext } from "../../ThemeProvider";
 
 const Modal = ({ addPost, handleClose, open, children }) => {
   const showHideClassName = open ? "modalOpen" : "modal display-none";
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
-        <div className={showHideClassName}>
+        <div className={showHideClassName} data-testid="modal">
           <section
             className={`modal-main
             ${theme.whiteFont}

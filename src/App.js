@@ -11,7 +11,7 @@ import { ThemeContext, themes } from "./ThemeProvider";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
-import "./Components/header.css";
+import "./Components/Header/header.css";
 
 Amplify.configure(aws_exports);
 library.add(faPlus, faSearch);
@@ -34,6 +34,7 @@ class App extends Component {
   };
 
   toggleTheme = () => {
+    console.log("toggling theme");
     this.setState(state => ({
       theme: state.theme === themes.dark ? themes.light : themes.dark
     }));
@@ -47,17 +48,14 @@ class App extends Component {
   };
 
   addPost = async post => {
-    const newPost = await fetch(
-      "https://nov-chirp-backend.herokuapp.com/chirp",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: `${post}`,
-          username: `${this.state.user.username}`
-        })
-      }
-    );
+    const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: `${post}`,
+        username: `${this.state.user.username}`
+      })
+    });
     const reply = await newPost.json();
     this.setState(prevState => {
       prevState.chirps.unshift(reply);
@@ -71,10 +69,8 @@ class App extends Component {
       theme,
       toggleTheme: this.toggleTheme
     };
-    const searchedChirps = chirps.filter(chirp =>
-      chirp.message
-        ? chirp.message.toLowerCase().includes(filter.toLowerCase())
-        : false
+    const searchedChirps = chirps.filter(
+      chirp => (chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false)
     );
     return (
       <ThemeContext.Provider value={themeChange}>
