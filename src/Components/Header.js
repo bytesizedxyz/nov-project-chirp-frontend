@@ -33,6 +33,10 @@ class Header extends Component {
     this.props.addPost(this.state.message);
   };
 
+  handleSearch = () => {
+    console.log("Searching for new chirps");
+  };
+
   render() {
     const { user, handleFilter, filter } = this.props;
     let GravatarBlock;
@@ -70,9 +74,7 @@ class Header extends Component {
               ${theme.blueBackground}`}
             >
               <div
-                className={`theme-button ${theme.brownBackground} ${
-                  theme.blueBackground
-                }`}
+                className={`theme-button ${theme.brownBackground} ${theme.blueBackground}`}
                 onClick={toggleTheme}
               >
                 <EmpireLogo />
@@ -94,9 +96,7 @@ class Header extends Component {
                 handleClose={this.hideModal}
                 addPost={this.closeAndSend}
               >
-                <h1 className={`${theme.blackFont} ${theme.eggshellFont}`}>
-                  Add New Post
-                </h1>
+                <h1 className={`${theme.blackFont} ${theme.eggshellFont}`}>Add New Post</h1>
                 <textarea
                   value={this.state.message}
                   onChange={this.handleChange}
@@ -124,9 +124,7 @@ class Header extends Component {
               <span className="flexRowCenter">
                 <FontAwesomeIcon
                   icon="search"
-                  className={`searchIcon ${theme.searchIconBorder} ${
-                    theme.redFont
-                  }`}
+                  className={`searchIcon ${theme.searchIconBorder} ${theme.redFont}`}
                 />
                 <input
                   onChange={handleFilter}
