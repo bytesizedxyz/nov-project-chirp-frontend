@@ -11,7 +11,8 @@ export const themes = {
     brownFont: "brownFont",
     eggshellBorder: "eggshellBorder",
     searchIconBorder: "searchIconBorderEggshell",
-    obiTwitter: "Obi Wan Kenobi Twitter"
+    obiTwitter: "Obi Wan Kenobi Twitter",
+    iconColor:"#fff"
   },
   dark: {
     brownBackground: "brownBackground",
@@ -22,7 +23,8 @@ export const themes = {
     redBorder: "redBorder",
     searchIconBorder: "searchIconBorderRed",
     blackBackground: "blackBackground",
-    darthTwitter: "Darth Twitter"
+    darthTwitter: "Darth Twitter",
+    iconColor: "#990303"
   }
 };
 
