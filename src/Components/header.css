@@ -193,7 +193,7 @@
 h1 {
   font-size: 80px;
   margin: 0px;
-  font-family: 'Bowlby One SC', cursive;
+  font-family: "Bowlby One SC", cursive;
   letter-spacing: 2px;
 }
 
@@ -204,7 +204,7 @@ h1 {
 }
 
 /* font */
-@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
+@import url("https://fonts.googleapis.com/css?family=Bowlby+One+SC");
 
 /* flexbox */
 .flexRowAround {

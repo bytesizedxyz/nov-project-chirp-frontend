@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Amplify, { Auth } from 'aws-amplify';
-import { withAuthenticator } from 'aws-amplify-react';
-import aws_exports from './aws-exports';
+import React, { Component } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Amplify, { Auth } from "aws-amplify";
+import { withAuthenticator } from "aws-amplify-react";
+import aws_exports from "./aws-exports";
 
-import * as chirps from './dummy_data/chirps';
-import Header from './Components/Header';
-import Feed from './Views/Feed';
-import { ThemeContext, themes } from './ThemeProvider';
+import * as chirps from "./dummy_data/chirps";
+import Header from "./Components/Header";
+import Feed from "./Views/Feed";
+import { ThemeContext, themes } from "./ThemeProvider";
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
-import './Components/header.css';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
+import "./Components/header.css";
 
 Amplify.configure(aws_exports);
 library.add(faPlus, faSearch);
@@ -20,7 +20,7 @@ class App extends Component {
   state = {
     chirps: chirps.default,
     user: [],
-    filter: '',
+    filter: "",
     theme: themes.dark
   };
 
@@ -31,14 +31,12 @@ class App extends Component {
     chirps = chirps.reverse();
     console.log("chirps", chirps, "user", user);
     this.setState({ user, chirps });
-
   };
 
   toggleTheme = () => {
     this.setState(state => ({
       theme: state.theme === themes.dark ? themes.light : themes.dark
     }));
-    console.log(this.state.theme);
   };
 
   handleFilter = e => {
@@ -49,15 +47,22 @@ class App extends Component {
   };
 
   addPost = async post => {
-    const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({
-      message:`${post}`,
-      username:`${this.state.user.username}`
-    })})
+    const newPost = await fetch(
+      "https://nov-chirp-backend.herokuapp.com/chirp",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: `${post}`,
+          username: `${this.state.user.username}`
+        })
+      }
+    );
     const reply = await newPost.json();
     this.setState(prevState => {
       prevState.chirps.unshift(reply);
-      return prevState
-    })
+      return prevState;
+    });
   };
 
   render() {
@@ -67,7 +72,9 @@ class App extends Component {
       toggleTheme: this.toggleTheme
     };
     const searchedChirps = chirps.filter(chirp =>
-      chirp.message? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false
+      chirp.message
+        ? chirp.message.toLowerCase().includes(filter.toLowerCase())
+        : false
     );
     return (
       <ThemeContext.Provider value={themeChange}>
