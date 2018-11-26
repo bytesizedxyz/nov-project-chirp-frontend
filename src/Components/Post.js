@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { ThemeContext } from "../ThemeProvider";
 
+
 export default function Post(props) {
   const chirp = props.chirp;
   return (
@@ -25,18 +26,18 @@ export default function Post(props) {
           />
           <span className="content">{chirp.message}</span>
           <span className="likes">
-            {chirp.likes} <FontAwesomeIcon color="#990303" icon={faThumbsUp} />
+            {chirp.likes} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
           </span>
           <span className="dislikes">
-            {chirp.dislikes}{" "}
-            <FontAwesomeIcon color="#990303" icon={faThumbsDown} />
+            {chirp.hates}{" "}
+            <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
           </span>
           <span className="favorites">
-            {chirp.favorites} <FontAwesomeIcon color="#990303" icon={faStar} />
+            {chirp.favorites} <FontAwesomeIcon color={theme.iconColor} icon={faStar} />
           </span>
           <span className="createdAt">
-            {chirp.created_at}{" "}
-            <FontAwesomeIcon color="#990303" icon={faClock} />
+            {new Date(chirp.created_at).toLocaleDateString()}{" "}
+            <FontAwesomeIcon color={theme.iconColor} icon={faClock} />
           </span>
         </div>
       )}
