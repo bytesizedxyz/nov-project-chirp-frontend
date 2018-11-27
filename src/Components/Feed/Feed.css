@@ -3,4 +3,15 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 190px;
+  overflow: scroll;
+}
+
+.black-background {
+  background-color: black;
+}
+
+.blue-background {
+  background-colof: blue;
 }
