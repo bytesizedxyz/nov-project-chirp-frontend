@@ -3,7 +3,7 @@ import "../Post/Post.css";
 
 class Comment extends Component {
   state = {
-    comments: [{ userName: "A User", comment: "I WIN" }],
+    comments: [{ userName: "A User: ", comment: "I WIN" }],
     commentValue: ""
   };
 
