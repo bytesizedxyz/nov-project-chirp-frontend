@@ -42,6 +42,13 @@ class App extends Component {
     });
   };
 
+  handleComment = e => {
+    const { value } = e.target;
+    this.setState({
+      commentValue: value
+    });
+  };
+
   addPost = async post => {
     const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
       method: "POST",
@@ -57,6 +64,8 @@ class App extends Component {
       return prevState;
     });
   };
+
+  submitComment = () => {};
 
   render() {
     const { chirps, user, filter, theme } = this.state;

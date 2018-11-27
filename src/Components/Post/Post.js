@@ -4,10 +4,10 @@ import "./Post.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown, faStar, faClock } from "@fortawesome/free-solid-svg-icons";
 import { ThemeContext } from "../../ThemeProvider";
-import { Comment } from "../Comment";
+import Comment from "../Comment";
 
 export default function Post(props) {
-  const chirp = props.chirp;
+  const { chirp } = props;
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
@@ -38,7 +38,7 @@ export default function Post(props) {
             </span>
           </span>
           <span className="comment-span">
-            <Comment />
+            <Comment userName="MyUser" />
           </span>
         </div>
       )}
