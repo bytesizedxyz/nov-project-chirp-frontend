@@ -8,8 +8,8 @@ import {
   faStar,
   faClock
 } from '@fortawesome/free-solid-svg-icons';
-import { ThemeContext } from '../ThemeProvider';
-import { Comment } from './Comment';
+import { ThemeContext } from '../../ThemeProvider';
+import { Comment } from '../Comment';
 
 export default function Post(props) {
   const chirp = props.chirp;

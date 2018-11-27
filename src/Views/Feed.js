@@ -12,9 +12,7 @@ export default class Feed extends Component {
       <ThemeContext.Consumer>
         {({ theme, toggleTheme }) => (
           <div className="feed">
-            {chirps
-              ? chirps.map((chirp, index) => <Post key={index} chirp={chirp} />)
-              : null}
+            {chirps ? chirps.map((chirp, index) => <Post key={index} chirp={chirp} />) : null}
           </div>
         )}
       </ThemeContext.Consumer>
