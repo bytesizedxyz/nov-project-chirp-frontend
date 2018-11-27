@@ -17,7 +17,11 @@ export default function Post(props) {
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
         <div
-          className={`post ${theme.brownBackground} ${theme.blueBackground}`}
+          className={`
+          post
+          ${theme.brownBackground}
+          ${theme.blueBackground}
+          `}
         >
           <span className="profile-info">
             <img

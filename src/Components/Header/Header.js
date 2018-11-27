@@ -82,7 +82,6 @@ class Header extends Component {
                 {theme.darthTwitter}
                 {theme.obiTwitter}
               </h1>
-              {/* {profileImage()} */}
               {GravatarBlock}
             </div>
 
