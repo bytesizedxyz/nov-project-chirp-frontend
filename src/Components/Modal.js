@@ -1,8 +1,8 @@
-import React from "react";
-import { ThemeContext } from "../ThemeProvider";
+import React from 'react';
+import { ThemeContext } from '../ThemeProvider';
 
 const Modal = ({ addPost, handleClose, open, children }) => {
-  const showHideClassName = open ? "modalOpen" : "modal display-none";
+  const showHideClassName = open ? 'modalOpen' : 'modal display-none';
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
