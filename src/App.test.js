@@ -11,17 +11,39 @@ afterEach(cleanup);
     [ ] - TEST APP
 */
 describe("app testing", () => {
-  it("renders the app with chirps being passed in", async () => {
+  it("renders the app and can get chirps", async () => {
+    //rendering app
     const { getByText } = render(<App />);
 
-    await wait(() => getByText("Darth Twitter"));
+    //waiting to recieve first chirps
+    await wait(() => getByText("I feel that, but it looks good if you have zoom out"));
+    const firstChirp = getByText("I feel that, but it looks good if you have zoom out");
+
+    //should be true
     expect(firstChirp).toBeInTheDocument();
   });
-  // it("load data", async () => {
-  //   const { getByText, getByTestId, getByPlaceholderText, container } = render(<Select />);
+  it("can change the theme", () => {
+    //rendering app
+    const { getByTestId } = render(<App />);
 
-  //   Simulate.click(getByText("Load"));
-  //   const elem = getByTestId("item");
-  //   expect(elem).toHaveTextContent("test");
-  // });
+    //expecting these items to render
+    const themeChanger = getByTestId("SVGIcon");
+
+    //should be true
+    expect(themeChanger).toHaveClass("brownBackground");
+
+    //click logo to change theme
+    fireEvent.click(themeChanger);
+    expect(themeChanger).toHaveClass("blueBackground");
+  });
+  it("can search for chirps and rerender the page", async () => {
+    //rendering app
+    const { getByPlaceholderText, asFragment } = render(<App />);
+    //waiting for first chirps to then render the first snapshot
+    const newSnap = await wait(() => asFragment());
+    //grabbing elements
+    const searchInput = getByPlaceholderText("Search for chirps");
+
+    // expect(newSnap).toMatchDiffSnapshot(asFragment());
+  });
 });

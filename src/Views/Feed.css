@@ -5,13 +5,5 @@
   justify-content: center;
   position: absolute;
   top: 190px;
-  overflow: scroll;
-}
-
-.black-background {
-  background-color: black;
-}
-
-.blue-background {
-  background-colof: blue;
+  width: 100vw;
 }
