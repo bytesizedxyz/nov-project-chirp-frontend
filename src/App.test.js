@@ -43,7 +43,7 @@ describe("app testing", () => {
     const newSnap = await wait(() => asFragment());
     //grabbing elements
     const searchInput = getByPlaceholderText("Search for chirps");
-
+    
     // expect(newSnap).toMatchDiffSnapshot(asFragment());
   });
 });
