@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import * as chirps from "./dummy_data/chirps";
-import Header from "./Components/Header";
-import Feed from "./Views/Feed";
-import Login from "./Views/Login/Login"
+import Login from "./Views/Login/Login";
+import Home from "./Views/Home/Home";
 import { ThemeContext, themes } from "./ThemeProvider";
-import withAuth from "./Components/withAuth";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -16,13 +13,14 @@ library.add(faPlus, faSearch);
 
 class App extends Component {
   state = {
-    chirps: chirps.default,
+    chirps: [],
     user: [],
     filter: "",
     theme: themes.dark
   };
 
   componentDidMount = async () => {
+    console.log("App mounted")
     let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
     chirps = await chirps.json();
     chirps = chirps.reverse();
@@ -69,31 +67,12 @@ class App extends Component {
     const searchedChirps = chirps.filter(
       chirp => (chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false)
     );
+    console.log("app searched chirps", searchedChirps)
     return (
       <ThemeContext.Provider value={themeChange}>
         <Router>
           <>
-          <Route exact path="/" render={() => {
-            return (
-              <ThemeContext.Consumer>
-              {({ theme }) => (
-                <div
-                  className={`App
-                  ${theme.lightBlueBackground}
-                  ${theme.blackBackground}`}
-                >
-                  <Header
-                    handleFilter={this.handleFilter}
-                    addPost={this.addPost}
-                    user={user.attributes}
-                    filter={filter}
-                  />
-                  {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
-                </div>
-              )}
-            </ThemeContext.Consumer>
-            )
-          }} />
+          <Route exact path="/" render={() => <Home chirps={searchedChirps} user={user} filter={filter} addPost={this.addPost} handleFilter={this.handleFilter}/>} />
           <Route exact path="/login" component={Login}/>
           </>
         </Router>

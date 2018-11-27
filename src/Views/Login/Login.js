@@ -7,7 +7,10 @@ import AuthService from "../../Services/AuthService";
 class Login extends Component {
 
     componentDidMount(){
-        if(this.Auth.loggedIn()) this.props.history.replace("/")
+        if(this.Auth.loggedIn()){
+            console.log(this.Auth.loggedIn())
+            this.props.history.push("/")
+        } 
     }
 
     Auth = new AuthService();

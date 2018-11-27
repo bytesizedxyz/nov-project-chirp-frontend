@@ -14,9 +14,11 @@ export default function withAuth(AuthComp){
                 this.props.history.replace("/login")
             } else {
                 try {
-                    const profile = auth.getProfile();
+                    // const profile = auth.getProfile();
+                    const profile = localStorage.getItem("id_token")
                     this.setState({user: profile})
                 } catch(e){
+                    console.log("error", e)
                     auth.logout();
                     this.props.history.replace("/login")
                 }
@@ -26,7 +28,7 @@ export default function withAuth(AuthComp){
         render(){
             return (
                 <>
-                    {this.state.user? <AuthComp props={this.props.history} user={this.state.user}/> : null}
+                    {this.state.user? <AuthComp authProps={this.props} user={this.state.user}/> : null}
                 </>
             )
         }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import Post from "../Components/Post";
+import Post from "../../Components/Post";
 import "./Feed.css";
-import { ThemeContext } from "../ThemeProvider";
+import { ThemeContext } from "../../ThemeProvider";
 
 export default class Feed extends Component {
   render() {

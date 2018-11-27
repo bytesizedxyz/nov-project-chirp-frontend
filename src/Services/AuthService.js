@@ -10,6 +10,7 @@ export default class AuthService {
 
     login(username, password) {
         // Get a token from api server using the fetch api
+        console.log("login called", username, password)
         return this.fetch(`${this.domain}/login`, {
             method: 'POST',
             body: JSON.stringify({
@@ -25,24 +26,29 @@ export default class AuthService {
     loggedIn() {
         // Checks if there is a saved token and it's still valid
         const token = this.getToken() // GEtting token from localstorage
-        return !!token && !this.isTokenExpired(token) // handwaiving here
+        console.log("loggedin token", token)
+        if(token){
+            return true
+        }
+        // return !!token && !this.isTokenExpired(token) // handwaiving here
     }
 
-    isTokenExpired(token) {
-        try {
-            const decoded = decode(token);
-            if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
-                return true;
-            }
-            else
-                return false;
-        }
-        catch (err) {
-            return false;
-        }
-    }
+    // isTokenExpired(token) {
+    //     try {
+    //         const decoded = decode(token);
+    //         if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
+    //             return true;
+    //         }
+    //         else
+    //             return false;
+    //     }
+    //     catch (err) {
+    //         return false;
+    //     }
+    // }
 
     setToken(idToken) {
+        console.log("calling setToken", idToken)
         // Saves user token to localStorage
         localStorage.setItem('id_token', idToken)
     }
@@ -53,6 +59,7 @@ export default class AuthService {
     }
 
     logout() {
+        console.log("calling logout")
         // Clear user token and profile data from localStorage
         localStorage.removeItem('id_token');
     }
