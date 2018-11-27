@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Post/Post.css";
+import "../Post/Post.css";
 
 class Comment extends Component {
   state = {
@@ -8,10 +8,12 @@ class Comment extends Component {
   };
 
   handleChange = e => {
+    console.log("handling comment change");
     this.setState({ commentValue: e.target.value });
   };
 
   submitComment = () => {
+    console.log("submitting comment");
     const user = "fake user";
     const { commentValue } = this.state;
     const newComment = { userName: user, comment: commentValue };
@@ -22,10 +24,10 @@ class Comment extends Component {
     const { comments, commentValue } = this.state;
     return (
       <div className="comment-body">
-        <span>
-          {comments.map(comment => {
+        <span data-testid="comments">
+          {comments.map((comment, index) => {
             return (
-              <span className="comment-header">
+              <span key={index} className="comment-header">
                 <img
                   className="comment-profile-image"
                   src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg"
@@ -43,7 +45,12 @@ class Comment extends Component {
         </span>
 
         <span className="reply-input">
-          <input value={commentValue} onChange={this.handleChange} type="text" />
+          <input
+            placeholder="New Comment"
+            value={commentValue}
+            onChange={this.handleChange}
+            type="text"
+          />
           <p onClick={this.submitComment}>Send</p>
         </span>
       </div>

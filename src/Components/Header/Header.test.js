@@ -17,7 +17,7 @@ library.add(faPlus, faSearch);
 afterEach(cleanup);
 
 xdescribe("Header functionality", () => {
-  describe("showModal", () => {
+  xdescribe("showModal", () => {
     it("should setState", () => {
       //making the header instance
       const component = new Header();
@@ -80,6 +80,7 @@ xdescribe("Header functionality", () => {
       toggleTheme: toggleTheme
     };
 
+    //rending header with themecontext provider
     const { getByTestId, asFragment } = render(
       <ThemeContext.Provider value={themeChange}>
         <Header />
@@ -134,7 +135,8 @@ xdescribe("Header functionality", () => {
     //evaluate that the value has been changed for the input
     expect(textarea.value).toBe("This is going to be a new post");
     // expect(firstRender).toMatchDiffSnapshot(asFragment());
-
+    
+    //clicking submit button
     fireEvent.click(submit);
     expect(addPost).toHaveBeenCalledTimes(1);
   });

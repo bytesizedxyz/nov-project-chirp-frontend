@@ -6,11 +6,22 @@ import "jest-dom/extend-expect";
 
 afterEach(cleanup);
 
+/*
+  TODO:
+    [ ] - TEST APP
+*/
 describe("app testing", () => {
-  it("renders the app with chirps being passed in", () => {
+  it("renders the app with chirps being passed in", async () => {
     const { getByText } = render(<App />);
-    const firstChirp = getByText("I feel that, but it looks good if you have zoom out");
 
-    expect(firstChirp).toHaveTextContent("I feel that, but it looks good if you have zoom out");
+    await wait(() => getByText("Darth Twitter"));
+    expect(firstChirp).toBeInTheDocument();
   });
+  // it("load data", async () => {
+  //   const { getByText, getByTestId, getByPlaceholderText, container } = render(<Select />);
+
+  //   Simulate.click(getByText("Load"));
+  //   const elem = getByTestId("item");
+  //   expect(elem).toHaveTextContent("test");
+  // });
 });

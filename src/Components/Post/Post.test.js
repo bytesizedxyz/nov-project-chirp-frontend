@@ -30,7 +30,9 @@ afterEach(cleanup);
 
 describe("Post functionality and rendering", () => {
   it("renders the post component with the fake chirp declared up above", async () => {
+    //rendering post
     const { getByText, getByTestId } = render(<Post chirp={chirp} />);
+    //what to look for in post
     const message = getByText("Distributed solution-oriented contingency");
     const created_at = getByText("8/25/2001");
     const likes = getByTestId("likes");

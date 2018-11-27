@@ -4,7 +4,7 @@ import "./Post.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown, faStar, faClock } from "@fortawesome/free-solid-svg-icons";
 import { ThemeContext } from "../../ThemeProvider";
-import Comment from "../Comment";
+import Comment from "../Comments/Comment";
 
 export default function Post(props) {
   const { chirp } = props;
@@ -22,13 +22,13 @@ export default function Post(props) {
           <span className="content">{chirp.message}</span>
           <span className="stats">
             <span className="votes">
-              <span>
+              <span data-testid="likes">
                 {chirp.likes} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
               </span>
-              <span>
+              <span data-testid="dislikes">
                 {chirp.hates} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
               </span>
-              <span>
+              <span data-testid="favorites">
                 {chirp.favorites} <FontAwesomeIcon color={theme.iconColor} icon={faStar} />
               </span>
             </span>
