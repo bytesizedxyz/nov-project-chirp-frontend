@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import "./Post/Post.css";
+import React, { Component } from 'react';
+import './Post/Post.css';
 
 class Comment extends Component {
   state = {
-    comments: [{ userName: "A User", comment: "I WIN" }],
-    commentValue: ""
+    comments: [{ userName: 'A User: ', comment: 'I WIN' }],
+    commentValue: ''
   };
 
   handleChange = e => {
@@ -12,7 +12,7 @@ class Comment extends Component {
   };
 
   submitComment = () => {
-    const user = "fake user";
+    const user = 'fake user';
     const { commentValue } = this.state;
     const newComment = { userName: user, comment: commentValue };
     this.setState({ comments: this.state.comments.concat(newComment) });
@@ -43,7 +43,11 @@ class Comment extends Component {
         </span>
 
         <span className="reply-input">
-          <input value={commentValue} onChange={this.handleChange} type="text" />
+          <input
+            value={commentValue}
+            onChange={this.handleChange}
+            type="text"
+          />
           <p onClick={this.submitComment}>Send</p>
         </span>
       </div>
