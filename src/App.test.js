@@ -1,9 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import App from "./App";
+import { cleanup, render, fireEvent, wait } from "react-testing-library";
+// this adds custom jest matchers from jest-dom
+import "jest-dom/extend-expect";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+afterEach(cleanup);
+
+describe("app testing", () => {
+  it("renders the app with chirps being passed in", () => {
+    const { getByText } = render(<App />);
+    const firstChirp = getByText("I feel that, but it looks good if you have zoom out");
+
+    expect(firstChirp).toHaveTextContent("I feel that, but it looks good if you have zoom out");
+  });
 });

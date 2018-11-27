@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import Amplify, { Auth } from "aws-amplify";
-import { withAuthenticator } from "aws-amplify-react";
-import aws_exports from "./aws-exports";
 
 import * as chirps from "./dummy_data/chirps";
 import Header from "./Components/Header";
@@ -13,7 +10,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import "./Components/Header/header.css";
 
-Amplify.configure(aws_exports);
 library.add(faPlus, faSearch);
 
 class App extends Component {
@@ -25,12 +21,11 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    const user = await Auth.currentAuthenticatedUser();
     let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
     chirps = await chirps.json();
     chirps = chirps.reverse();
-    console.log("chirps", chirps, "user", user);
-    this.setState({ user, chirps });
+    console.log("chirps", chirps);
+    this.setState({ chirps });
   };
 
   toggleTheme = () => {
@@ -98,4 +93,4 @@ class App extends Component {
   }
 }
 
-export default withAuthenticator(App);
+export default App;

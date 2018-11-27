@@ -61,55 +61,56 @@ class Header extends Component {
     return (
       <ThemeContext.Consumer>
         {({ theme, toggleTheme }) => (
-          <div
-            className={`flexColumnAround
+          <div>
+            <div
+              className={`flexColumnAround
             ${theme.brownBackground}
             ${theme.blueBackground}`}
-          >
-            <div
-              className={`flexRowBetween
-              ${theme.brownBackground}
-              ${theme.blueBackground}`}
             >
               <div
-                className={`theme-button ${theme.brownBackground} ${theme.blueBackground}`}
-                onClick={toggleTheme}
-                data-testid="SVGIcon"
-              >
-                <EmpireLogo />
-              </div>
-              <h1 className={`${theme.eggshellFont} ${theme.blackFont}`}>
-                {theme.darthTwitter}
-                {theme.obiTwitter}
-              </h1>
-              {GravatarBlock}
-            </div>
-
-            <div
-              className={`headerBottom flexRowAround
+                className={`flexRowBetween
               ${theme.brownBackground}
               ${theme.blueBackground}`}
-            >
-              <Modal
-                open={this.state.show}
-                handleClose={this.hideModal}
-                addPost={this.closeAndSend}
               >
-                <h1 className={`${theme.blackFont} ${theme.eggshellFont}`}>Add New Post</h1>
-                <textarea
-                  value={this.state.message}
-                  onChange={this.handleChange}
-                  rows="5"
-                  cols="50"
-                  type="text"
-                  name="message"
-                  maxLength="280"
-                  className={`greyBackground whiteFont textAreaFont`}
-                  data-testid="addPostText"
-                />
-              </Modal>
-              <button
-                className={`chirpButton
+                <div
+                  className={`theme-button ${theme.brownBackground} ${theme.blueBackground}`}
+                  onClick={toggleTheme}
+                  data-testid="SVGIcon"
+                >
+                  <EmpireLogo />
+                </div>
+                <h1 className={`${theme.eggshellFont} ${theme.blackFont}`}>
+                  {theme.darthTwitter}
+                  {theme.obiTwitter}
+                </h1>
+                {GravatarBlock}
+              </div>
+
+              <div
+                className={`headerBottom flexRowAround
+              ${theme.brownBackground}
+              ${theme.blueBackground}`}
+              >
+                <Modal
+                  open={this.state.show}
+                  handleClose={this.hideModal}
+                  addPost={this.closeAndSend}
+                >
+                  <h1 className={`${theme.blackFont} ${theme.eggshellFont}`}>Add New Post</h1>
+                  <textarea
+                    value={this.state.message}
+                    onChange={this.handleChange}
+                    rows="5"
+                    cols="50"
+                    type="text"
+                    name="message"
+                    maxLength="280"
+                    className={`greyBackground whiteFont textAreaFont`}
+                    data-testid="addPostText"
+                  />
+                </Modal>
+                <button
+                  className={`chirpButton
                 ${theme.brownBackground}
                 ${theme.redBorder}
                 ${theme.redFont}
@@ -117,32 +118,32 @@ class Header extends Component {
                 ${theme.font}
                 ${theme.blueBackground}
                 ${theme.eggshellBorder}`}
-                onClick={this.showModal}
-                data-testid="addPostButton"
-              >
-                <FontAwesomeIcon icon="plus" />
-              </button>
-              <span className="flexRowCenter">
-                <FontAwesomeIcon
-                  icon="search"
-                  className={`searchIcon ${theme.searchIconBorder} ${theme.redFont}`}
-                />
-                <input
-                  onChange={handleFilter}
-                  placeholder="Search for chirps"
-                  className={`search
+                  onClick={this.showModal}
+                  data-testid="addPostButton"
+                >
+                  <FontAwesomeIcon icon="plus" />
+                </button>
+                <span className="flexRowCenter">
+                  <FontAwesomeIcon
+                    icon="search"
+                    className={`searchIcon ${theme.searchIconBorder} ${theme.redFont}`}
+                  />
+                  <input
+                    onChange={handleFilter}
+                    placeholder="Search for chirps"
+                    className={`search
                   ${theme.brownBackground}
                   ${theme.blueBackground}
                   ${theme.eggshellFont}
                   ${theme.eggshellBorder}
                   ${theme.whiteFont}
                   ${theme.redBorder}`}
-                  type="text"
-                  name={filter}
-                />
-              </span>
-              <button
-                className={`chirpButton
+                    type="text"
+                    name={filter}
+                  />
+                </span>
+                <button
+                  className={`chirpButton
                   ${theme.brownBackground}
                   ${theme.blueBackground}
                   ${theme.eggshellFont}
@@ -150,10 +151,11 @@ class Header extends Component {
                   ${theme.whiteFont}
                   ${theme.redFont}
                   ${theme.redBorder}`}
-                onClick={this.handleSearch}
-              >
-                SEARCH
-              </button>
+                  onClick={this.handleSearch}
+                >
+                  SEARCH
+                </button>
+              </div>
             </div>
           </div>
         )}

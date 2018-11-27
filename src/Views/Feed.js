@@ -9,13 +9,9 @@ export default class Feed extends Component {
     const { chirps } = this.props;
 
     return (
-      <ThemeContext.Consumer>
-        {({ theme, toggleTheme }) => (
-          <div className="feed">
-            {chirps ? chirps.map((chirp, index) => <Post key={index} chirp={chirp} />) : null}
-          </div>
-        )}
-      </ThemeContext.Consumer>
+      <div className="feed" data-testid="feed">
+        {chirps ? chirps.map((chirp, index) => <Post key={index} chirp={chirp} />) : null}
+      </div>
     );
   }
 }
