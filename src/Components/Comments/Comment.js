@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import './Post/Post.css';
+import React, { Component } from "react";
+import "../Post/Post.css";
 
 class Comment extends Component {
   state = {
-    comments: [{ userName: 'A User: ', comment: 'I WIN' }],
-    commentValue: ''
+    comments: [{ userName: "A User: ", comment: "I WIN" }],
+    commentValue: ""
   };
 
   handleChange = e => {
+    console.log("handling comment change");
     this.setState({ commentValue: e.target.value });
   };
 
   submitComment = () => {
-    const user = 'fake user';
+    console.log("submitting comment");
+    const user = "fake user";
     const { commentValue } = this.state;
     const newComment = { userName: user, comment: commentValue };
     this.setState({ comments: this.state.comments.concat(newComment) });
@@ -22,10 +24,10 @@ class Comment extends Component {
     const { comments, commentValue } = this.state;
     return (
       <div className="comment-body">
-        <span>
-          {comments.map(comment => {
+        <span data-testid="comments">
+          {comments.map((comment, index) => {
             return (
-              <span className="comment-header">
+              <span key={index} className="comment-header">
                 <img
                   className="comment-profile-image"
                   src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg"
@@ -44,6 +46,7 @@ class Comment extends Component {
 
         <span className="reply-input">
           <input
+            placeholder="New Comment"
             value={commentValue}
             onChange={this.handleChange}
             type="text"

@@ -1,13 +1,10 @@
 import React from "react";
-import { cleanup, render, fireEvent, wait } from "react-testing-library";
-
+import { cleanup, render, fireEvent } from "react-testing-library";
 // this adds custom jest matchers from jest-dom
 import "jest-dom/extend-expect";
-
 //needed components to render properly
 import Header from "./Header";
 import Modal from "../Modal";
-import { ThemeContext, themes } from "../../ThemeProvider";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 const { toMatchDiffSnapshot } = require("snapshot-diff");
@@ -16,22 +13,20 @@ library.add(faPlus, faSearch);
 
 afterEach(cleanup);
 
-xdescribe("Header functionality", () => {
-  describe("showModal", () => {
-    it("should setState", () => {
-      //making the header instance
-      const component = new Header();
-      //redefining the setstate function
-      component.setState = jest.fn();
+describe("Header functionality", () => {
+  it("should setState", () => {
+    //making the header instance
+    const component = new Header();
+    //redefining the setstate function
+    component.setState = jest.fn();
 
-      //opening the modal
-      component.showModal();
-      expect(component.setState).toHaveBeenCalledWith({ show: true });
+    //opening the modal
+    component.showModal();
+    expect(component.setState).toHaveBeenCalledWith({ show: true });
 
-      //closing the modal
-      component.hideModal();
-      expect(component.setState).toHaveBeenCalledWith({ show: false });
-    });
+    //closing the modal
+    component.hideModal();
+    expect(component.setState).toHaveBeenCalledWith({ show: false });
   });
 
   it("it renders the header components such as title, search input, add button and grab user image", async () => {
@@ -66,29 +61,12 @@ xdescribe("Header functionality", () => {
     //evaluate that the value has been changed for the input
     expect(search.value).toBe("cross");
   });
-
-  /*
-  TODO: 
-    [ ] - Make header change theme, might have to move it up into the app test instead
-  */
   it("can open add post modal and able to click and change theme", async () => {
-    //defining simulated props
-    const toggleTheme = jest.fn();
-    const theme = themes.dark;
-    const themeChange = {
-      theme,
-      toggleTheme: toggleTheme
-    };
-
-    const { getByTestId, asFragment } = render(
-      <ThemeContext.Provider value={themeChange}>
-        <Header />
-      </ThemeContext.Provider>
-    );
+    //rending header with themecontext provider
+    const { getByTestId, asFragment } = render(<Header />);
 
     //Rendered items to look for
     const addButton = getByTestId("addPostButton");
-    const empireLogo = getByTestId("SVGIcon");
 
     //generating snapshot to test if modal has been opened
     const firstRender = asFragment();
@@ -96,16 +74,6 @@ xdescribe("Header functionality", () => {
     fireEvent.click(addButton);
     //comparing the two snapshots
     expect(firstRender).toMatchDiffSnapshot(asFragment());
-
-    //event that are expected to be true
-    expect(empireLogo).toBeInTheDocument();
-    expect(empireLogo).toHaveClass("brownBackground");
-
-    // clicking the logo to change the theme
-    fireEvent.click(empireLogo);
-    expect(toggleTheme).toHaveBeenCalledTimes(1);
-
-    // await wait(() => expect(empireLogo).toHaveClass("blueBackground"));
   });
   it("can change the value of the modal textarea and submit it", async () => {
     const addPost = jest.fn();
@@ -116,7 +84,7 @@ xdescribe("Header functionality", () => {
       </Header>
     );
     //generating first snapshot of render
-    // const firstRender = asFragment();
+    const firstRender = asFragment();
 
     //rendered items to look for
     const modal = getByTestId("modal");
@@ -133,8 +101,9 @@ xdescribe("Header functionality", () => {
     fireEvent.change(textarea, { target: { value: "This is going to be a new post" } });
     //evaluate that the value has been changed for the input
     expect(textarea.value).toBe("This is going to be a new post");
-    // expect(firstRender).toMatchDiffSnapshot(asFragment());
+    expect(firstRender).toMatchDiffSnapshot(asFragment());
 
+    //clicking submit button
     fireEvent.click(submit);
     expect(addPost).toHaveBeenCalledTimes(1);
   });

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comment functionality can post new comments 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -20,10 +20,26 @@
+          <p>
+            I WIN
+          </p>
+        </span>
+        <span
++         class=\\"comment-header\\"
++       >
++         <img
++           alt=\\"A user visual identifier.\\"
++           class=\\"comment-profile-image\\"
++           src=\\"https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg\\"
++         />
++         <h4>
++           fake user
++         </h4>
++         |
++         <p>
++           a new comment
++         </p>
++       </span>
++       <span
+          class=\\"reply-bar\\"
+        >
+          <p>
+            Like
+          </p>
+@@ -39,11 +55,11 @@
+        class=\\"reply-input\\"
+      >
+        <input
+          placeholder=\\"New Comment\\"
+          type=\\"text\\"
+-         value=\\"\\"
++         value=\\"a new comment\\"
+        />
+        <p>
+          Send
+        </p>
+      </span>"
+`;
