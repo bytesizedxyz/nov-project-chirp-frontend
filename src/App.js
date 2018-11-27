@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import * as chirps from "./dummy_data/chirps";
 import Header from "./Components/Header";
 import Feed from "./Views/Feed";
+import Login from "./Views/Login/Login"
 import { ThemeContext, themes } from "./ThemeProvider";
+import withAuth from "./Components/withAuth";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -70,23 +72,30 @@ class App extends Component {
     return (
       <ThemeContext.Provider value={themeChange}>
         <Router>
-          <ThemeContext.Consumer>
-            {({ theme }) => (
-              <div
-                className={`App
-                ${theme.lightBlueBackground}
-                ${theme.blackBackground}`}
-              >
-                <Header
-                  handleFilter={this.handleFilter}
-                  addPost={this.addPost}
-                  user={user.attributes}
-                  filter={filter}
-                />
-                {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
-              </div>
-            )}
-          </ThemeContext.Consumer>
+          <>
+          <Route exact path="/" render={() => {
+            return (
+              <ThemeContext.Consumer>
+              {({ theme }) => (
+                <div
+                  className={`App
+                  ${theme.lightBlueBackground}
+                  ${theme.blackBackground}`}
+                >
+                  <Header
+                    handleFilter={this.handleFilter}
+                    addPost={this.addPost}
+                    user={user.attributes}
+                    filter={filter}
+                  />
+                  {searchedChirps ? <Feed chirps={searchedChirps} /> : null}
+                </div>
+              )}
+            </ThemeContext.Consumer>
+            )
+          }} />
+          <Route exact path="/login" component={Login}/>
+          </>
         </Router>
       </ThemeContext.Provider>
     );
