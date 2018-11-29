@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import withAuth from "../../Components/withAuth";
 import { withRouter } from "react-router";
 
@@ -6,33 +6,28 @@ import Header from "../../Components/Header/Header";
 import Feed from "../../Components/Feed/Feed";
 import { ThemeContext, themes } from "../../ThemeProvider";
 
-
-
 class Home extends Component {
-	render() {
-		const {user, chirps, handleFilter, addPost, filter} = this.props.authProps;
-		console.log("HomeProps",this.props)
-		console.log(chirps)
-		return (
-			<ThemeContext.Consumer>
-			{({ theme }) => (
-				<div
-					className={`App
+  render() {
+    const { chirps, handleFilter, addPost, filter } = this.props.authProps;
+    const { user } = this.props;
+    // console.log("HomeProps", this.props);
+    // console.log(chirps);
+    // console.log(user);
+    return (
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div
+            className={`App
 					${theme.lightBlueBackground}
 					${theme.blackBackground}`}
-				>
-					<Header
-						handleFilter={handleFilter}
-						addPost={addPost}
-						user={user.attributes}
-						filter={filter}
-					/>
-					{chirps ? <Feed chirps={chirps} /> : null}
-				</div>
-			)}
-		</ThemeContext.Consumer>
-		)
-	}
+          >
+            <Header handleFilter={handleFilter} user={user} addPost={addPost} filter={filter} />
+            {chirps ? <Feed chirps={chirps} user={user} /> : null}
+          </div>
+        )}
+      </ThemeContext.Consumer>
+    );
+  }
 }
 
 export default withRouter(withAuth(Home));

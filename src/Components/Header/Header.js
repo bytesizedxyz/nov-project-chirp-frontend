@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import Gravatar from 'gravatar-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EmpireLogo from '../empire-brands';
-import Modal from '../Modal';
-import { ThemeContext } from '../../ThemeProvider';
-import './header.css';
+import React, { Component } from "react";
+import Gravatar from "gravatar-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EmpireLogo from "../empire-brands";
+import Modal from "../Modal";
+import { ThemeContext } from "../../ThemeProvider";
+import "./header.css";
 
 class Header extends Component {
   state = {
-    message: '',
+    message: "",
     show: false
   };
 
   showModal = () => {
-    console.log('showing modal');
+    console.log("showing modal");
     this.setState({ show: true });
   };
 
   hideModal = () => {
-    console.log('hiding modal');
+    console.log("hiding modal");
     this.setState({ show: false });
   };
 
@@ -30,14 +30,14 @@ class Header extends Component {
   };
 
   closeAndSend = () => {
-    console.log('running close and send');
-    this.setState({ show: false, message: '' });
+    console.log("running close and send");
+    this.setState({ show: false, message: "" });
     this.props.addPost(this.state.message);
   };
 
   render() {
     const { user, handleFilter, filter } = this.props;
-    const email = !user ? 'email@gmail.com' : user.email;
+    const email = user ? user : "email@gmail.com";
     const GravatarBlock = (
       <ThemeContext.Consumer>
         {({ theme }) => (
@@ -70,9 +70,7 @@ class Header extends Component {
               ${theme.blueBackground}`}
             >
               <div
-                className={`theme-button ${theme.brownBackground} ${
-                  theme.blueBackground
-                }`}
+                className={`theme-button ${theme.brownBackground} ${theme.blueBackground}`}
                 onClick={toggleTheme}
                 data-testid="SVGIcon"
               >
@@ -95,9 +93,7 @@ class Header extends Component {
                 handleClose={this.hideModal}
                 addPost={this.closeAndSend}
               >
-                <h1 className={`${theme.blackFont} ${theme.eggshellFont}`}>
-                  Add New Post
-                </h1>
+                <h1 className={`${theme.blackFont} ${theme.eggshellFont}`}>Add New Post</h1>
                 <textarea
                   value={this.state.message}
                   onChange={this.handleChange}
@@ -127,9 +123,7 @@ class Header extends Component {
               <span className="flexRowCenter">
                 <FontAwesomeIcon
                   icon="search"
-                  className={`searchIcon ${theme.searchIconBorder} ${
-                    theme.redFont
-                  }`}
+                  className={`searchIcon ${theme.searchIconBorder} ${theme.redFont}`}
                 />
                 <input
                   onChange={handleFilter}

@@ -20,7 +20,7 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    console.log("App mounted")
+    console.log("App mounted");
     let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
     chirps = await chirps.json();
     chirps = chirps.reverse();
@@ -65,8 +65,6 @@ class App extends Component {
     });
   };
 
-  submitComment = () => {};
-
   render() {
     const { chirps, user, filter, theme } = this.state;
     const themeChange = {
@@ -76,13 +74,28 @@ class App extends Component {
     const searchedChirps = chirps.filter(
       chirp => (chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false)
     );
-    console.log("app searched chirps", searchedChirps)
+    console.log("app searched chirps", searchedChirps);
+    if (user > 0) {
+      console.log("user", user);
+    }
     return (
       <ThemeContext.Provider value={themeChange}>
         <Router>
           <>
-          <Route exact path="/" render={() => <Home chirps={searchedChirps} user={user} filter={filter} addPost={this.addPost} handleFilter={this.handleFilter}/>} />
-          <Route exact path="/login" component={Login}/>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Home
+                  chirps={searchedChirps}
+                  user={user}
+                  filter={filter}
+                  addPost={this.addPost}
+                  handleFilter={this.handleFilter}
+                />
+              )}
+            />
+            <Route exact path="/login" component={Login} />
           </>
         </Router>
       </ThemeContext.Provider>

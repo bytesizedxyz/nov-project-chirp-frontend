@@ -1,17 +1,11 @@
 import React from "react";
-import { cleanup, render, fireEvent } from "react-testing-library";
-// this adds custom jest matchers from jest-dom
-import "jest-dom/extend-expect";
+import { render, fireEvent } from "react-testing-library";
 //needed components to render properly
 import Header from "./Header";
 import Modal from "../Modal";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
-const { toMatchDiffSnapshot } = require("snapshot-diff");
-expect.extend({ toMatchDiffSnapshot });
 library.add(faPlus, faSearch);
-
-afterEach(cleanup);
 
 describe("Header functionality", () => {
   it("should setState", () => {
@@ -28,7 +22,6 @@ describe("Header functionality", () => {
     component.hideModal();
     expect(component.setState).toHaveBeenCalledWith({ show: false });
   });
-
   it("it renders the header components such as title, search input, add button and grab user image", async () => {
     //defining simulated props
     const user = {
