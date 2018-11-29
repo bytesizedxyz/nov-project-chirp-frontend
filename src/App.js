@@ -12,6 +12,7 @@ import './Components/Header/header.css';
 library.add(faPlus, faSearch);
 
 class App extends Component {
+<<<<<<< HEAD
   constructor() {
     super();
 
@@ -29,6 +30,18 @@ class App extends Component {
 
   async componentWillMount() {
     let chirps = await fetch('https://nov-chirp-backend.herokuapp.com/chirp');
+=======
+  state = {
+    chirps: [],
+    user: [],
+    filter: "",
+    theme: themes.dark
+  };
+
+  componentDidMount = async () => {
+    console.log("App mounted");
+    let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
+>>>>>>> 0244c79addbaa0828da022abf5f48c96cc21c777
     chirps = await chirps.json();
     chirps = chirps.reverse();
     // console.log('chirps', chirps);
@@ -77,7 +90,10 @@ class App extends Component {
 
   // }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0244c79addbaa0828da022abf5f48c96cc21c777
   render() {
     const {
       chirps, user, filter, theme,
@@ -89,11 +105,34 @@ class App extends Component {
     const searchedChirps = chirps.filter(
       chirp => (chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false),
     );
+<<<<<<< HEAD
+=======
+    console.log("app searched chirps", searchedChirps);
+    if (user > 0) {
+      console.log("user", user);
+    }
+>>>>>>> 0244c79addbaa0828da022abf5f48c96cc21c777
     return (
       <ThemeContext.Provider value={themeChange}>
         <Router>
           <>
+<<<<<<< HEAD
             <Route exact path="/" render={() => <Home chirps={searchedChirps} user={user} filter={filter} addPost={this.addPost} handleFilter={this.handleFilter} />} />
+=======
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Home
+                  chirps={searchedChirps}
+                  user={user}
+                  filter={filter}
+                  addPost={this.addPost}
+                  handleFilter={this.handleFilter}
+                />
+              )}
+            />
+>>>>>>> 0244c79addbaa0828da022abf5f48c96cc21c777
             <Route exact path="/login" component={Login} />
           </>
         </Router>

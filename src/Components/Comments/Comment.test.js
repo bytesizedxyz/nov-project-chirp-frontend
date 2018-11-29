@@ -1,14 +1,6 @@
 import React from "react";
-import { cleanup, render, fireEvent, wait } from "react-testing-library";
-// this adds custom jest matchers from jest-dom
-import "jest-dom/extend-expect";
-
+import { render, fireEvent, wait } from "react-testing-library";
 import Comment from "./Comment";
-
-const { toMatchDiffSnapshot } = require("snapshot-diff");
-expect.extend({ toMatchDiffSnapshot });
-
-afterEach(cleanup);
 
 describe("Comment functionality", () => {
   it("Can render comments", () => {

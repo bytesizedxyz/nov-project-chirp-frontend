@@ -1,9 +1,5 @@
 import React from "react";
-import { cleanup, render, fireEvent, wait } from "react-testing-library";
-
-// this adds custom jest matchers from jest-dom
-import "jest-dom/extend-expect";
-
+import { render, fireEvent, wait } from "react-testing-library";
 //needed components to render properly
 import Post from "./Post";
 /*
@@ -11,10 +7,6 @@ TODO:
   [ ] - Test the theme switching for the post component
   [ ] - Use snapshot to test post component
 */
-import { ThemeContext, themes } from "../../ThemeProvider";
-const { toMatchDiffSnapshot } = require("snapshot-diff");
-expect.extend({ toMatchDiffSnapshot });
-
 //fake chirp declaration
 const chirp = {
   userId: 7,
@@ -26,8 +18,6 @@ const chirp = {
   created_at: "8/25/2001"
 };
 
-afterEach(cleanup);
-
 describe("Post functionality and rendering", () => {
   it("renders the post component with the fake chirp declared up above", async () => {
     //rendering post
@@ -35,9 +25,9 @@ describe("Post functionality and rendering", () => {
     //what to look for in post
     const message = getByText("Distributed solution-oriented contingency");
     const created_at = getByText("8/25/2001");
-    const likes = getByTestId("likes");
-    const dislikes = getByTestId("dislikes");
-    const favorites = getByTestId("favorites");
+    const likes = getByTestId("like");
+    const dislikes = getByTestId("hate");
+    const favorites = getByTestId("favorite");
 
     expect(message).toHaveTextContent(chirp.message);
     expect(created_at).toHaveTextContent(chirp.created_at);

@@ -37,7 +37,6 @@ p {
   font-size: 20px;
 }
 .comment-span {
-  overflow: scroll;
   grid-row: 4;
   grid-column: 2;
 }

@@ -7,7 +7,34 @@ import { ThemeContext } from "../../ThemeProvider";
 import Comment from "../Comments";
 
 export default function Post(props) {
-  const { chirp } = props;
+  const { chirp, user } = props;
+  //TODO:
+  //  [ ] - get votes to work
+  // const updateVotes = e => {
+  //   const voteName = e.target.dataset.testid;
+  //   const uuid = chirp.uuid;
+  //   const wat = fetch("https://nov-chirp-backend.herokuapp.com/chirp/reaction/" + voteName, {
+  //     method: "PUT",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       chirpUuid: uuid,
+  //       userUuid: "35f8ce60-f333-11e8-92bb-d90a6311ea527d94fea3-f4b9-4058-9677-93bf6f8351e6"
+  //     })
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       console.log("I AM THE ONE AND ONLY DATAMIN", res.data);
+  //       const {voteName}
+  //       console.log(res.data + `.${voteName}Count`)
+  //     })
+  //     .catch(err => {
+  //       console.log("error happened, printed below");
+  //       console.log(err);
+  //       alert("NO");
+  //     });
+
+  //   console.log(wat);
+  // };
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
@@ -29,13 +56,13 @@ export default function Post(props) {
           <span className="content">{chirp.message}</span>
           <span className="stats">
             <span className="votes">
-              <span data-testid="likes">
+              <span data-testid="like">
                 {chirp.likes} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
               </span>
-              <span data-testid="dislikes">
+              <span data-testid="hate">
                 {chirp.hates} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
               </span>
-              <span data-testid="favorites">
+              <span data-testid="favorite">
                 {chirp.favorites} <FontAwesomeIcon color={theme.iconColor} icon={faStar} />
               </span>
             </span>
