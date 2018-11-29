@@ -19,7 +19,7 @@ export default function Feed(props) {
           data-testid="feed"
         >
           {chirps
-            ? chirps.map(chirp => <Post key={chirp.id} chirp={chirp} id={chirp.uuid} />)
+            ? chirps.map(chirp => <Post key={chirp._id} chirp={chirp} id={chirp.uuid} />)
             : null}
         </div>
       )}

@@ -22,7 +22,7 @@ export default withRouter(withAuth(function Home(props) {
           <Header
             handleFilter={handleFilter}
             addPost={addPost}
-            user={user.attributes}
+            user={user}
             filter={filter}
           />
           {chirps ? <Feed chirps={chirps} /> : null}

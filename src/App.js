@@ -17,7 +17,7 @@ class App extends Component {
 
     this.state = {
       chirps: [],
-      user: [],
+      user: {},
       filter: '',
       theme: themes.dark,
     };
