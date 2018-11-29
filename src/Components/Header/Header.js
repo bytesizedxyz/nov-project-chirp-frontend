@@ -7,10 +7,15 @@ import { ThemeContext } from '../../ThemeProvider';
 import './header.css';
 
 class Header extends Component {
-  state = {
-    message: '',
-    show: false
-  };
+  constructor(){
+    super();
+
+    this.state = {
+      message: '',
+      show: false
+    };
+  }
+
 
   showModal = () => {
     console.log('showing modal');
