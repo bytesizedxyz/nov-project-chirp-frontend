@@ -24,7 +24,7 @@ export default function withAuth(AuthComp) {
           const profile = localStorage.getItem('id_token');
           this.setState({ user: profile });
         } catch (e) {
-          console.log('error', e);
+          // console.log('error', e);
           auth.logout();
           history.replace('/login');
         }

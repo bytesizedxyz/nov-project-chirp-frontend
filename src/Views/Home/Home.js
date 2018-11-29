@@ -7,10 +7,10 @@ import Feed from '../../Components/Feed/Feed';
 import { ThemeContext } from '../../ThemeProvider';
 
 
-export default withRouter(withAuth(function Home() {
+export default withRouter(withAuth(function Home(props) {
   const {
     user, chirps, handleFilter, addPost, filter,
-  } = this.props.authProps;
+  } = props.authProps;
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
