@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Form, Card } from "semantic-ui-react";
-// import "./Login.css";
+import "./Login.css";
 
 import AuthService from "../../Services/AuthService";
 
@@ -42,34 +42,28 @@ class Login extends Component {
 
   render() {
     return (
-      <Grid centered columns={2} verticalAlign="middle">
-        <Grid.Row verticalAlign="middle">
-          <Grid.Column>
-            <Card>
-              <Card.Header>Login</Card.Header>
-              <Form onSubmit={this.handleFormSubmit}>
-                <Form.Input
-                  fluid
-                  // className="form-item"
-                  placeholder="Username goes here..."
-                  name="username"
-                  label="User Name"
-                  type="text"
-                  onChange={this.handleChange}
-                />
-                <Form.Input
-                  // className="form-item"
-                  placeholder="Password goes here..."
-                  name="password"
-                  type="password"
-                  onChange={this.handleChange}
-                />
-                <Form.Button className="form-submit" value="SUBMIT">
-                  Login
-                </Form.Button>
-              </Form>
-            </Card>
-          </Grid.Column>
+      <Grid className="loginForm" centered columns={2} textAlign="center" verticalAlign="middle">
+        <Grid.Row centered>
+          <Card>
+            <Card.Header>Login</Card.Header>
+            <Form onSubmit={this.handleFormSubmit}>
+              <Form.Input
+                fluid
+                placeholder="Username goes here..."
+                name="username"
+                label="User Name"
+                type="text"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                placeholder="Password goes here..."
+                name="password"
+                type="password"
+                onChange={this.handleChange}
+              />
+              <Form.Button value="SUBMIT">Login</Form.Button>
+            </Form>
+          </Card>
         </Grid.Row>
       </Grid>
     );
