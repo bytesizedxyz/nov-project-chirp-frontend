@@ -4,3 +4,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.backgroundColorBlacck {
+  height: 100vh;
+  background-color: black;
+}
