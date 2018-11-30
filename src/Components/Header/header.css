@@ -1,3 +1,7 @@
+.header {
+  border-radius: 0% !important;
+}
+
 /* App styling */
 .App {
   text-align: center;

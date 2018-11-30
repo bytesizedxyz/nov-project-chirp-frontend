@@ -2,6 +2,7 @@ import React from "react";
 
 export const themes = {
   light: {
+    currentTheme: "light",
     lightBlueBackground: "lightBlueBackground",
     eggshellBackground: "eggshellBackground",
     greyBackground: "greyBackground",
@@ -12,9 +13,10 @@ export const themes = {
     eggshellBorder: "eggshellBorder",
     searchIconBorder: "searchIconBorderEggshell",
     obiTwitter: "Obi Wan Kenobi Twitter",
-    iconColor:"#fff"
+    iconColor: "#fff"
   },
   dark: {
+    currentTheme: "dark",
     brownBackground: "brownBackground",
     greyBackground: "greyBackground",
     whiteFont: "whiteFont",
