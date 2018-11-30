@@ -3,6 +3,7 @@
   text-align: center;
   color: #fff;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 /* theme button */

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container, Card } from 'semantic-ui-react'
 
 import Post from '../Post';
 import './Feed.css';
@@ -10,18 +11,15 @@ export default function Feed(props) {
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
-        <div
-          className={`
-            feed
-            ${theme.blackBackground}
-            ${theme.lightBlueBackground}
-            `}
+        <Container
           data-testid="feed"
         >
+          <Card.Group centered itemsPerRow={1}>
           {chirps
             ? chirps.map(chirp => <Post key={chirp._id} chirp={chirp} id={chirp.uuid} />)
             : null}
-        </div>
+          </Card.Group>
+        </Container>
       )}
     </ThemeContext.Consumer>
   );
