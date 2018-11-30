@@ -42,8 +42,8 @@ class Login extends Component {
 
   render() {
     return (
-      <Container fluid inverted className="backgroundColorBlacck">
-        <Grid className="loginForm" centered columns={2} textAlign="center" verticalAlign="middle">
+      <Container fluid className="backgroundColorBlacck">
+        <Grid className="loginForm" centered textAlign="center" verticalAlign="middle">
           <Grid.Row centered>
             <Card style={{}}>
               <Card.Header style={{ margin: "20px" }}>Login</Card.Header>
