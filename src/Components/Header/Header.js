@@ -1,43 +1,53 @@
-import React, { Component } from "react";
-import Gravatar from "gravatar-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EmpireLogo from "../empire-brands";
-import Modal from "../Modal";
-import { ThemeContext } from "../../ThemeProvider";
-import "./header.css";
+import React, { Component } from 'react';
+import Gravatar from 'gravatar-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
+
+import EmpireLogo from '../empire-brands';
+import Modal from '../Modal';
+import { ThemeContext } from '../../ThemeProvider';
+import './header.css';
 
 class Header extends Component {
-  state = {
-    message: "",
-    show: false
-  };
+  constructor() {
+    super();
 
-  showModal = () => {
-    console.log("showing modal");
-    this.setState({ show: true });
-  };
+    this.state = {
+      message: '',
+      show: false,
+    };
 
-  hideModal = () => {
-    console.log("hiding modal");
-    this.setState({ show: false });
-  };
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.closeAndSend = this.closeAndSend.bind(this);
+  }
 
-  handleChange = e => {
+
+  toggleModal() {
+    const { show } = this.state;
+    this.setState({ show: !show });
+  }
+
+
+  handleChange(e) {
     const { name, value } = e.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
-  };
+  }
 
-  closeAndSend = () => {
-    console.log("running close and send");
-    this.setState({ show: false, message: "" });
-    this.props.addPost(this.state.message);
-  };
+  closeAndSend() {
+    const { addPost } = this.props;
+    const { message } = this.state;
+    // console.log("running close and send");
+    this.setState({ show: false, message: '' });
+    addPost(message);
+  }
 
   render() {
     const { user, handleFilter, filter } = this.props;
-    const email = user ? user : "email@gmail.com";
+    const { show, message } = this.state;
+    const email = user || 'email@gmail.com';
     const GravatarBlock = (
       <ThemeContext.Consumer>
         {({ theme }) => (
@@ -70,6 +80,7 @@ class Header extends Component {
               ${theme.blueBackground}`}
             >
               <div
+                role="presentation"
                 className={`theme-button ${theme.brownBackground} ${theme.blueBackground}`}
                 onClick={toggleTheme}
                 data-testid="SVGIcon"
@@ -80,7 +91,9 @@ class Header extends Component {
                 {theme.darthTwitter}
                 {theme.obiTwitter}
               </h1>
-              {GravatarBlock}
+              <span>
+                {GravatarBlock}
+              </span>
             </div>
 
             <div
@@ -89,24 +102,25 @@ class Header extends Component {
               ${theme.blueBackground}`}
             >
               <Modal
-                open={this.state.show}
-                handleClose={this.hideModal}
+                open={show}
+                handleClose={this.toggleModal}
                 addPost={this.closeAndSend}
               >
                 <h1 className={`${theme.blackFont} ${theme.eggshellFont}`}>Add New Post</h1>
                 <textarea
-                  value={this.state.message}
+                  value={message}
                   onChange={this.handleChange}
                   rows="5"
                   cols="50"
                   type="text"
                   name="message"
                   maxLength="280"
-                  className={`greyBackground whiteFont textAreaFont`}
+                  className="greyBackground whiteFont textAreaFont"
                   data-testid="addPostText"
                 />
               </Modal>
               <button
+                type="button"
                 className={`chirpButton
                 ${theme.brownBackground}
                 ${theme.redBorder}
@@ -140,6 +154,7 @@ class Header extends Component {
                 />
               </span>
               <button
+                type="button"
                 className={`chirpButton
                   ${theme.brownBackground}
                   ${theme.blueBackground}
@@ -159,5 +174,12 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  addPost: PropTypes.func.isRequired,
+  handleFilter: PropTypes.func.isRequired,
+  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  filter: PropTypes.string.isRequired,
+};
 
 export default Header;

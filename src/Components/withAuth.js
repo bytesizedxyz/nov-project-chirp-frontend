@@ -1,32 +1,40 @@
-import React, { Component } from "react";
-import AuthService from "../Services/AuthService";
+import React, { Component } from 'react';
+
+import AuthService from '../Services/AuthService';
 
 export default function withAuth(AuthComp) {
   const auth = new AuthService();
   return class AuthWrap extends Component {
-    state = {
-      user: null
-    };
+    constructor() {
+      super();
+      this.state = {
+        user: null,
+      };
+    }
+
 
     componentDidMount() {
+      // eslint-disable-next-line react/prop-types
+      const { history } = this.props;
       if (!auth.loggedIn()) {
-        this.props.history.replace("/login");
+        history.replace('/login');
       } else {
         try {
           // const profile = auth.getProfile();
-          const profile = localStorage.getItem("id_token");
+          const profile = localStorage.getItem('id_token');
           this.setState({ user: profile });
         } catch (e) {
-          console.log("error", e);
+          // console.log('error', e);
           auth.logout();
-          this.props.history.replace("/login");
+          history.replace('/login');
         }
       }
     }
 
     render() {
+      const { user } = this.state;
       return (
-        <>{this.state.user ? <AuthComp authProps={this.props} user={this.state.user} /> : null}</>
+        <>{user ? <AuthComp authProps={this.props} user={user} /> : null}</>
       );
     }
   };

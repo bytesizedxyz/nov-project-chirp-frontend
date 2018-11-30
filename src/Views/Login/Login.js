@@ -1,33 +1,45 @@
-import React, { Component } from "react";
-import "./Login.css";
+import React, { Component } from 'react';
+import './Login.css';
 
-import AuthService from "../../Services/AuthService";
+import AuthService from '../../Services/AuthService';
 
 class Login extends Component {
+  constructor() {
+    super();
+
+    this.Auth = new AuthService();
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+
+
   componentDidMount() {
     if (this.Auth.loggedIn()) {
+      // eslint-disable-next-line react/prop-types
+      const { history } = this.props;
       console.log(this.Auth.loggedIn());
-      this.props.history.push("/");
+      history.push('/');
     }
   }
 
-  Auth = new AuthService();
 
-  handleChange = e => {
+  handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-  };
+  }
 
-  handleFormSubmit = e => {
+  handleFormSubmit(e) {
     e.preventDefault();
-
-    this.Auth.login(this.state.username, this.state.password)
-      .then(res => {
-        this.props.history.replace("/");
+    const { username, password } = this.state;
+    this.Auth.login(username, password)
+      .then(() => {
+        const { history } = this.props;
+        history.replace('/');
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
-  };
+  }
 
   render() {
     return (

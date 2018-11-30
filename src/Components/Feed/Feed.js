@@ -1,31 +1,36 @@
-import React, { Component } from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import Post from "../../Components/Post";
-import "./Feed.css";
-import { ThemeContext } from "../../ThemeProvider";
+import Post from '../Post';
+import './Feed.css';
+import { ThemeContext } from '../../ThemeProvider';
 
-export default class Feed extends Component {
-  render() {
-    const { chirps, user } = this.props;
-    return (
-      <ThemeContext.Consumer>
-        {({ theme }) => (
-          <div
-            className={`
+export default function Feed(props) {
+  const { chirps } = props;
+  return (
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <div
+          className={`
             feed
             ${theme.blackBackground}
             ${theme.lightBlueBackground}
             `}
-            data-testid="feed"
-          >
-            {chirps
-              ? chirps.map((chirp, index) => (
-                  <Post key={index} user={user} chirp={chirp} id={chirp.uuid} />
-                ))
-              : null}
-          </div>
-        )}
-      </ThemeContext.Consumer>
-    );
-  }
+          data-testid="feed"
+        >
+          {chirps
+            ? chirps.map(chirp => <Post key={chirp._id} chirp={chirp} id={chirp.uuid} />)
+            : null}
+        </div>
+      )}
+    </ThemeContext.Consumer>
+  );
 }
+
+Feed.defaultProps = {
+  chirps: [],
+};
+
+Feed.propTypes = {
+  chirps: PropTypes.arrayOf(PropTypes.object),
+};
