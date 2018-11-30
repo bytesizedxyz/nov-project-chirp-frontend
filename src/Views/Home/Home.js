@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router";
 import withAuth from "../../Components/withAuth";
-import Header from "../../Components/Header/Header";
+import NavBar from "../../Components/Header/Header";
 import Feed from "../../Components/Feed/Feed";
 import { ThemeContext } from "../../ThemeProvider";
 
@@ -16,7 +16,7 @@ export default withRouter(
           ${theme.lightBlueBackground}
           ${theme.blackBackground}`}
           >
-            <Header handleFilter={handleFilter} addPost={addPost} user={user} filter={filter} />
+            <NavBar handleFilter={handleFilter} addPost={addPost} user={user} filter={filter} />
             {chirps ? <Feed chirps={chirps} /> : null}
           </div>
         )}

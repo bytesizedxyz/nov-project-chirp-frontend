@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "./Login.css";
+import { Grid, Form, Card } from "semantic-ui-react";
+// import "./Login.css";
 
 import AuthService from "../../Services/AuthService";
 
@@ -41,28 +42,36 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="center">
-        <div className="card">
-          <h1>Login</h1>
-          <form>
-            <input
-              className="form-item"
-              placeholder="Username goes here..."
-              name="username"
-              type="text"
-              onChange={this.handleChange}
-            />
-            <input
-              className="form-item"
-              placeholder="Password goes here..."
-              name="password"
-              type="password"
-              onChange={this.handleChange}
-            />
-            <input className="form-submit" value="SUBMIT" type="submit" />
-          </form>
-        </div>
-      </div>
+      <Grid centered columns={2} verticalAlign="middle">
+        <Grid.Row verticalAlign="middle">
+          <Grid.Column>
+            <Card>
+              <Card.Header>Login</Card.Header>
+              <Form onSubmit={this.handleFormSubmit}>
+                <Form.Input
+                  fluid
+                  // className="form-item"
+                  placeholder="Username goes here..."
+                  name="username"
+                  label="User Name"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+                <Form.Input
+                  // className="form-item"
+                  placeholder="Password goes here..."
+                  name="password"
+                  type="password"
+                  onChange={this.handleChange}
+                />
+                <Form.Button className="form-submit" value="SUBMIT">
+                  Login
+                </Form.Button>
+              </Form>
+            </Card>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

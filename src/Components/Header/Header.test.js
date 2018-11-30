@@ -1,28 +1,27 @@
 import React from "react";
 import { render, fireEvent } from "react-testing-library";
 //needed components to render properly
-import Header from "./Header";
-import Modal from "../Modal";
+import NavBar from "./Header";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 library.add(faPlus, faSearch);
 
-describe("Header functionality", () => {
+describe("NavBar functionality", () => {
   it("should setState", () => {
-    //making the header instance
-    const component = new Header();
+    //making the NavBar instance
+    const component = new NavBar();
     //redefining the setstate function
     component.setState = jest.fn();
 
     //opening the modal
-    component.showModal();
-    expect(component.setState).toHaveBeenCalledWith({ show: true });
+    component.handleOpen();
+    expect(component.setState).toHaveBeenCalledWith({ modalOpen: true });
 
     //closing the modal
-    component.hideModal();
-    expect(component.setState).toHaveBeenCalledWith({ show: false });
+    component.handleClose();
+    expect(component.setState).toHaveBeenCalledWith({ modalOpen: false });
   });
-  it("it renders the header components such as title, search input, add button and grab user image", async () => {
+  it("it renders the NavBar components such as title, search input, add button and grab user image", async () => {
     //defining simulated props
     const user = {
       attributes: {
@@ -31,9 +30,9 @@ describe("Header functionality", () => {
     };
     const filter = "";
 
-    //rendering header
+    //rendering NavBar
     const { getByText, getByPlaceholderText, getByAltText, getByTestId } = render(
-      <Header user={user.attributes} filter={filter} />
+      <NavBar user={user.attributes} filter={filter} />
     );
 
     //Rendered items to look for
@@ -55,8 +54,8 @@ describe("Header functionality", () => {
     expect(search.value).toBe("cross");
   });
   it("can open add post modal and able to click and change theme", async () => {
-    //rending header with themecontext provider
-    const { getByTestId, asFragment } = render(<Header />);
+    //rending NavBar with themecontext provider
+    const { getByTestId, asFragment } = render(<NavBar />);
 
     //Rendered items to look for
     const addButton = getByTestId("addPostButton");
@@ -70,12 +69,7 @@ describe("Header functionality", () => {
   });
   it("can change the value of the modal textarea and submit it", async () => {
     const addPost = jest.fn();
-    const closeAndSend = jest.fn();
-    const { getByTestId, getByText, asFragment } = render(
-      <Header addPost={addPost}>
-        <Modal addPost={closeAndSend} />
-      </Header>
-    );
+    const { getByTestId, getByText, asFragment } = render(<NavBar addPost={addPost} />);
     //generating first snapshot of render
     const firstRender = asFragment();
 
