@@ -45,7 +45,7 @@ class Login extends Component {
       <Container fluid inverted className="backgroundColorBlacck">
         <Grid className="loginForm" centered columns={2} textAlign="center" verticalAlign="middle">
           <Grid.Row centered>
-            <Card>
+            <Card style={{}}>
               <Card.Header style={{ margin: "20px" }}>Login</Card.Header>
               <Form onSubmit={this.handleFormSubmit}>
                 <Form.Input
