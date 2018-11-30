@@ -72,7 +72,7 @@ export default function Post(props) {
             </span>
           </span>
           <span className="comment-span">
-            <Comment userName="MyUser" />
+            <Comment userName={user} />
           </span>
         </div>
       )}
