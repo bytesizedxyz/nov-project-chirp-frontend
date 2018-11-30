@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Post from '../Post';
-import './Feed.css';
-import { ThemeContext } from '../../ThemeProvider';
+import Post from "../Post";
+import "./Feed.css";
+import { ThemeContext } from "../../ThemeProvider";
 
 export default function Feed(props) {
   const { chirps } = props;
@@ -28,9 +28,9 @@ export default function Feed(props) {
 }
 
 Feed.defaultProps = {
-  chirps: [],
+  chirps: []
 };
 
 Feed.propTypes = {
-  chirps: PropTypes.arrayOf(PropTypes.object),
+  chirps: PropTypes.arrayOf(PropTypes.object)
 };
