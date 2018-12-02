@@ -43,16 +43,6 @@ class NavBar extends Component {
     const { user, handleFilter, filter } = this.props;
     const { message } = this.state;
     const email = user || "email@gmail.com";
-    const GravatarBlock = (
-      <Gravatar
-        email={email}
-        size={240}
-        rating="PG"
-        alt="Profile Avatar"
-        default="monsterid"
-        secure
-      />
-    );
     return (
       <ThemeContext.Consumer>
         {({ theme, toggleTheme }) => (
@@ -152,7 +142,16 @@ class NavBar extends Component {
                 />
               </Grid.Row>
             </Menu.Item>
-            <Menu.Item className="profileImage">{GravatarBlock}</Menu.Item>
+            <Menu.Item className="profileImage">
+              <Gravatar
+                email={email}
+                size={240}
+                rating="PG"
+                alt="Profile Avatar"
+                default="monsterid"
+                secure
+              />
+            </Menu.Item>
           </Menu>
         )}
       </ThemeContext.Consumer>

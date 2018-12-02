@@ -6,6 +6,11 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 library.add(faPlus, faSearch);
 
+const addPostFN = jest.fn();
+const filter = "";
+const user = { email: "email@gmail.com" };
+const handleFilter = jest.fn();
+
 describe("NavBar functionality", () => {
   it("should setState", () => {
     //making the NavBar instance
@@ -22,17 +27,9 @@ describe("NavBar functionality", () => {
     expect(component.setState).toHaveBeenCalledWith({ modalOpen: false });
   });
   it("it renders the NavBar components such as title, search input, add button and grab user image", async () => {
-    //defining simulated props
-    const user = {
-      attributes: {
-        email: "email@gmail.com"
-      }
-    };
-    const filter = "";
-
     //rendering NavBar
     const { getByText, getByPlaceholderText, getByAltText, getByTestId } = render(
-      <NavBar user={user.attributes} filter={filter} />
+      <NavBar addPost={addPostFN} filter={filter} user={user} handleFilter={handleFilter} />
     );
 
     //Rendered items to look for
@@ -55,7 +52,9 @@ describe("NavBar functionality", () => {
   });
   it("can open add post modal and able to click and change theme", async () => {
     //rending NavBar with themecontext provider
-    const { getByTestId, asFragment } = render(<NavBar />);
+    const { getByTestId, asFragment } = render(
+      <NavBar addPost={addPostFN} filter={filter} user={user} handleFilter={handleFilter} />
+    );
 
     //Rendered items to look for
     const addButton = getByTestId("addPostButton");
@@ -68,30 +67,25 @@ describe("NavBar functionality", () => {
     expect(firstRender).toMatchDiffSnapshot(asFragment());
   });
   it("can change the value of the modal textarea and submit it", async () => {
-    const addPost = jest.fn();
-    const { getByTestId, getByText, asFragment } = render(<NavBar addPost={addPost} />);
-    //generating first snapshot of render
-    const firstRender = asFragment();
+    const component = new NavBar();
 
-    //rendered items to look for
-    const modal = getByTestId("modal");
-    const submit = getByText("submit");
-    const textarea = getByTestId("addPostText");
+    component.setState = jest.fn();
 
-    //events expected to be true
-    expect(modal).toContainHTML("Add New Post");
-    expect(modal).toHaveTextContent("submit");
+    const { getByTestId, getByPlaceholderText, asFragment } = render(
+      <NavBar addPost={addPostFN} filter={filter} user={user} handleFilter={handleFilter} />
+    );
 
-    //testing default value of text area
-    expect(textarea.value).toBe("");
-    //change value of input
-    fireEvent.change(textarea, { target: { value: "This is going to be a new post" } });
-    //evaluate that the value has been changed for the input
-    expect(textarea.value).toBe("This is going to be a new post");
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
+    const firstSnapshot = asFragment();
 
-    //clicking submit button
-    fireEvent.click(submit);
-    expect(addPost).toHaveBeenCalledTimes(1);
+    //Rendered items to look for
+    const addButton = getByTestId("addPostButton");
+    const newChirp = getByPlaceholderText("Tell us more");
+
+    fireEvent.click(addButton);
+    component.handleOpen();
+    expect(component.setState).toHaveBeenCalledWith({ modalOpen: true });
+    expect(firstSnapshot).toMatchDiffSnapshot(asFragment());
+
+    expect(newChirp.value).toBe("");
   });
 });

@@ -5,6 +5,7 @@ import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import * as chirps from "./dummy_data/chirps";
 import { ThemeContext, themes } from "./ThemeProvider";
 import Login from "./Views/Login/Login";
+import SignUp from "./Views/SignUp/SignUp";
 import Home from "./Views/Home/Home";
 import "./Components/Header/header.css";
 
@@ -107,6 +108,7 @@ class App extends Component {
               )}
             />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/signUp" component={SignUp} />
           </>
         </Router>
       </ThemeContext.Provider>
