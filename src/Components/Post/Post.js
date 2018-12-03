@@ -12,7 +12,6 @@ export default function Post(props) {
   const updateVotes = e => {
     const voteName = e.target.dataset.testid;
     const uuid = chirp.uuid;
-    console.log(voteName, uuid);
     fetch(`https://nov-chirp-backend.herokuapp.com/chirp/reaction/${voteName}/${uuid}`, {
       method: "PUT",
       headers: {
@@ -28,8 +27,6 @@ export default function Post(props) {
         console.log("error happened, printed below");
         console.log(err);
       });
-
-    // console.log(wat);
   };
   return (
     <ThemeContext.Consumer>
