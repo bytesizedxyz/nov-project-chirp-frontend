@@ -46,29 +46,30 @@ export default function Post(props) {
                 <h3>Users Name</h3>
               </span>
             </Card.Header>
+
             <Card.Description>
-              <span className="content">{chirp.message}</span>
+              <span>{chirp.message}</span>
+              <span className="stats">
+                <span className="votes">
+                  <span data-testid="like" onClick={updateVotes}>
+                    {chirp.likes} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
+                  </span>
+                  <span data-testid="hate" onClick={updateVotes}>
+                    {chirp.hates} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
+                  </span>
+                  <span data-testid="favorite" onClick={updateVotes}>
+                    {chirp.favorites} <FontAwesomeIcon color={theme.iconColor} icon={faStar} />
+                  </span>
+                </span>
+                <span className="date">
+                  {new Date(chirp.created_at).toLocaleDateString() + " "}
+                  <FontAwesomeIcon color={theme.iconColor} icon={faClock} />
+                </span>
+              </span>
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <span className="stats">
-              <span className="votes">
-                <span data-testid="like" onClick={updateVotes}>
-                  {chirp.likes} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
-                </span>
-                <span data-testid="hate" onClick={updateVotes}>
-                  {chirp.hates} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
-                </span>
-                <span data-testid="favorite" onClick={updateVotes}>
-                  {chirp.favorites} <FontAwesomeIcon color={theme.iconColor} icon={faStar} />
-                </span>
-              </span>
-              <span className="date">
-                {new Date(chirp.created_at).toLocaleDateString() + " "}
-                <FontAwesomeIcon color={theme.iconColor} icon={faClock} />
-              </span>
-            </span>
-            <span className="comment-span">
+            <span>
               <Comment userName={user} />
             </span>
           </Card.Content>

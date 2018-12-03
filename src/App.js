@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
-// import * as chirps from "./dummy_data/chirps";
-import { ThemeContext, themes } from "./ThemeProvider";
-import Login from "./Views/Login";
-import SignUp from "./Views/SignUp";
-import Home from "./Views/Home/Home";
-import "./Components/Header/header.css";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ThemeContext, themes } from './ThemeProvider';
+import Login from './Views/Login';
+import SignUp from './Views/SignUp';
+import Home from './Views/Home/Home';
+import './Components/Header/header.css';
 
 library.add(faPlus, faSearch);
 
@@ -18,31 +17,42 @@ class App extends Component {
     this.state = {
       chirps: [],
       user: {},
-      filter: "",
+      filter: '',
       theme: themes.dark
     };
 
     this.toggleTheme = this.toggleTheme.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
     this.addPost = this.addPost.bind(this);
+    this.getChirps = this.getChirps.bind(this);
   }
 
-  async componentDidMount() {
-    let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("id_token")
+  async getChirps() {
+    console.log('get the chirps');
+    if (localStorage.getItem('id_token').length > 0) {
+      console.log('token got');
+      let chirps = await fetch(
+        'https://nov-chirp-backend.herokuapp.com/chirp',
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('id_token')
+          }
+        }
+      );
+      console.log('chirps status', chirps.status);
+      if (chirps.status === 200 || chirps.status === 304) {
+        chirps = await chirps.json();
+        chirps = chirps.reverse();
+        const user = JSON.parse(localStorage.getItem('_user_prof'));
+        this.setState({ chirps, user });
+      } else if (chirps.status === 500) {
+        localStorage.setItem('id_token', '');
+        this.props.history.replace('/login', {
+          err: 'You have been logged out'
+        });
       }
-    });
-    console.log("CHIRPS PRE JSON", chirps);
-    console.log(chirps.status);
-    if (chirps.status === 200 || chirps.status === 304) {
-      console.log("CHIRP STATUS ACCPETED");
-      chirps = await chirps.json();
-      chirps = chirps.reverse();
-      console.log("chirps", chirps);
-      const user = JSON.parse(localStorage.getItem("_user_prof"));
-      this.setState({ chirps, user });
-      console.log(user);
+    } else {
+      console.log('am confused');
     }
   }
 
@@ -69,14 +79,17 @@ class App extends Component {
   async addPost(post) {
     const { user } = this.state;
 
-    const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: `${post}`,
-        username: `${user.username}`
-      })
-    });
+    const newPost = await fetch(
+      'https://nov-chirp-backend.herokuapp.com/chirp',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `${post}`,
+          username: `${user.username}`
+        })
+      }
+    );
     const reply = await newPost.json();
     this.setState(prevState => {
       prevState.chirps.unshift(reply);
@@ -95,11 +108,11 @@ class App extends Component {
       toggleTheme: this.toggleTheme
     };
     const searchedChirps = chirps.filter(chirp =>
-      chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false
+      chirp.message
+        ? chirp.message.toLowerCase().includes(filter.toLowerCase())
+        : false
     );
-    console.log("app searched chirps", searchedChirps);
     if (user > 0) {
-      console.log("user", user);
     }
     return (
       <ThemeContext.Provider value={themeChange}>
@@ -110,6 +123,7 @@ class App extends Component {
               path="/"
               render={() => (
                 <Home
+                  getChirps={this.getChirps}
                   chirps={searchedChirps}
                   user={user}
                   filter={filter}

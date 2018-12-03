@@ -1,17 +1,26 @@
-import React, { Component } from "react";
-import { Button, Modal, TextArea, Input, Menu, Header, Grid, Icon } from "semantic-ui-react";
-import Gravatar from "gravatar-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PropTypes from "prop-types";
-import { ThemeContext } from "../../ThemeProvider";
-import "./header.css";
+import React, { Component } from 'react';
+import {
+  Button,
+  Modal,
+  TextArea,
+  Input,
+  Menu,
+  Header,
+  Grid,
+  Icon
+} from 'semantic-ui-react';
+import Gravatar from 'gravatar-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
+import { ThemeContext } from '../../ThemeProvider';
+import './header.css';
 
 class NavBar extends Component {
   constructor() {
     super();
 
     this.state = {
-      message: "",
+      message: '',
       modalOpen: false
     };
 
@@ -33,22 +42,22 @@ class NavBar extends Component {
   closeAndSend() {
     const { addPost } = this.props;
     const { message } = this.state;
-    console.log("running close and send");
-    this.setState({ modalOpen: false, message: "" });
+    console.log('running close and send');
+    this.setState({ modalOpen: false, message: '' });
     addPost(message);
   }
 
   render() {
     const { user, handleFilter, filter } = this.props;
     const { message } = this.state;
-    const email = user || "email@gmail.com";
+    const email = user || 'email@gmail.com';
     return (
       <ThemeContext.Consumer>
         {({ theme, toggleTheme }) => (
           <Menu
-            color={theme.currentTheme === "dark" ? "black" : "blue"}
+            color={theme.currentTheme === 'dark' ? 'black' : 'blue'}
             inverted
-            borderless="false"
+            borderless={false}
             fluid
             size="huge"
             widths={3}
@@ -56,15 +65,21 @@ class NavBar extends Component {
           >
             <Menu.Item onClick={toggleTheme}>
               <Icon
-                color={theme.currentTheme === "dark" ? "red" : "white"}
+                color={theme.currentTheme === 'dark' ? 'red' : 'white'}
                 size="massive"
-                name={theme.currentTheme === "dark" ? "empire" : "rebel"}
+                name={theme.currentTheme === 'dark' ? 'empire' : 'rebel'}
               />
             </Menu.Item>
             <Menu.Item>
               <Grid.Row>
-                <Header size="huge" as="h1" color={theme.currentTheme === "dark" ? "red" : "white"}>
-                  {theme.currentTheme === "dark" ? "Darth Twitter" : "Obi Wan Twitter"}
+                <Header
+                  size="huge"
+                  as="h1"
+                  color={theme.currentTheme === 'dark' ? 'red' : 'white'}
+                >
+                  {theme.currentTheme === 'dark'
+                    ? 'Darth Twitter'
+                    : 'Obi Wan Twitter'}
                 </Header>
                 <Modal
                   centered
@@ -73,8 +88,8 @@ class NavBar extends Component {
                       size="medium"
                       onClick={this.handleOpen}
                       data-testid="addPostButton"
-                      style={{ marginRight: "20px" }}
-                      color={theme.currentTheme === "dark" ? "red" : "blue"}
+                      style={{ marginRight: '20px' }}
+                      color={theme.currentTheme === 'dark' ? 'red' : 'blue'}
                     >
                       <FontAwesomeIcon icon="plus" />
                     </Button>
@@ -86,16 +101,16 @@ class NavBar extends Component {
                 >
                   <Modal.Header
                     style={
-                      theme.currentTheme === "dark"
-                        ? { backgroundColor: "black" }
-                        : { backgroundColor: "blue" }
+                      theme.currentTheme === 'dark'
+                        ? { backgroundColor: 'black' }
+                        : { backgroundColor: 'blue' }
                     }
                   >
                     <h1
                       style={
-                        theme.currentTheme === "dark"
-                          ? { color: "red", textAlign: "center" }
-                          : { color: "white", textAlign: "center" }
+                        theme.currentTheme === 'dark'
+                          ? { color: 'red', textAlign: 'center' }
+                          : { color: 'white', textAlign: 'center' }
                       }
                     >
                       Add New Post
@@ -103,9 +118,9 @@ class NavBar extends Component {
                   </Modal.Header>
                   <Modal.Content
                     style={
-                      theme.currentTheme === "dark"
-                        ? { backgroundColor: "black" }
-                        : { backgroundColor: "blue" }
+                      theme.currentTheme === 'dark'
+                        ? { backgroundColor: 'black' }
+                        : { backgroundColor: 'blue' }
                     }
                   >
                     <TextArea
@@ -115,15 +130,15 @@ class NavBar extends Component {
                       name="message"
                       autoHeight
                       rows={10}
-                      style={{ width: "100%" }}
+                      style={{ width: '100%' }}
                       value={message}
                     />
                   </Modal.Content>
                   <Modal.Actions
                     style={
-                      theme.currentTheme === "dark"
-                        ? { backgroundColor: "black", textAlign: "center" }
-                        : { backgroundColor: "blue", textAlign: "center" }
+                      theme.currentTheme === 'dark'
+                        ? { backgroundColor: 'black', textAlign: 'center' }
+                        : { backgroundColor: 'blue', textAlign: 'center' }
                     }
                   >
                     <Button onClick={this.handleClose}>Close</Button>
