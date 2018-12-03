@@ -8,7 +8,8 @@ export default function withAuth(AuthComp) {
     constructor() {
       super();
       this.state = {
-        user: null
+        user: null,
+        err: null
       };
     }
 
@@ -16,7 +17,10 @@ export default function withAuth(AuthComp) {
       // eslint-disable-next-line react/prop-types
       const { history } = this.props;
       if (!auth.loggedIn()) {
-        history.replace("/login");
+        console.log("youre getting logged out, son")
+        history.replace("/login", {
+          err:"You have been logged out"
+        });
       } else {
         try {
           // const profile = auth.getProfile();
