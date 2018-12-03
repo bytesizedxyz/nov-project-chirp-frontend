@@ -3,8 +3,7 @@ import { Button, Modal, TextArea, Input, Menu, Header, Grid, Icon } from "semant
 import Gravatar from "gravatar-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
-import { ThemeContext, themes } from "../../ThemeProvider";
-import EmpireLogo from "../empire-brands";
+import { ThemeContext } from "../../ThemeProvider";
 import "./header.css";
 
 class NavBar extends Component {
@@ -43,21 +42,11 @@ class NavBar extends Component {
     const { user, handleFilter, filter } = this.props;
     const { message } = this.state;
     const email = user || "email@gmail.com";
-    const GravatarBlock = (
-      <Gravatar
-        email={email}
-        size={240}
-        rating="PG"
-        alt="Profile Avatar"
-        default="monsterid"
-        secure
-      />
-    );
     return (
       <ThemeContext.Consumer>
         {({ theme, toggleTheme }) => (
           <Menu
-            color={theme.currentTheme == "dark" ? "black" : "blue"}
+            color={theme.currentTheme === "dark" ? "black" : "blue"}
             inverted
             borderless="false"
             fluid
@@ -67,15 +56,15 @@ class NavBar extends Component {
           >
             <Menu.Item onClick={toggleTheme}>
               <Icon
-                color={theme.currentTheme == "dark" ? "red" : "white"}
+                color={theme.currentTheme === "dark" ? "red" : "white"}
                 size="massive"
-                name={theme.currentTheme == "dark" ? "empire" : "rebel"}
+                name={theme.currentTheme === "dark" ? "empire" : "rebel"}
               />
             </Menu.Item>
             <Menu.Item>
               <Grid.Row>
-                <Header size="huge" as="h1" color={theme.currentTheme == "dark" ? "red" : "white"}>
-                  {theme.currentTheme == "dark" ? "Darth Twitter" : "Obi Wan Twitter"}
+                <Header size="huge" as="h1" color={theme.currentTheme === "dark" ? "red" : "white"}>
+                  {theme.currentTheme === "dark" ? "Darth Twitter" : "Obi Wan Twitter"}
                 </Header>
                 <Modal
                   centered
@@ -85,7 +74,7 @@ class NavBar extends Component {
                       onClick={this.handleOpen}
                       data-testid="addPostButton"
                       style={{ marginRight: "20px" }}
-                      color={theme.currentTheme == "dark" ? "red" : "blue"}
+                      color={theme.currentTheme === "dark" ? "red" : "blue"}
                     >
                       <FontAwesomeIcon icon="plus" />
                     </Button>
@@ -97,14 +86,14 @@ class NavBar extends Component {
                 >
                   <Modal.Header
                     style={
-                      theme.currentTheme == "dark"
+                      theme.currentTheme === "dark"
                         ? { backgroundColor: "black" }
                         : { backgroundColor: "blue" }
                     }
                   >
                     <h1
                       style={
-                        theme.currentTheme == "dark"
+                        theme.currentTheme === "dark"
                           ? { color: "red", textAlign: "center" }
                           : { color: "white", textAlign: "center" }
                       }
@@ -114,7 +103,7 @@ class NavBar extends Component {
                   </Modal.Header>
                   <Modal.Content
                     style={
-                      theme.currentTheme == "dark"
+                      theme.currentTheme === "dark"
                         ? { backgroundColor: "black" }
                         : { backgroundColor: "blue" }
                     }
@@ -131,11 +120,10 @@ class NavBar extends Component {
                     />
                   </Modal.Content>
                   <Modal.Actions
-                    style={{ textAlign: "center" }}
                     style={
-                      theme.currentTheme == "dark"
-                        ? { backgroundColor: "black" }
-                        : { backgroundColor: "blue" }
+                      theme.currentTheme === "dark"
+                        ? { backgroundColor: "black", textAlign: "center" }
+                        : { backgroundColor: "blue", textAlign: "center" }
                     }
                   >
                     <Button onClick={this.handleClose}>Close</Button>
@@ -152,7 +140,16 @@ class NavBar extends Component {
                 />
               </Grid.Row>
             </Menu.Item>
-            <Menu.Item className="profileImage">{GravatarBlock}</Menu.Item>
+            <Menu.Item className="profileImage">
+              <Gravatar
+                email={email}
+                size={240}
+                rating="PG"
+                alt="Profile Avatar"
+                default="monsterid"
+                secure
+              />
+            </Menu.Item>
           </Menu>
         )}
       </ThemeContext.Consumer>

@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
+<<<<<<< HEAD
+=======
+// import * as chirps from "./dummy_data/chirps";
+>>>>>>> cfc6512cb503a36c11b3b94729b385cac116be00
 import { ThemeContext, themes } from "./ThemeProvider";
-import Login from "./Views/Login/Login";
+import Login from "./Views/Login";
+import SignUp from "./Views/SignUp";
 import Home from "./Views/Home/Home";
 import "./Components/Header/header.css";
 
@@ -98,8 +103,8 @@ class App extends Component {
       theme,
       toggleTheme: this.toggleTheme
     };
-    const searchedChirps = chirps.filter(
-      chirp => (chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false)
+    const searchedChirps = chirps.filter(chirp =>
+      chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false
     );
     if (user > 0) {
     }
@@ -121,7 +126,8 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/SignUp" component={SignUp} />
           </>
         </Router>
       </ThemeContext.Provider>
