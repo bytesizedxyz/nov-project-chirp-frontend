@@ -5,9 +5,12 @@ import NavBar from "../../Components/Header/Header";
 import Feed from "../../Components/Feed/Feed";
 import { ThemeContext } from "../../ThemeProvider";
 
-export default withRouter(
-  withAuth(function Home(props) {
-    const { user, chirps, handleFilter, addPost, filter } = props.authProps;
+export default withRouter(withAuth(function Home(props) {
+    const { user, chirps, handleFilter, addPost, filter, getChirps } = props.authProps;
+    if(chirps.length === 0){
+      getChirps();
+    }
+    
     return (
       <ThemeContext.Consumer>
         {({ theme }) => (

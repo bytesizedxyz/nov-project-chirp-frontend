@@ -12,8 +12,7 @@ import {
 import Gravatar from 'gravatar-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { ThemeContext, themes } from '../../ThemeProvider';
-import EmpireLogo from '../empire-brands';
+import { ThemeContext } from '../../ThemeProvider';
 import './header.css';
 
 class NavBar extends Component {
@@ -52,16 +51,6 @@ class NavBar extends Component {
     const { user, handleFilter, filter } = this.props;
     const { message } = this.state;
     const email = user || 'email@gmail.com';
-    const GravatarBlock = (
-      <Gravatar
-        email={email}
-        size={240}
-        rating="PG"
-        alt="Profile Avatar"
-        default="monsterid"
-        secure
-      />
-    );
     return (
       <ThemeContext.Consumer>
         {({ theme, toggleTheme }) => (
@@ -166,7 +155,16 @@ class NavBar extends Component {
                 />
               </Grid.Row>
             </Menu.Item>
-            <Menu.Item className="profileImage">{GravatarBlock}</Menu.Item>
+            <Menu.Item className="profileImage">
+              <Gravatar
+                email={email}
+                size={240}
+                rating="PG"
+                alt="Profile Avatar"
+                default="monsterid"
+                secure
+              />
+            </Menu.Item>
           </Menu>
         )}
       </ThemeContext.Consumer>

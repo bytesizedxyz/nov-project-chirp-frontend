@@ -34,9 +34,9 @@ const chirp = [
     userId: 4,
     message: "Fundamental non-volatile solution",
     deleted: true,
-    likes: -81327498127349871,
-    dislikes: 9999999999999999,
-    favorites: "null",
+    likes: 9,
+    dislikes: 5,
+    favorites: 87,
     created_at: "8/25/2001"
   }
 ];
