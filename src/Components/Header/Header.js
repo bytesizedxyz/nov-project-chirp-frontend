@@ -66,10 +66,13 @@ class NavBar extends Component {
               centered
               trigger={
                 <Button
+                inverted
+                as="button"
+                borderless
                   size="medium"
                   onClick={this.handleOpen}
                   data-testid="addPostButton"
-                  style={{ marginRight: "20px" }}
+                  style={{ marginRight: "20px", border:"3px solid rgb(219, 40, 40)", boxShadow: "none !important" }}
                 >
                   <FontAwesomeIcon icon="plus" />
                 </Button>
@@ -98,12 +101,14 @@ class NavBar extends Component {
               </Modal.Content>
             </Modal>
             <Input
+            transparent
               onChange={handleFilter}
               placeholder="Search for chirps"
               type="text"
               name={filter}
-              action="Search"
               size="medium"
+              icon={ <Icon name="search" inverted color="red" style={{marginRight:"5px"}} />}
+              style={{border:"2px solid rgb(219, 40, 40)", height:"36.5px",borderRadius:"4px"}}
             />
           </Grid.Row>
         </Menu.Item>
