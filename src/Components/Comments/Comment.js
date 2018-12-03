@@ -1,79 +1,89 @@
 import React, { Component } from 'react';
 import '../Post/Post.css';
+import { Input, Button, Header, Comment, Form } from 'semantic-ui-react';
 
-class Comment extends Component {
+class CommentBox extends Component {
   state = {
-    comments: [],
+    comments: [
+      { userName: '', comment: '' },
+      { userName: 'White Dads Answering The Phone: ', comment: 'Yellow' }
+    ],
     commentValue: '',
-    commentBoxOpen: false
+    commentBox: false
   };
-  // { userName: '', comment: '' }, { userName: 'White Dads Answering The Phone: ', comment: 'Yellow' }
 
+  // { comment: '', chirpId: '' }
+  // HTTP Header - Authorization: "JWT Bearer Token"
+  // POST route: https://nov-chirp-backend.herokuapp.com/chirp/comment/
+
+  // GET - returns all chirps and associated comments
+  // modify current GET request to associate all comments with to each chirp
+  // { userName: '', comment: '', chirpId: '', created_at: '' }
   toggleBox = () => {
-    const { commentBoxOpen } = this.state;
-    this.setState({ commentBoxOpen: !commentBoxOpen }, () => {
-      console.log(commentBoxOpen);
-    });
+    const { commentBox } = this.state;
+    this.setState({ commentBox: !commentBox });
   };
 
   handleChange = e => {
-    console.log('handling comment change');
-    this.setState({ commentValue: e.target.value });
+    this.setState({ commentValue: e.target.value }, () => {
+      console.log(this.state.commentValue);
+    });
   };
 
   submitComment = () => {
-    console.log('submitting comment');
     const user = 'fake user';
     const { commentValue } = this.state;
+    console.log(commentValue);
     const newComment = { userName: user, comment: commentValue };
-    this.setState({ comments: this.state.comments.concat(newComment) });
+    this.setState({ comments: this.state.comments.concat(newComment) }, () => {
+      console.log(this.state.comments);
+    });
     this.toggleBox();
-
-    // url for POST
-    // data object for POST
-    // url for GET
-    // data object received from GET
   };
 
   render() {
-    const { comments, userName } = this.state;
-    const returnComment = () => {
+    const { comments } = this.state;
+    const comment = () => {
       if (comments) {
         return comments.map(comment => {
+          const { userComment, userName } = comment;
           return (
-            <span key={`${comment}${userName}`} data-testid="comments">
-              <span className="comment-header">
-                <img
-                  className="comment-profile-image"
-                  src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg"
-                  alt="A user visual identifier."
-                />
-                <h4>{comment.userName}</h4>
-                <p>{comment.comment}</p>
-              </span>
-              <span className="reply-bar">
-                <p>Like</p>
-                <p>Hate</p>
-              </span>
-            </span>
+            <Comment key={`${userName}${userComment}`} data-testid="comments">
+              <Comment.Avatar src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg" />
+              <Comment.Content>
+                <Comment.Author as="a">{userName}</Comment.Author>
+                <Comment.Metadata>
+                  <div>Today at 5:42PM</div>
+                </Comment.Metadata>
+                <Comment.Text>{userComment}</Comment.Text>
+              </Comment.Content>
+            </Comment>
           );
         });
       }
     };
 
-    const returnCommentBox = () => {
-      const { commentValue, commentBoxOpen } = this.state;
-      if (commentBoxOpen) {
+    const commentBox = () => {
+      const { commentBox } = this.state;
+      if (commentBox) {
         return (
-          <span className="reply-input">
-            <input
-              placeholder="New Comment"
-              value={commentValue}
-              onChange={this.handleChange}
-              type="text"
-            />
-            <p onClick={this.submitComment}>Send</p>
-          </span>
+          <Form reply>
+            <Form.Field>
+              <Input
+                action={
+                  <Button
+                    color="red"
+                    onClick={this.submitComment}
+                    content="Comment"
+                    labelPosition="left"
+                    icon="edit"
+                  />
+                }
+                actionPosition="left"
+                placeholder="Add something to the conversation:"
+              />
+            </Form.Field>
+          </Form>
         );
       } else {
         return <span />;
@@ -81,15 +91,18 @@ class Comment extends Component {
     };
 
     return (
-      <div className="comment-body">
-        <span className="reply-bar">
-          <p onClick={this.toggleBox}>Comment</p>
-        </span>
-        <span>{returnComment()}</span>
-        <span>{returnCommentBox()}</span>
+      <div>
+        <Comment.Group>
+          {comment()}
+          {commentBox()}
+          <Header onClick={this.toggleBox} as="h3" dividing>
+            {' '}
+            Comments
+          </Header>
+        </Comment.Group>
       </div>
     );
   }
 }
 
-export default Comment;
+export default CommentBox;

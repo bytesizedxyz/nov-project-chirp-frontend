@@ -1,15 +1,20 @@
 // {"userId":7,"message":"Distributed solution-oriented contingency","deleted":true,"likes":16,"dislikes":33,"favorites":73,"created_at":"8/25/2001"},
-import React from "react";
-import "./Post.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faThumbsDown, faStar, faClock } from "@fortawesome/free-solid-svg-icons";
-import { Card } from "semantic-ui-react";
-import { ThemeContext } from "../../ThemeProvider";
-import Comment from "../Comments";
-import Header from "../Header/Header";
+import React from 'react';
+import './Post.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faThumbsUp,
+  faThumbsDown,
+  faStar,
+  faClock
+} from '@fortawesome/free-solid-svg-icons';
+import { Card } from 'semantic-ui-react';
+import { ThemeContext } from '../../ThemeProvider';
+import Comment from '../Comments';
+import Header from '../Header/Header';
 
 export default function Post(props) {
-  const { chirp, user } = props;
+  const { chirp } = props;
   //TODO:
   //  [ ] - get votes to work
   // const updateVotes = e => {
@@ -40,7 +45,7 @@ export default function Post(props) {
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
-        <Card color={theme.brownBackground ? "red" : "white"}>
+        <Card color={theme.brownBackground ? 'red' : 'white'}>
           <Card.Content>
             <Card.Header>
               <span className="profile-info">
@@ -60,17 +65,23 @@ export default function Post(props) {
             <span className="stats">
               <span className="votes">
                 <span data-testid="like">
-                  {chirp.likes} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
+                  {chirp.likes}{' '}
+                  <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
                 </span>
                 <span data-testid="hate">
-                  {chirp.hates} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
+                  {chirp.hates}{' '}
+                  <FontAwesomeIcon
+                    color={theme.iconColor}
+                    icon={faThumbsDown}
+                  />
                 </span>
                 <span data-testid="favorite">
-                  {chirp.favorites} <FontAwesomeIcon color={theme.iconColor} icon={faStar} />
+                  {chirp.favorites}{' '}
+                  <FontAwesomeIcon color={theme.iconColor} icon={faStar} />
                 </span>
               </span>
               <span className="date">
-                {new Date(chirp.created_at).toLocaleDateString() + " "}
+                {new Date(chirp.created_at).toLocaleDateString() + ' '}
                 <FontAwesomeIcon color={theme.iconColor} icon={faClock} />
               </span>
             </span>

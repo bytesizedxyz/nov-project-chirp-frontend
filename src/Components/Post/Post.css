@@ -53,33 +53,11 @@ p {
   -moz-animation: glow 1s ease-in-out infinite alternate;
   animation: glow 1s ease-in-out infinite alternate;
 }
-.reply-header {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  position: relative;
-  left: 15px;
-}
-.reply-profile-image {
-  height: 15px;
-  width: 15px;
-  margin-right: 5px;
-  border-radius: 50%;
-}
 
 .reply-input {
-  display: flex;
+  width: 100%;
 }
-.reply-input input {
-  width: 40vw;
-  margin-right: 10px;
-  border-radius: 10px;
-}
-.reply-input p {
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 700;
-}
+
 .reply-input p:hover {
   -webkit-animation: glow 1s ease-in-out infinite alternate;
   -moz-animation: glow 1s ease-in-out infinite alternate;
