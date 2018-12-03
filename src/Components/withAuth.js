@@ -18,9 +18,9 @@ export default function withAuth(AuthComp) {
       const { history } = this.props;
       if (!auth.loggedIn()) {
         console.log("youre getting logged out, son")
-        history.replace("/login", {state:{
+        history.replace("/login", {
           err:"You have been logged out"
-        }});
+        });
       } else {
         try {
           // const profile = auth.getProfile();

@@ -27,18 +27,26 @@ class App extends Component {
   }
 
   async getChirps(){
-    if(localStorage.getItem("id_token")){
+    console.log("get the chirps")
+    if(localStorage.getItem("id_token").length > 0){
+      console.log("token got")
       let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("id_token")
         }
       });
+      console.log("chirps status", chirps.status)
       if(chirps.status === 200 || chirps.status === 304){
         chirps = await chirps.json();
         chirps = chirps.reverse();
         const user = JSON.parse(localStorage.getItem("_user_prof"))
         this.setState({ chirps, user});
+    } else if (chirps.status === 500){
+      localStorage.setItem("id_token", "");
+      this.props.history.replace("/login", {err:"You have been logged out"})
     }
+  } else {
+    console.log("am confused")
   }
   }
 

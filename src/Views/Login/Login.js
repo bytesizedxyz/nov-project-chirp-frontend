@@ -24,6 +24,8 @@ class Login extends Component {
       const { history } = this.props;
       console.log(this.Auth.loggedIn());
       history.push("/");
+    } else if (this.props.location.state && this.props.location.state.err !== "") {
+      this.setState({err: this.props.location.state.err })
     }
   }
 
