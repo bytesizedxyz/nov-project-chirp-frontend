@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
-
+import * as chirps from "./dummy_data/chirps";
 import { ThemeContext, themes } from "./ThemeProvider";
 import Login from "./Views/Login/Login";
 import Home from "./Views/Home/Home";
@@ -15,7 +15,7 @@ class App extends Component {
     super();
 
     this.state = {
-      chirps: [],
+      chirps: chirps.default,
       user: {},
       filter: "",
       theme: themes.dark
