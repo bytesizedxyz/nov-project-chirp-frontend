@@ -13,9 +13,7 @@ import { ThemeContext } from '../../ThemeProvider';
 import Comment from '../Comments';
 
 export default function Post(props) {
-  const { chirp } = props;
-  //TODO:
-  //  [ ] - get votes to work
+  const { chirp, user } = props;
   // const updateVotes = e => {
   //   const voteName = e.target.dataset.testid;
   //   const uuid = chirp.uuid;

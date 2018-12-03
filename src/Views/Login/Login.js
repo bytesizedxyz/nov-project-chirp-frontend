@@ -8,7 +8,7 @@ class Login extends Component {
   constructor() {
     super();
 
-    this.Auth = new AuthService("https://nov-chirp-backend.herokuapp.com/user");
+    this.Auth = new AuthService();
 
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
