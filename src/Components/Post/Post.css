@@ -9,7 +9,7 @@ p {
   margin-bottom: 20px;
   display: grid;
   grid-template-columns: 1fr 22fr 1fr;
-  grid-template-rows: 25% 20% 15% 40%;
+  grid-template-rows: 25% 20% 20% 35%;
   border-radius: 10px;
 }
 .chirp-profile-image {
@@ -19,26 +19,12 @@ p {
   /* margin-top: 20px; */
   border-radius: 50%;
 }
-.comment-header {
-  display: flex;
-  align-items: center;
-}
-.comment-profile-image {
-  height: 20px;
-  width: 20px;
-  margin-right: 5px;
-  border-radius: 50%;
-}
-.comment-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 20px;
-}
+
 .comment-span {
   grid-row: 4;
   grid-column: 2;
+  width: 100%;
+  margin: 0px;
 }
 .reply-bar {
   display: flex;
@@ -81,6 +67,11 @@ h4 {
   grid-row: 1/1;
   display: flex;
   align-items: center;
+}
+.comment {
+  width: 100%;
+  grid-column: 2;
+  grid-row: 5;
 }
 .content {
   grid-column: 2;

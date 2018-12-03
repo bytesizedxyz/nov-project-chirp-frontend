@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import '../Post/Post.css';
-import { Input, Button, Header, Comment, Form } from 'semantic-ui-react';
+import {
+  Input,
+  Button,
+  Header,
+  Comment,
+  Form,
+  Card,
+  Image
+} from 'semantic-ui-react';
 
 class CommentBox extends Component {
   state = {
@@ -19,6 +27,7 @@ class CommentBox extends Component {
   // GET - returns all chirps and associated comments
   // modify current GET request to associate all comments with to each chirp
   // { userName: '', comment: '', chirpId: '', created_at: '' }
+
   toggleBox = () => {
     const { commentBox } = this.state;
     this.setState({ commentBox: !commentBox });
@@ -48,16 +57,30 @@ class CommentBox extends Component {
         return comments.map(comment => {
           const { userComment, userName } = comment;
           return (
-            <Comment key={`${userName}${userComment}`} data-testid="comments">
-              <Comment.Avatar src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg" />
-              <Comment.Content>
-                <Comment.Author as="a">{userName}</Comment.Author>
-                <Comment.Metadata>
-                  <div>Today at 5:42PM</div>
-                </Comment.Metadata>
-                <Comment.Text>{userComment}</Comment.Text>
-              </Comment.Content>
-            </Comment>
+            <Card.Group className="comment-span">
+              <Card className="comment-span">
+                <Card.Content className="comment-span">
+                  <Image
+                    floated="right"
+                    size="mini"
+                    src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg"
+                  />
+                  <Comment
+                    key={`${userName}${userComment}`}
+                    data-testid="comments"
+                    className="comment-span"
+                  >
+                    <Comment.Content>
+                      <Comment.Author as="a">{userName}</Comment.Author>
+                      <Comment.Metadata>
+                        <div>Today at 5:42PM</div>
+                      </Comment.Metadata>
+                      <Comment.Text>{userComment}</Comment.Text>
+                    </Comment.Content>
+                  </Comment>
+                </Card.Content>
+              </Card>
+            </Card.Group>
           );
         });
       }
@@ -77,6 +100,7 @@ class CommentBox extends Component {
                     content="Comment"
                     labelPosition="left"
                     icon="edit"
+                    className="comment"
                   />
                 }
                 actionPosition="left"
@@ -91,16 +115,21 @@ class CommentBox extends Component {
     };
 
     return (
-      <div>
-        <Comment.Group>
-          {comment()}
-          {commentBox()}
-          <Header onClick={this.toggleBox} as="h3" dividing>
+      <span className="comment-span">
+        <Comment.Group className="comment-span">
+          <Header
+            className="comment-span"
+            onClick={this.toggleBox}
+            as="h3"
+            dividing
+          >
             {' '}
             Comments
           </Header>
+          {comment()}
+          {commentBox()}
         </Comment.Group>
-      </div>
+      </span>
     );
   }
 }

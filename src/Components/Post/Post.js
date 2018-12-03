@@ -83,7 +83,7 @@ export default function Post(props) {
               </span>
             </span>
             <span className="comment-span">
-              {/* <Comment userName={user} /> */}
+              <Comment userName={user} />
             </span>
           </Card.Content>
         </Card>
