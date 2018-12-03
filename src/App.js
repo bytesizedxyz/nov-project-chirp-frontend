@@ -35,7 +35,8 @@ class App extends Component {
         'https://nov-chirp-backend.herokuapp.com/chirp',
         {
           headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('id_token')
+            "Content-Type":"application/json",
+            "Authorization": 'Bearer ' + localStorage.getItem('id_token')
           }
         }
       );
@@ -77,16 +78,13 @@ class App extends Component {
   // }
 
   async addPost(post) {
-    const { user } = this.state;
-
     const newPost = await fetch(
       'https://nov-chirp-backend.herokuapp.com/chirp',
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("id_token")}` },
         body: JSON.stringify({
           message: `${post}`,
-          username: `${user.username}`
         })
       }
     );

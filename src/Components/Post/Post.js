@@ -14,31 +14,30 @@ import Comment from '../Comments';
 
 export default function Post(props) {
   const { chirp, user } = props;
-  const updateVotes = e => {
-    const voteName = e.target.dataset.testid;
-    const uuid = chirp.uuid;
-    console.log(voteName, uuid);
-    fetch(
-      `https://nov-chirp-backend.herokuapp.com/chirp/reaction/${voteName}/${uuid}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('id_token')
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(res => {
-        console.log('I AM THE ONE AND ONLY DATAMIN', res.data);
-      })
-      .catch(err => {
-        console.log('error happened, printed below');
-        console.log(err);
-      });
-
-    // console.log(wat);
-  };
+  // const updateVotes = e => {
+  //   const voteName = e.target.dataset.testid;
+  //   const uuid = chirp.uuid;
+  //   console.log(voteName, uuid);
+  //   fetch(
+  //     `https://nov-chirp-backend.herokuapp.com/chirp/reaction/${voteName}/${uuid}`,
+  //     {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: 'Bearer ' + localStorage.getItem('id_token')
+  //       }
+  //     }
+  //   )
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       console.log('I AM THE ONE AND ONLY DATAMIN', res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log('error happened, printed below');
+  //       console.log(err);
+  //     });
+  // console.log(wat);
+  //};
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
