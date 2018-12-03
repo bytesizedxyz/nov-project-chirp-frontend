@@ -5,7 +5,4 @@ exports[`NavBar functionality can change the value of the modal textarea and sub
 Compared values have no visual difference."
 `;
 
-exports[`NavBar functionality can open add post modal and able to click and change theme 1`] = `
-"Snapshot Diff:
-Compared values have no visual difference."
-`;
+exports[`NavBar functionality can open add post modal and able to click and change theme 1`] = `Object {}`;

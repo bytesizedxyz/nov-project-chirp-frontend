@@ -4,7 +4,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 // import * as chirps from "./dummy_data/chirps";
 import { ThemeContext, themes } from "./ThemeProvider";
-import Login from "./Views/Login/Login";
+import Login from "./Views/Login";
+import SignUp from "./Views/SignUp";
 import Home from "./Views/Home/Home";
 import "./Components/Header/header.css";
 
@@ -32,15 +33,16 @@ class App extends Component {
         Authorization: "Bearer " + localStorage.getItem("id_token")
       }
     });
-    console.log("CHIRPS PRE JSON", chirps)
-    console.log(chirps.status)
-    if(chirps.status === 200 || chirps.status === 304){
-      console.log("CHIRP STATUS ACCPETED")
+    console.log("CHIRPS PRE JSON", chirps);
+    console.log(chirps.status);
+    if (chirps.status === 200 || chirps.status === 304) {
+      console.log("CHIRP STATUS ACCPETED");
       chirps = await chirps.json();
       chirps = chirps.reverse();
-      console.log('chirps', chirps);
-      const user = JSON.parse(localStorage.getItem("_user_prof"))
-      this.setState({ chirps, user});
+      console.log("chirps", chirps);
+      const user = JSON.parse(localStorage.getItem("_user_prof"));
+      this.setState({ chirps, user });
+      console.log(user);
     }
   }
 
@@ -116,7 +118,8 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/SignUp" component={SignUp} />
           </>
         </Router>
       </ThemeContext.Provider>

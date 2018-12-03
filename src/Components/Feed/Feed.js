@@ -11,8 +11,8 @@ export default function Feed(props) {
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
-        <Container data-testid="feed">
-          <Card.Group centered itemsPerRow={1}>
+        <Container>
+          <Card.Group centered itemsPerRow={1} data-testid="feed">
             {chirps
               ? chirps.map(chirp => <Post key={chirp._id} chirp={chirp} id={chirp.uuid} />)
               : null}

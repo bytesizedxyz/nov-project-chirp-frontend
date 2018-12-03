@@ -55,22 +55,19 @@ describe("NavBar functionality", () => {
     const { getByTestId, asFragment } = render(
       <NavBar addPost={addPostFN} filter={filter} user={user} handleFilter={handleFilter} />
     );
+    //generating snapshot to test if modal has been opened
+    const firstRender = asFragment();
 
     //Rendered items to look for
     const addButton = getByTestId("addPostButton");
-
-    //generating snapshot to test if modal has been opened
-    const firstRender = asFragment();
     //clicking add modal to see if anything has changed
     fireEvent.click(addButton);
+
     //comparing the two snapshots
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
+    expect(firstRender).toMatchSnapshot(asFragment());
   });
   it("can change the value of the modal textarea and submit it", async () => {
-    const component = new NavBar();
-
-    component.setState = jest.fn();
-
+    //rendering navbar with props being passed down
     const { getByTestId, getByPlaceholderText, asFragment } = render(
       <NavBar addPost={addPostFN} filter={filter} user={user} handleFilter={handleFilter} />
     );
@@ -79,13 +76,18 @@ describe("NavBar functionality", () => {
 
     //Rendered items to look for
     const addButton = getByTestId("addPostButton");
-    const newChirp = getByPlaceholderText("Tell us more");
-
+    //clicking button to open modal
     fireEvent.click(addButton);
-    component.handleOpen();
-    expect(component.setState).toHaveBeenCalledWith({ modalOpen: true });
-    expect(firstSnapshot).toMatchDiffSnapshot(asFragment());
 
+    //looking for modal textbox
+    const newChirp = getByPlaceholderText("Tell us more");
     expect(newChirp.value).toBe("");
+
+    //changing value of modal textbox
+    fireEvent.change(newChirp, { target: { value: "THIS IS MY CHIRP, MUAHAHHAHAHAHHAHAH" } });
+    expect(newChirp.value).toBe("THIS IS MY CHIRP, MUAHAHHAHAHAHHAHAH");
+
+    //expecting snapshot to be different
+    expect(firstSnapshot).toMatchDiffSnapshot(asFragment());
   });
 });
