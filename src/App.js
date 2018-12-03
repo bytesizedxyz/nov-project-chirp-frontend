@@ -39,7 +39,8 @@ class App extends Component {
       chirps = await chirps.json();
       chirps = chirps.reverse();
       console.log('chirps', chirps);
-      this.setState({ chirps });
+      const user = JSON.parse(localStorage.getItem("_user_prof"))
+      this.setState({ chirps, user});
     }
   }
 

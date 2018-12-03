@@ -10,8 +10,6 @@ import Header from "../Header/Header";
 
 export default function Post(props) {
   const { chirp, user } = props;
-  //TODO:
-  //  [ ] - get votes to work
   // const updateVotes = e => {
   //   const voteName = e.target.dataset.testid;
   //   const uuid = chirp.uuid;
