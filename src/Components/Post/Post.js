@@ -11,7 +11,6 @@ import {
 import { Card } from 'semantic-ui-react';
 import { ThemeContext } from '../../ThemeProvider';
 import Comment from '../Comments';
-import Header from '../Header/Header';
 
 export default function Post(props) {
   const { chirp } = props;
@@ -86,7 +85,7 @@ export default function Post(props) {
               </span>
             </span>
             <span className="comment-span">
-              <Comment userName={user} />
+              {/* <Comment userName={user} /> */}
             </span>
           </Card.Content>
         </Card>
