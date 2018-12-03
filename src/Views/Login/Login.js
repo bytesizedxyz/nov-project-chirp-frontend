@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Form, Card, Container } from "semantic-ui-react";
+import { Grid, Form, Card, Container, Button } from "semantic-ui-react";
 import "./Login.css";
 
 import AuthService from "../../Services/AuthService";
@@ -66,9 +66,9 @@ class Login extends Component {
                 <Form.Button value="SUBMIT" style={{ marginBottom: "20px" }}>
                   Login
                 </Form.Button>
-                <Form.Button as="a" href="/SignUp" style={{ marginBottom: "20px" }}>
+                <Button href="/SignUp" style={{ marginBottom: "30px" }}>
                   Sign Up
-                </Form.Button>
+                </Button>
               </Form>
             </Card>
           </Grid.Row>
