@@ -28,11 +28,15 @@ class App extends Component {
   }
 
   async componentWillMount() {
-    // let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp");
-    // chirps = await chirps.json();
-    // chirps = chirps.reverse();
-    // console.log('chirps', chirps);
-    // this.setState({ chirps });
+    let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("id_token")
+      }
+    });
+    chirps = await chirps.json();
+    chirps = chirps.reverse();
+    console.log('chirps', chirps);
+    this.setState({ chirps });
   }
 
   toggleTheme() {

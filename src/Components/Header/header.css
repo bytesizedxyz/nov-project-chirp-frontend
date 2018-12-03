@@ -141,13 +141,12 @@
   font-size: 18px;
 }
 
-.profileImage img {
+.profileImage {
   border-radius: 50%;
   opacity: 0.75;
   position: relative;
   right: 15px;
   top: 15px;
-  width: 20% !important;
 }
 
 .alternate-profile-image {
@@ -157,6 +156,37 @@
   opacity: 0.75;
   height: 100px;
   width: 100px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-main {
+  position: fixed;
+  width: 80%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-main textarea {
+  margin-bottom: 3%;
+  height: 10em;
+}
+
+.modal-main button {
+  margin-right: 3%;
+  margin-bottom: 3%;
+}
+
+.modalOpen {
+  z-index: 1;
 }
 
 .display-none {
@@ -177,7 +207,7 @@
 h1 {
   font-size: 80px;
   margin: 0px;
-  font-family: "Bowlby One SC", cursive;
+  font-family: 'Bowlby One SC', cursive;
   letter-spacing: 2px;
 }
 
@@ -188,7 +218,7 @@ h1 {
 }
 
 /* font */
-@import url("https://fonts.googleapis.com/css?family=Bowlby+One+SC");
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
 
 /* flexbox */
 .flexRowAround {
