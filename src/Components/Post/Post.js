@@ -36,8 +36,9 @@ export default function Post(props) {
   //       console.log('error happened, printed below');
   //       console.log(err);
   //     });
+
   // console.log(wat);
-  //};
+  // };
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
