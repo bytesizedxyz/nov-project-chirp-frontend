@@ -69,10 +69,9 @@ class App extends Component {
 
     const newPost = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("id_token")}` },
       body: JSON.stringify({
         message: `${post}`,
-        username: `${user.username}`
       })
     });
     const reply = await newPost.json();
