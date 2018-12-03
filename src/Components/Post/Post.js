@@ -6,35 +6,31 @@ import { faThumbsUp, faThumbsDown, faStar, faClock } from "@fortawesome/free-sol
 import { Card } from "semantic-ui-react";
 import { ThemeContext } from "../../ThemeProvider";
 import Comment from "../Comments";
-import Header from "../Header/Header";
 
 export default function Post(props) {
   const { chirp, user } = props;
-  // const updateVotes = e => {
-  //   const voteName = e.target.dataset.testid;
-  //   const uuid = chirp.uuid;
-  //   const wat = fetch("https://nov-chirp-backend.herokuapp.com/chirp/reaction/" + voteName, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       chirpUuid: uuid,
-  //       userUuid: "35f8ce60-f333-11e8-92bb-d90a6311ea527d94fea3-f4b9-4058-9677-93bf6f8351e6"
-  //     })
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       console.log("I AM THE ONE AND ONLY DATAMIN", res.data);
-  //       const {voteName}
-  //       console.log(res.data + `.${voteName}Count`)
-  //     })
-  //     .catch(err => {
-  //       console.log("error happened, printed below");
-  //       console.log(err);
-  //       alert("NO");
-  //     });
+  const updateVotes = e => {
+    const voteName = e.target.dataset.testid;
+    const uuid = chirp.uuid;
+    console.log(voteName, uuid);
+    fetch(`https://nov-chirp-backend.herokuapp.com/chirp/reaction/${voteName}/${uuid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("id_token")
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log("I AM THE ONE AND ONLY DATAMIN", res.data);
+      })
+      .catch(err => {
+        console.log("error happened, printed below");
+        console.log(err);
+      });
 
-  //   console.log(wat);
-  // };
+    // console.log(wat);
+  };
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
@@ -57,13 +53,13 @@ export default function Post(props) {
           <Card.Content extra>
             <span className="stats">
               <span className="votes">
-                <span data-testid="like">
+                <span data-testid="like" onClick={updateVotes}>
                   {chirp.likes} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsUp} />
                 </span>
-                <span data-testid="hate">
+                <span data-testid="hate" onClick={updateVotes}>
                   {chirp.hates} <FontAwesomeIcon color={theme.iconColor} icon={faThumbsDown} />
                 </span>
-                <span data-testid="favorite">
+                <span data-testid="favorite" onClick={updateVotes}>
                   {chirp.favorites} <FontAwesomeIcon color={theme.iconColor} icon={faStar} />
                 </span>
               </span>

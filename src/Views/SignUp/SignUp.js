@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Grid, Form, Card, Container } from "semantic-ui-react";
-import "./Login.css";
+import "./SignUp.css";
 
 import AuthService from "../../Services/AuthService";
 
-class Login extends Component {
+class SignUp extends Component {
   constructor() {
     super();
 
@@ -45,9 +45,17 @@ class Login extends Component {
       <Container fluid className="backgroundColorBlacck">
         <Grid className="loginForm" centered textAlign="center" verticalAlign="middle">
           <Grid.Row centered>
-            <Card style={{}}>
-              <Card.Header style={{ margin: "20px" }}>Login</Card.Header>
+            <Card>
+              <Card.Header style={{ margin: "20px" }}>Sign Up</Card.Header>
               <Form onSubmit={this.handleFormSubmit}>
+                <Form.Input
+                  fluid
+                  placeholder="Email goes here..."
+                  name="email"
+                  label="Email"
+                  type="text"
+                  onChange={this.handleChange}
+                />
                 <Form.Input
                   fluid
                   placeholder="Username goes here..."
@@ -63,12 +71,14 @@ class Login extends Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Button value="SUBMIT" style={{ marginBottom: "20px" }}>
-                  Login
-                </Form.Button>
-                <Form.Button as="a" href="/SignUp" style={{ marginBottom: "20px" }}>
-                  Sign Up
-                </Form.Button>
+                <Form.Group widths="equal">
+                  <Form.Button value="SUBMIT" style={{ marginBottom: "20px" }}>
+                    Sign Up
+                  </Form.Button>
+                  <Form.Button as="a" href="/Login" style={{ marginBottom: "20px" }}>
+                    Login
+                  </Form.Button>
+                </Form.Group>
               </Form>
             </Card>
           </Grid.Row>
@@ -78,4 +88,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default SignUp;

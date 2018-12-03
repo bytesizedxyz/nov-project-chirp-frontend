@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
-import * as chirps from "./dummy_data/chirps";
+// import * as chirps from "./dummy_data/chirps";
 import { ThemeContext, themes } from "./ThemeProvider";
-import Login from "./Views/Login/Login";
+import Login from "./Views/Login";
+import SignUp from "./Views/SignUp";
 import Home from "./Views/Home/Home";
 import "./Components/Header/header.css";
 
@@ -15,7 +16,7 @@ class App extends Component {
     super();
 
     this.state = {
-      chirps: chirps.default,
+      chirps: [],
       user: {},
       filter: "",
       theme: themes.dark
@@ -29,18 +30,19 @@ class App extends Component {
   async componentDidMount() {
     let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
       headers: {
-        "Authorization": "Bearer " + localStorage.getItem("id_token")
+        Authorization: "Bearer " + localStorage.getItem("id_token")
       }
     });
-    console.log("CHIRPS PRE JSON", chirps)
-    console.log(chirps.status)
-    if(chirps.status === 200 || chirps.status === 304){
-      console.log("CHIRP STATUS ACCPETED")
+    console.log("CHIRPS PRE JSON", chirps);
+    console.log(chirps.status);
+    if (chirps.status === 200 || chirps.status === 304) {
+      console.log("CHIRP STATUS ACCPETED");
       chirps = await chirps.json();
       chirps = chirps.reverse();
-      console.log('chirps', chirps);
-      const user = JSON.parse(localStorage.getItem("_user_prof"))
-      this.setState({ chirps, user});
+      console.log("chirps", chirps);
+      const user = JSON.parse(localStorage.getItem("_user_prof"));
+      this.setState({ chirps, user });
+      console.log(user);
     }
   }
 
@@ -92,8 +94,8 @@ class App extends Component {
       theme,
       toggleTheme: this.toggleTheme
     };
-    const searchedChirps = chirps.filter(
-      chirp => (chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false)
+    const searchedChirps = chirps.filter(chirp =>
+      chirp.message ? chirp.message.toLowerCase().includes(filter.toLowerCase()) : false
     );
     console.log("app searched chirps", searchedChirps);
     if (user > 0) {
@@ -116,7 +118,8 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/SignUp" component={SignUp} />
           </>
         </Router>
       </ThemeContext.Provider>
