@@ -10,7 +10,6 @@ export default class AuthService {
 
   login(username, password) {
     // Get a token from api server using the fetch api
-    console.log("login called", username, password);
     return this.fetch(`${this.domain}/user/login`, {
       method: "POST",
       body: JSON.stringify({
@@ -19,9 +18,7 @@ export default class AuthService {
       })
     }).then(res => {
       this.setToken(res.token); // Setting the token in localStorage
-      console.log(decode(res.token))
       localStorage.setItem("_user_prof", JSON.stringify({user: res.username, email: res.email}))
-      console.log("setting TOken");
       return Promise.resolve(res);
     });
   }
@@ -29,7 +26,6 @@ export default class AuthService {
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken(); // GEtting token from localstorage
-    console.log("loggedin token", token);
     if (token) {
       return true;
     }
@@ -51,19 +47,16 @@ export default class AuthService {
   }
 
   setToken(idToken) {
-    console.log("calling setToken", idToken);
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
   }
 
   getToken() {
-    console.log(localStorage.getItem("id_token"));
     // Retrieves the user token from localStorage
     return localStorage.getItem("id_token");
   }
 
   logout() {
-    console.log("calling logout");
     // Clear user token and profile data from localStorage
     localStorage.removeItem("id_token");
   }
