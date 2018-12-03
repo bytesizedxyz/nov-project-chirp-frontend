@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
 import '../Post/Post.css';
-import {
-  Input,
-  Button,
-  Header,
-  Comment,
-  Form,
-  Card,
-  Image
-} from 'semantic-ui-react';
+import { Input, Button, Header, Comment, Form } from 'semantic-ui-react';
 
 class CommentBox extends Component {
   state = {
     comments: [
-      { userName: '', comment: '' },
-      { userName: 'White Dads Answering The Phone: ', comment: 'Yellow' }
+      {
+        userName: 'Brad',
+        userComment: 'Hey dude, meet me at the Blue Rhino at 9pm.'
+      },
+      { userName: 'John', userComment: 'Sure thing dude!' }
     ],
-    commentValue: '',
-    commentBox: false
+    comment: '',
+    open: false
   };
 
   // { comment: '', chirpId: '' }
@@ -28,67 +23,57 @@ class CommentBox extends Component {
   // modify current GET request to associate all comments with to each chirp
   // { userName: '', comment: '', chirpId: '', created_at: '' }
 
-  toggleBox = () => {
-    const { commentBox } = this.state;
-    this.setState({ commentBox: !commentBox });
-  };
-
   handleChange = e => {
-    this.setState({ commentValue: e.target.value }, () => {
-      console.log(this.state.commentValue);
+    console.log(e.target.value);
+    this.setState({ comment: e.target.value }, () => {
+      console.log(this.state.comment);
     });
   };
 
   submitComment = () => {
-    const user = 'fake user';
-    const { commentValue } = this.state;
-    console.log(commentValue);
-    const newComment = { userName: user, comment: commentValue };
-    this.setState({ comments: this.state.comments.concat(newComment) }, () => {
-      console.log(this.state.comments);
-    });
-    this.toggleBox();
+    const user = 'Chris';
+    const { comment } = this.state;
+    const newComment = { userName: user, userComment: comment };
+    this.setState(
+      { comments: this.state.comments.concat(newComment), comment: '' },
+      () => {
+        console.log(this.state.comments);
+      }
+    );
+  };
+
+  toggleBox = () => {
+    const { open } = this.state;
+    this.setState({ open: !open });
   };
 
   render() {
-    const { comments } = this.state;
-    const comment = () => {
-      if (comments) {
-        return comments.map(comment => {
-          const { userComment, userName } = comment;
-          return (
-            <Card.Group className="comment-span">
-              <Card className="comment-span">
-                <Card.Content className="comment-span">
-                  <Image
-                    floated="right"
-                    size="mini"
-                    src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg"
-                  />
-                  <Comment
-                    key={`${userName}${userComment}`}
-                    data-testid="comments"
-                    className="comment-span"
-                  >
-                    <Comment.Content>
-                      <Comment.Author as="a">{userName}</Comment.Author>
-                      <Comment.Metadata>
-                        <div>Today at 5:42PM</div>
-                      </Comment.Metadata>
-                      <Comment.Text>{userComment}</Comment.Text>
-                    </Comment.Content>
-                  </Comment>
-                </Card.Content>
-              </Card>
-            </Card.Group>
-          );
-        });
+    const { open, comments } = this.state;
+    const returnComments = () => {
+      if (open) {
+        if (comments) {
+          return comments.map(comment => {
+            const { userComment, userName } = comment;
+            return (
+              <Comment key={`${userName}${userComment}`} data-testid="comments">
+                <Comment.Avatar src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg" />
+                <Comment.Content>
+                  <Comment.Author as="a">{userName}</Comment.Author>
+                  <Comment.Metadata>
+                    <div>Today at 5:42PM</div>
+                  </Comment.Metadata>
+                  <Comment.Text>{userComment}</Comment.Text>
+                </Comment.Content>
+              </Comment>
+            );
+          });
+        }
       }
     };
 
-    const commentBox = () => {
-      const { commentBox } = this.state;
-      if (commentBox) {
+    const returnCommentBox = () => {
+      const { open } = this.state;
+      if (open) {
         return (
           <Form reply>
             <Form.Field>
@@ -100,9 +85,10 @@ class CommentBox extends Component {
                     content="Comment"
                     labelPosition="left"
                     icon="edit"
-                    className="comment"
                   />
                 }
+                value={this.state.comment}
+                onChange={this.handleChange}
                 actionPosition="left"
                 placeholder="Add something to the conversation:"
               />
@@ -115,21 +101,16 @@ class CommentBox extends Component {
     };
 
     return (
-      <span className="comment-span">
-        <Comment.Group className="comment-span">
-          <Header
-            className="comment-span"
-            onClick={this.toggleBox}
-            as="h3"
-            dividing
-          >
+      <div>
+        <Comment.Group>
+          <Header onClick={this.toggleBox} as="h3" dividing>
             {' '}
             Comments
           </Header>
-          {comment()}
-          {commentBox()}
+          {returnComments()}
         </Comment.Group>
-      </span>
+        {returnCommentBox()}
+      </div>
     );
   }
 }

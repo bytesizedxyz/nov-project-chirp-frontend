@@ -1,90 +1,25 @@
-p {
-  margin: 5px;
-}
 .post {
   width: 60%;
   min-height: 300px;
   font-size: 1.5em;
   opacity: 0.875;
   margin-bottom: 20px;
-  display: grid;
-  grid-template-columns: 1fr 22fr 1fr;
-  grid-template-rows: 25% 20% 20% 35%;
-  border-radius: 10px;
 }
 .chirp-profile-image {
   height: 60px;
   width: 60px;
   margin-right: 10px;
-  /* margin-top: 20px; */
   border-radius: 50%;
 }
-
-.comment-span {
-  grid-row: 4;
-  grid-column: 2;
-  width: 100%;
-  margin: 0px;
-}
-.reply-bar {
-  display: flex;
-  font-size: 12px;
-  font-weight: 700;
-  position: relative;
-  left: 30px;
-}
-.reply-bar p:hover {
-  cursor: pointer;
-  -webkit-animation: glow 1s ease-in-out infinite alternate;
-  -moz-animation: glow 1s ease-in-out infinite alternate;
-  animation: glow 1s ease-in-out infinite alternate;
-}
-
-.reply-input {
-  width: 100%;
-}
-
-.reply-input p:hover {
-  -webkit-animation: glow 1s ease-in-out infinite alternate;
-  -moz-animation: glow 1s ease-in-out infinite alternate;
-  animation: glow 1s ease-in-out infinite alternate;
-}
-@-webkit-keyframes glow {
-  from {
-    text-shadow: 0 0 5px #272b2e, 0 0 10px #272b2e, 0 0 15px #000000,
-      0 0 20px #000000, 0 0 25px #000000, 0 0 30px #000000, 0 0 35px #000000;
-  }
-  to {
-    text-shadow: 0 0 10px #272b2e, 0 0 15px #272b2e, 0 0 20px #272b2e,
-      0 0 25px #272b2e, 0 0 30px #272b2e, 0 0 35px #272b2e, 0 0 40px #272b2e;
-  }
-}
-h4 {
-  margin: 0px;
-}
 .profile-info {
-  grid-column: 2;
-  grid-row: 1/1;
   display: flex;
   align-items: center;
-}
-.comment {
-  width: 100%;
-  grid-column: 2;
-  grid-row: 5;
-}
-.content {
-  grid-column: 2;
-  grid-row: 2;
-  word-break: break-all;
 }
 .stats {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-content: center;
-  grid-column: 2;
-  grid-row: 3;
 }
 .votes {
   display: flex;
@@ -93,6 +28,13 @@ h4 {
 }
 .date {
   width: 21%;
+}
+.ui.comments {
+  max-width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
 }
 
 /* @media screen and (max-width: 700px) {
