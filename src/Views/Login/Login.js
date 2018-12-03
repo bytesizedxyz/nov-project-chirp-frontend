@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Form, Card, Container, Message, GridRow } from "semantic-ui-react";
+import { Grid, Form, Card, Container, Message } from "semantic-ui-react";
 import "./Login.css";
 
 import AuthService from "../../Services/AuthService";
