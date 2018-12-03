@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Container, Card } from "semantic-ui-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Container, Card } from 'semantic-ui-react';
 
-import Post from "../Post";
-import "./Feed.css";
-import { ThemeContext } from "../../ThemeProvider";
+import Post from '../Post';
+import './Feed.css';
+import { ThemeContext } from '../../ThemeProvider';
 
 export default function Feed(props) {
   const { chirps } = props;
@@ -14,7 +14,9 @@ export default function Feed(props) {
         <Container>
           <Card.Group centered itemsPerRow={1} data-testid="feed">
             {chirps
-              ? chirps.map(chirp => <Post key={chirp._id} chirp={chirp} id={chirp.uuid} />)
+              ? chirps.map(chirp => (
+                  <Post key={chirp._id} chirp={chirp} id={chirp.uuid} />
+                ))
               : null}
           </Card.Group>
         </Container>
