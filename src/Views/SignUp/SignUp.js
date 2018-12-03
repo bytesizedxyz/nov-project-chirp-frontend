@@ -44,7 +44,7 @@ class SignUp extends Component {
     return (
       <Container fluid className="backgroundColorBlacck">
         <Grid className="loginForm" centered textAlign="center" verticalAlign="middle">
-          <Grid.Row centered>
+          <Grid.Row centered columns={16}>
             <Card>
               <Card.Header style={{ margin: "20px" }}>Sign Up</Card.Header>
               <Form onSubmit={this.handleFormSubmit}>
