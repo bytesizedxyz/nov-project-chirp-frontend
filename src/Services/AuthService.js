@@ -26,7 +26,7 @@ export default class AuthService {
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken(); // GEtting token from localstorage
-    if (token) {
+    if (token && this.isTokenExpired(token) === false) {
       return true;
     }
     return !!token && !this.isTokenExpired(token) // handwaiving here
@@ -42,6 +42,7 @@ export default class AuthService {
               return false;
       }
       catch (err) {
+        console.log("token expiration err:", err)
           return false;
       }
   }
