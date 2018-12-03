@@ -27,11 +27,31 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem("id_token")
+    if(localStorage.getItem("id_token")){
+      let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("id_token")
+        }
+      });
+      if(localStorage.getItem("id_token")){
+        let chirps = await fetch("https://nov-chirp-backend.herokuapp.com/chirp", {
+          headers: {
+            "Authorization": "Bearer " + localStorage.getItem("id_token")
+          }
+        });
+        console.log("CHIRPS PRE JSON", chirps)
+        console.log(chirps.status)
+        if(chirps.status === 200 || chirps.status === 304){
+          console.log("CHIRP STATUS ACCPETED")
+          chirps = await chirps.json();
+          chirps = chirps.reverse();
+          console.log('chirps', chirps);
+          const user = JSON.parse(localStorage.getItem("_user_prof"))
+          this.setState({ chirps, user});
+        }
       }
-    });
+    }
+
     console.log("CHIRPS PRE JSON", chirps)
     console.log(chirps.status)
     if(chirps.status === 200 || chirps.status === 304){
