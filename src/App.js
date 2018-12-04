@@ -95,10 +95,31 @@ class App extends Component {
     });
   }
 
-  updateChirp = (reaction, chirpIndex) => {
-    const { chirps } = this.state;
-    console.log(reaction, chirpIndex);
-    console.log(chirps[chirpIndex]);
+  updateChirp = (reaction, chirpUUID) => {
+    const objKeys = Object.keys(reaction);
+    this.setState(prevState => {
+      let newChirps = prevState.chirps.map(chirp => {
+        if (chirp.uuid === chirpUUID) {
+          if (objKeys[0].includes("like")) {
+            chirp.likes = reaction.likesCount;
+            return chirp;
+          } else if (objKeys[0].includes("hate")) {
+            chirp.hates = reaction.hatesCount;
+            return chirp;
+          } else if (objKeys[0].includes("favor")) {
+            chirp.favorites = reaction.favoritesCount;
+            return chirp;
+          } else {
+            return chirp;
+          }
+        } else {
+          return chirp;
+        }
+      });
+      prevState.chirps = newChirps;
+
+      return prevState;
+    });
   };
 
   render() {
