@@ -2,31 +2,34 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../Post/Post.css';
 import { Input, Button, Header, Comment, Form } from 'semantic-ui-react';
+import Gravatar from 'gravatar-react';
 
 class CommentBox extends Component {
   state = {
     comments: [],
-    userName: '',
+    user: JSON.parse(localStorage.getItem('_user_prof')).user,
+    email: JSON.parse(localStorage.getItem('_user_prof')).email,
+    token: localStorage.getItem('id_token'),
     comment: '',
-    chirpId: '',
-    email: '',
     open: false
   };
 
   corsHeaders = () => {
+    const { token } = this.state;
     const cors = {};
-    const token = localStorage.getItem('id_token');
     cors.headers = { Authorization: token };
     return cors;
   };
 
   getData = async () => {
-    const url = 'its a url';
+    const { comments } = this.state;
+    const url = 'http://www.itsaurl.com';
     const cors = this.corsHeaders();
     await axios
       .get(url, cors)
       .then(res => {
         console.log(res);
+        this.setState({ comments: comments.concat(res.body) });
       })
       .catch(err => {
         console.log(err);
@@ -34,8 +37,7 @@ class CommentBox extends Component {
   };
 
   postData = async () => {
-    const { userName, comment, chirpId } = this.state;
-    const email = JSON.parse(localStorage.getItem('_user_prof')).email;
+    const { userName, comment, chirpId, email } = this.state;
     const data = { userName, comment, chirpId, email };
     const url = 'https://nov-chirp-backend.herokuapp.com/chirp/comment/';
     const cors = this.corsHeaders();
@@ -54,8 +56,7 @@ class CommentBox extends Component {
   };
 
   submitComment = () => {
-    const user = 'Chris';
-    const { comment, comments } = this.state;
+    const { comment, comments, user } = this.state;
     const newComment = { userName: user, userComment: comment };
     this.setState({ comments: comments.concat(newComment), comment: '' });
     this.postData();
@@ -72,17 +73,31 @@ class CommentBox extends Component {
       if (open) {
         if (comments) {
           return comments.map(comment => {
-            const { userComment, userName } = comment;
+            const email = 'email@gmail.com';
+            const { userComment, userName, chirpId, createdAt } = comment;
             return (
-              <Comment key={`${userName}${userComment}`} data-testid="comments">
-                <Comment.Avatar src="https://www.neweurope.eu/wp-content/uploads/2018/02/h_53880267.jpg" />
-                <Comment.Content>
-                  <Comment.Author as="a">{userName}</Comment.Author>
-                  <Comment.Metadata>
-                    <div>Today at 5:42PM</div>
-                  </Comment.Metadata>
-                  <Comment.Text>{userComment}</Comment.Text>
-                </Comment.Content>
+              <Comment key={`${chirpId}`} data-testid="comments">
+                <span style={{ display: 'flex' }}>
+                  <Gravatar
+                    email={email}
+                    size={35}
+                    rating="PG"
+                    alt="Profile Avatar"
+                    default="monsterid"
+                    secure
+                  />
+                  <Comment.Content style={{ paddingLeft: '15px' }}>
+                    <Comment.Author style={{ fontSize: '18px' }} as="a">
+                      {userName}
+                    </Comment.Author>
+                    <Comment.Metadata>
+                      <div>{createdAt}</div>
+                    </Comment.Metadata>
+                    <Comment.Text style={{ paddingLeft: '10px' }}>
+                      {userComment}
+                    </Comment.Text>
+                  </Comment.Content>
+                </span>
               </Comment>
             );
           });
