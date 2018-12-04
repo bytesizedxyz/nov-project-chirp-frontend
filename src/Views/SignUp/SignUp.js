@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Form, Card, Container } from "semantic-ui-react";
+import { Grid, Form, Card, Container, Button } from "semantic-ui-react";
 import "./SignUp.css";
 
 import AuthService from "../../Services/AuthService";
@@ -14,26 +14,19 @@ class SignUp extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  componentDidMount() {
-    if (this.Auth.loggedIn()) {
-      // eslint-disable-next-line react/prop-types
-      const { history } = this.props;
-      console.log(this.Auth.loggedIn());
-      history.push("/");
-    }
-  }
-
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleFormSubmit(e) {
     e.preventDefault();
-    const { username, password } = this.state;
-    this.Auth.login(username, password)
+    console.log("Submitting signup form");
+    const { email, username, password } = this.state;
+    this.Auth.signUp(email, username, password)
       .then(() => {
+        console.log("inside then signupform");
         const { history } = this.props;
-        history.replace("/");
+        history.replace("/Login");
       })
       .catch(err => {
         console.log(err);
@@ -71,14 +64,12 @@ class SignUp extends Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Group widths="equal">
-                  <Form.Button value="SUBMIT" style={{ marginBottom: "20px" }}>
-                    Sign Up
-                  </Form.Button>
-                  <Form.Button as="a" href="/Login" style={{ marginBottom: "20px" }}>
-                    Login
-                  </Form.Button>
-                </Form.Group>
+                <Form.Button value="SUBMIT" style={{ marginBottom: "20px" }}>
+                  Sign Up
+                </Form.Button>
+                <Button href="/Login" style={{ marginBottom: "30px" }}>
+                  Login
+                </Button>
               </Form>
             </Card>
           </Grid.Row>

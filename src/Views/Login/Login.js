@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Form, Card, Container, Message } from "semantic-ui-react";
+import { Grid, Form, Card, Container, Message, Button } from "semantic-ui-react";
 import "./Login.css";
 
 import AuthService from "../../Services/AuthService";
@@ -8,9 +8,9 @@ class Login extends Component {
   constructor() {
     super();
 
-    this.state={
-      err:''
-    }
+    this.state = {
+      err: ""
+    };
 
     this.Auth = new AuthService();
 
@@ -25,7 +25,7 @@ class Login extends Component {
       console.log(this.Auth.loggedIn());
       history.push("/");
     } else if (this.props.location.state && this.props.location.state.err !== "") {
-      this.setState({err: this.props.location.state.err })
+      this.setState({ err: this.props.location.state.err });
     }
   }
 
@@ -45,7 +45,7 @@ class Login extends Component {
         console.log(err);
         this.setState({
           err: "Invalid username and password combination!"
-        })
+        });
       });
   }
 
@@ -54,9 +54,11 @@ class Login extends Component {
       <Container fluid className="backgroundColorBlacck">
         <Grid className="loginForm" centered textAlign="center" verticalAlign="middle">
           <Grid.Row centered>
-          {this.state.err !== ''? <Message negative>
-              <Message.Header>{this.state.err}</Message.Header>
-            </Message>: null}
+            {this.state.err !== "" ? (
+              <Message negative>
+                <Message.Header>{this.state.err}</Message.Header>
+              </Message>
+            ) : null}
           </Grid.Row>
           <Grid.Row centered>
             <Card>
@@ -80,9 +82,9 @@ class Login extends Component {
                 <Form.Button value="SUBMIT" style={{ marginBottom: "20px" }}>
                   Login
                 </Form.Button>
-                <Form.Button as="a" href="/SignUp" style={{ marginBottom: "20px" }}>
+                <Button href="/SignUp" style={{ marginBottom: "30px" }}>
                   Sign Up
-                </Form.Button>
+                </Button>
               </Form>
             </Card>
           </Grid.Row>
