@@ -13,7 +13,7 @@ export const themes = {
     eggshellBorder: "eggshellBorder",
     searchIconBorder: "searchIconBorderEggshell",
     obiTwitter: "Obi Wan Kenobi Twitter",
-    iconColor: "#fff"
+    iconColor: "blue"
   },
   dark: {
     currentTheme: "dark",

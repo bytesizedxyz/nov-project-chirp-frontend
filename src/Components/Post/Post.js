@@ -41,7 +41,7 @@ export default function Post(props) {
                   src="https://media.licdn.com/dms/image/C5603AQELTaav4xJOkQ/profile-displayphoto-shrink_200_200/0?e=1548892800&v=beta&t=mC4qkBGQZDv4dJsJ3686-Ev7w1XJhVudOIVChTpZR-Q"
                   alt="User"
                 />
-                <h3>Users Name</h3>
+                <h3>{chirp.username? chirp.username : "Users Name"}</h3>
               </span>
             </Card.Header>
 
