@@ -18,7 +18,7 @@ export default class AuthService {
       })
     }).then(res => {
       this.setToken(res.token); // Setting the token in localStorage
-      localStorage.setItem("_user_prof", JSON.stringify({user: res.username, email: res.email}))
+      localStorage.setItem("_user_prof", JSON.stringify({ user: res.username, email: res.email }));
       return Promise.resolve(res);
     });
   }
@@ -29,22 +29,39 @@ export default class AuthService {
     if (token && this.isTokenExpired(token) === false) {
       return true;
     }
-    return !!token && !this.isTokenExpired(token) // handwaiving here
+    return !!token && !this.isTokenExpired(token); // handwaiving here
   }
 
   isTokenExpired(token) {
-      try {
-          const decoded = decode(token);
-          if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
-              return true;
-          }
-          else
-              return false;
-      }
-      catch (err) {
-        console.log("token expiration err:", err)
-          return false;
-      }
+    try {
+      const decoded = decode(token);
+      if (decoded.exp < Date.now() / 1000) {
+        // Checking if token is expired. N
+        return true;
+      } else return false;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  signUp(email, username, password) {
+    // Get a token from api server using the fetch api
+    return this.fetch(`${this.domain}/user/`, {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        username,
+        password
+      })
+    })
+      .then(res => {
+        console.log("Inside res");
+        console.log(res);
+      })
+      .catch(err => {
+        console.log("error happened signing up, printed below");
+        console.log(err);
+      });
   }
 
   setToken(idToken) {

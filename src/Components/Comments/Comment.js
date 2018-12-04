@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import '../Post/Post.css';
-import { Input, Button, Header, Comment, Form } from 'semantic-ui-react';
+import React, { Component } from "react";
+import "../Post/Post.css";
+import { Input, Button, Header, Comment, Form } from "semantic-ui-react";
 
 class CommentBox extends Component {
   state = {
     comments: [
       {
-        userName: 'Brad',
-        userComment: 'Hey dude, meet me at the Blue Rhino at 9pm.'
+        userName: "Brad",
+        userComment: "Hey dude, meet me at the Blue Rhino at 9pm."
       },
-      { userName: 'John', userComment: 'Sure thing dude!' }
+      { userName: "John", userComment: "Sure thing dude!" }
     ],
-    comment: '',
+    comment: "",
     open: false
   };
 
@@ -31,15 +31,12 @@ class CommentBox extends Component {
   };
 
   submitComment = () => {
-    const user = 'Chris';
+    const user = "Chris";
     const { comment } = this.state;
     const newComment = { userName: user, userComment: comment };
-    this.setState(
-      { comments: this.state.comments.concat(newComment), comment: '' },
-      () => {
-        console.log(this.state.comments);
-      }
-    );
+    this.setState({ comments: this.state.comments.concat(newComment), comment: "" }, () => {
+      console.log(this.state.comments);
+    });
   };
 
   toggleBox = () => {
@@ -104,7 +101,7 @@ class CommentBox extends Component {
       <div>
         <Comment.Group>
           <Header onClick={this.toggleBox} as="h3" dividing>
-            {' '}
+            {" "}
             Comments
           </Header>
           {returnComments()}
