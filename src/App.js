@@ -96,26 +96,35 @@ class App extends Component {
   }
 
   updateChirp = (reaction, chirpUUID) => {
-    const { chirps } = this.state;
-    console.log("Number of votes", reaction, "Chirp UUID recieved", chirpUUID);
     const objKeys = Object.keys(reaction);
     this.setState(prevState => {
-      let newChirps = chirps.map(chirp => {
+      console.log(prevState);
+      let newChirps = prevState.chirps.map(chirp => {
         if (chirp.uuid === chirpUUID) {
           if (objKeys[0].includes("like")) {
-            console.log(chirp);
+            console.log("prev chirp", chirp);
             chirp.likes = reaction.likesCount;
-            console.log(chirp.likes);
-            console.log("inside likes");
+            console.log("after Chirp", chirp);
+            return chirp;
           } else if (objKeys[0].includes("hate")) {
             chirp.hates = reaction.hatesCount;
             console.log("inside hate");
+            return chirp;
           } else if (objKeys[0].includes("favor")) {
             chirp.favorites = reaction.favoritesCount;
             console.log("inside favorite");
+            return chirp;
+          } else {
+            return chirp;
           }
+        } else {
+          return chirp;
         }
       });
+      console.log(newChirps);
+      prevState.chirps = newChirps;
+
+      return prevState;
     });
   };
 

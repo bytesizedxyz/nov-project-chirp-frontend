@@ -12,25 +12,22 @@ export default function Post(props) {
   const updateVotes = e => {
     const voteName = e.target.dataset.testid;
     const uuid = chirp.uuid;
-    // fetch(`https://nov-chirp-backend.herokuapp.com/chirp/reaction/${voteName}/${uuid}`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: "Bearer " + localStorage.getItem("id_token")
-    //   }
-    // })
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     const objKeys = Object.keys(res.data);
-    //     updateChirp({ [objKeys[0]]: res.data[objKeys[0]] }, uuid);
-    //   })
-    //   .catch(err => {
-    //     console.log("error happened, printed below");
-    //     console.log(err);
-    //   });
-    const returnedObj = { data: { likesCount: 1 } };
-    const objKeys = Object.keys(returnedObj.data);
-    updateChirp({ [objKeys[0]]: returnedObj.data[objKeys[0]] }, uuid);
+    fetch(`https://nov-chirp-backend.herokuapp.com/chirp/reaction/${voteName}/${uuid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("id_token")
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        const objKeys = Object.keys(res.data);
+        updateChirp({ [objKeys[0]]: res.data[objKeys[0]] }, uuid);
+      })
+      .catch(err => {
+        console.log("error happened, printed below");
+        console.log(err);
+      });
   };
   return (
     <ThemeContext.Consumer>
