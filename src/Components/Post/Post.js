@@ -35,9 +35,9 @@ export default function Post(props) {
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
-        <Card color={theme.brownBackground ? "red" : "white"}>
+        <Card style={theme.currentTheme === "dark"? {backgroundColor:"#292323", boxShadow:"none"}: {backgroundColor:"#fff", boxShadow:"none"}} color={theme.brownBackground ? "red" : ""}>
           <Card.Content>
-            <Card.Header>
+            <Card.Header style={theme.currentTheme === "dark"? {color:"#fff"}: {color:"#000"}}>
               <span className="profile-info">
                 <img
                   className="chirp-profile-image"
@@ -48,7 +48,7 @@ export default function Post(props) {
               </span>
             </Card.Header>
 
-            <Card.Description>
+            <Card.Description style={theme.currentTheme === "dark"? {color:"#fff"}: {color:"#000"}}>
               <span>{chirp.message}</span>
               <span className="stats">
                 <span className="votes">
@@ -70,7 +70,7 @@ export default function Post(props) {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <span>
+            <span style={theme.currentTheme === "dark"? {color:"#fff"}: {color:"#000"}}>
               <Comment userName={user} />
             </span>
           </Card.Content>
