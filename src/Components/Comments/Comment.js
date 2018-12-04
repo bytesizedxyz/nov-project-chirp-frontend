@@ -1,45 +1,64 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import '../Post/Post.css';
 import { Input, Button, Header, Comment, Form } from 'semantic-ui-react';
 
 class CommentBox extends Component {
   state = {
-    comments: [
-      {
-        userName: 'Brad',
-        userComment: 'Hey dude, meet me at the Blue Rhino at 9pm.'
-      },
-      { userName: 'John', userComment: 'Sure thing dude!' }
-    ],
+    comments: [],
+    userName: '',
     comment: '',
+    chirpId: '',
+    email: '',
     open: false
   };
 
-  // { comment: '', chirpId: '' }
-  // HTTP Header - Authorization: "JWT Bearer Token"
-  // POST route: https://nov-chirp-backend.herokuapp.com/chirp/comment/
+  corsHeaders = () => {
+    const cors = {};
+    const token = localStorage.getItem('id_token');
+    cors.headers = { Authorization: token };
+    return cors;
+  };
 
-  // GET - returns all chirps and associated comments
-  // modify current GET request to associate all comments with to each chirp
-  // { userName: '', comment: '', chirpId: '', created_at: '' }
+  getData = async () => {
+    const url = 'its a url';
+    const cors = this.corsHeaders();
+    await axios
+      .get(url, cors)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  postData = async () => {
+    const { userName, comment, chirpId } = this.state;
+    const email = JSON.parse(localStorage.getItem('_user_prof')).email;
+    const data = { userName, comment, chirpId, email };
+    const url = 'https://nov-chirp-backend.herokuapp.com/chirp/comment/';
+    const cors = this.corsHeaders();
+    await axios
+      .post(url, data, cors)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   handleChange = e => {
-    console.log(e.target.value);
-    this.setState({ comment: e.target.value }, () => {
-      console.log(this.state.comment);
-    });
+    this.setState({ comment: e.target.value });
   };
 
   submitComment = () => {
     const user = 'Chris';
-    const { comment } = this.state;
+    const { comment, comments } = this.state;
     const newComment = { userName: user, userComment: comment };
-    this.setState(
-      { comments: this.state.comments.concat(newComment), comment: '' },
-      () => {
-        console.log(this.state.comments);
-      }
-    );
+    this.setState({ comments: comments.concat(newComment), comment: '' });
+    this.postData();
   };
 
   toggleBox = () => {
