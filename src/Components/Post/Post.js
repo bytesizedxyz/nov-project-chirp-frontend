@@ -8,7 +8,7 @@ import { ThemeContext } from "../../ThemeProvider";
 import Comment from "../Comments";
 
 export default function Post(props) {
-  const { chirp, user } = props;
+  const { index, chirp, user, updateChirp } = props;
   const updateVotes = e => {
     const voteName = e.target.dataset.testid;
     const uuid = chirp.uuid;
@@ -21,7 +21,11 @@ export default function Post(props) {
     })
       .then(res => res.json())
       .then(res => {
-        console.log("I AM THE ONE AND ONLY DATAMIN", res.data);
+        const objKeys = Object.keys(res.data);
+        console.log({ [objKeys[0]]: res.data[objKeys[0]] });
+        console.log(res.data[objKeys[0]]);
+        console.log(chirp, index);
+        updateChirp(res.data[objKeys[0]], index);
       })
       .catch(err => {
         console.log("error happened, printed below");
