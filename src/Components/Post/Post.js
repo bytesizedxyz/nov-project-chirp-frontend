@@ -32,20 +32,20 @@ export default function Post(props) {
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
-        <Card color={theme.brownBackground ? "red" : "white"}>
+        <Card style={theme.currentTheme === "dark"? {backgroundColor:"#292323", boxShadow:"none"}: {backgroundColor:"#fff", boxShadow:"none"}} color={theme.brownBackground ? "red" : ""}>
           <Card.Content>
-            <Card.Header>
+            <Card.Header style={theme.currentTheme === "dark"? {color:"#fff"}: {color:"#000"}}>
               <span className="profile-info">
                 <img
                   className="chirp-profile-image"
                   src="https://media.licdn.com/dms/image/C5603AQELTaav4xJOkQ/profile-displayphoto-shrink_200_200/0?e=1548892800&v=beta&t=mC4qkBGQZDv4dJsJ3686-Ev7w1XJhVudOIVChTpZR-Q"
                   alt="User"
                 />
-                <h3>Users Name</h3>
+                <h3>{chirp.username? chirp.username : "Users Name"}</h3>
               </span>
             </Card.Header>
 
-            <Card.Description>
+            <Card.Description style={theme.currentTheme === "dark"? {color:"#fff"}: {color:"#000"}}>
               <span>{chirp.message}</span>
               <span className="stats">
                 <span className="votes">
@@ -67,7 +67,7 @@ export default function Post(props) {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <span>
+            <span style={theme.currentTheme === "dark"? {color:"#fff"}: {color:"#000"}}>
               <Comment userName={user} />
             </span>
           </Card.Content>
