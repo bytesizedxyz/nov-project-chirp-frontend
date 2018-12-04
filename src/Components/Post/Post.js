@@ -10,9 +10,12 @@ import {
 import { Card } from 'semantic-ui-react';
 import { ThemeContext } from '../../ThemeProvider';
 import Comment from '../Comments';
+import Gravatar from 'gravatar-react';
 
 export default function Post(props) {
-  const { chirp, user } = props;
+  const { chirp } = props;
+  const user = JSON.parse(localStorage.getItem('_user_prof')).user;
+  const email = JSON.parse(localStorage.getItem('_user_prof')).email;
   // const updateVotes = e => {
   //   const voteName = e.target.dataset.testid;
   //   const uuid = chirp.uuid;
@@ -45,12 +48,27 @@ export default function Post(props) {
           <Card.Content>
             <Card.Header>
               <span className="profile-info">
-                <img
-                  className="chirp-profile-image"
-                  src="https://media.licdn.com/dms/image/C5603AQELTaav4xJOkQ/profile-displayphoto-shrink_200_200/0?e=1548892800&v=beta&t=mC4qkBGQZDv4dJsJ3686-Ev7w1XJhVudOIVChTpZR-Q"
-                  alt="User"
+                <Gravatar
+                  email={email}
+                  size={100}
+                  rating="PG"
+                  alt="Profile Avatar"
+                  default="monsterid"
+                  secure
+                  style={{
+                    borderRadius: '50%'
+                  }}
                 />
-                <h3>Users Name</h3>
+                <h3
+                  style={{
+                    fontSize: '24px',
+                    position: 'relative',
+                    bottom: '20px',
+                    left: '20px'
+                  }}
+                >
+                  {user}
+                </h3>
               </span>
             </Card.Header>
 
@@ -86,7 +104,7 @@ export default function Post(props) {
           </Card.Content>
           <Card.Content extra>
             <span className="comment-span">
-              <Comment userName={user} />
+              <Comment chirp={chirp} />
             </span>
           </Card.Content>
         </Card>

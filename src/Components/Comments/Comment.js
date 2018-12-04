@@ -37,8 +37,13 @@ class CommentBox extends Component {
   };
 
   postData = async () => {
-    const { userName, comment, chirpId, email } = this.state;
-    const data = { userName, comment, chirpId, email };
+    const { comment } = this.state;
+    const { chirp } = this.props;
+    const chirpId = chirp.uuid;
+    console.log(chirp);
+    const data = { comment, chirpId };
+
+    console.log(data);
     const url = 'https://nov-chirp-backend.herokuapp.com/chirp/comment/';
     const cors = this.corsHeaders();
     await axios
@@ -85,6 +90,9 @@ class CommentBox extends Component {
                     alt="Profile Avatar"
                     default="monsterid"
                     secure
+                    style={{
+                      borderRadius: '50%'
+                    }}
                   />
                   <Comment.Content style={{ paddingLeft: '15px' }}>
                     <Comment.Author style={{ fontSize: '18px' }} as="a">
